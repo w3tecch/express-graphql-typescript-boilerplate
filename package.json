@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "lint": "./node_modules/.bin/gulp lint",
+    "build": "./node_modules/.bin/gulp build",
     "clean": "./node_modules/.bin/gulp clean"
   },
   "repository": {
@@ -52,6 +53,12 @@
     "gulp-notify": "^2.2.0",
     "gulp-tslint": "^7.0.1",
     "gulp-clean": "^0.3.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-typescript": "^3.1.4",
+    "gulp-copy": "^1.0.0",
+    "gulp-concat": "^2.6.1",
     "path": "^0.12.7",
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2"
