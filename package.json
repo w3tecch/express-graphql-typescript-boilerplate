@@ -8,7 +8,8 @@
     "lint": "./node_modules/.bin/gulp lint",
     "build": "./node_modules/.bin/gulp build",
     "test": "NODE_ENV=test ./node_modules/.bin/gulp test",
-    "clean": "./node_modules/.bin/gulp clean"
+    "clean": "./node_modules/.bin/gulp clean",
+    "zip": "./node_modules/.bin/gulp zip"
   },
   "repository": {
     "type": "git",
@@ -56,6 +57,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.9.1",
     "gulp-tslint": "^7.0.1",
+    "gulp-json-editor": "^2.2.1",
+    "gulp-filter": "^4.0.0",
+    "gulp-zip": "^3.2.0",
     "gulp-typescript": "^3.1.4",
     "jasmine": "^2.5.2",
     "jasmine-spec-reporter": "^3.0.0",
