@@ -7,6 +7,7 @@
     "start": "node src/index.js",
     "lint": "./node_modules/.bin/gulp lint",
     "build": "./node_modules/.bin/gulp build",
+    "test": "NODE_ENV=test ./node_modules/.bin/gulp test",
     "clean": "./node_modules/.bin/gulp clean"
   },
   "repository": {
@@ -44,23 +45,26 @@
   "homepage": "https://github.com/w3tecch/node-ts-boilerplate#readme",
   "dependencies": {},
   "devDependencies": {
-    "ts-node": "^2.0.0",
-    "tslint": "^4.3.1",
-    "typescript": "^2.1.4",
-    "typings": "^2.1.0",
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-copy": "^1.0.0",
+    "gulp-jasmine": "^2.4.2",
     "gulp-load-plugins": "^1.4.0",
     "gulp-notify": "^2.2.0",
-    "gulp-tslint": "^7.0.1",
-    "gulp-clean": "^0.3.2",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.9.1",
+    "gulp-tslint": "^7.0.1",
     "gulp-typescript": "^3.1.4",
-    "gulp-copy": "^1.0.0",
-    "gulp-concat": "^2.6.1",
+    "jasmine": "^2.5.2",
+    "jasmine-spec-reporter": "^3.0.0",
     "path": "^0.12.7",
     "require-dir": "^0.3.1",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "ts-node": "^2.0.0",
+    "tslint": "^4.3.1",
+    "typescript": "^2.1.4",
+    "typings": "^2.1.0"
   }
 }
