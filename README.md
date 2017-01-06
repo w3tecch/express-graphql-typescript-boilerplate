@@ -2,9 +2,30 @@
 Boilerplate for Node.js app written in TypeScript
 
 # Prerequisites
-1. Install [Node.js](http://nodejs.org)
+Install [Node.js](http://nodejs.org)
 	- on OSX use [homebrew](http://brew.sh) `brew install node`
 	- on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
+
+# Dependencies
+Navigate to your project folder to install all dependencies
+  ```
+  npm install
+  npm run install:typings
+  ```
+
+#Scripts / Commands
+
+| Scripts from package.json | Description   |
+|:------------------------- |:------------- |
+| `npm run install:typings` | Installs all the typings |
+| `npm run serve`           | Starts a local server and watches for changes to restart |
+| `npm run serve:debug`     | Starts a local server with debugging enabled on port 6666 and watches for changes to restart |
+| `npm run start`           | Starts the built app |
+| `npm run build`           | Builds the app. Transpiles/Compiles all the TypeScript files |
+| `npm run lint`            | Runs the linter over all source and test files |
+| `npm run clean`           | Removes all the JavaScript Files in the source and test folder |
+| `npm run test`            | Runs all written unit-tests |
+| `npm run zip`             | Builds the app and creates a cloudfoundry-ready zip file for upload (if needed) |
 
 #Sources & Tools
 ##Structure
