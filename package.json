@@ -4,7 +4,8 @@
   "description": "Boilerplate for Node.js app written in TypeScript",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "lint": "./node_modules/.bin/gulp lint"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
     "gulp": "^3.9.1",
     "gulp-load-plugins": "^1.4.0",
     "gulp-notify": "^2.2.0",
+    "gulp-tslint": "^7.0.1",
     "path": "^0.12.7",
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2"
