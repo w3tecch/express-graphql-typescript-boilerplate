@@ -1,0 +1,44 @@
+{
+  "name": "node-ts-boilerplate",
+  "version": "0.0.0",
+  "description": "Boilerplate for Node.js app written in TypeScript",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://w3tecch@github.com/w3tecch/node-ts-boilerplate.git"
+  },
+  "engines": {
+    "node": "6.9.2"
+  },
+  "keywords": [
+    "NodeJS",
+    "TypeScript",
+    "express",
+    "boilerplate",
+    "w3tec.ch",
+    "node-ts-boilerplate"
+  ],
+  "author": "w3tec.ch <info@w3tec.ch>",
+  "contributors": [
+    {
+      "name": "David Weber",
+      "email": "david.weber@w3tec.ch",
+      "url": "https://github.com/dweber019"
+    },
+    {
+      "name": "Gery Hirschfeld",
+      "email": "gery.hirschfeld@w3tec.ch",
+      "url": "https://github.com/hirsch88"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/w3tecch/node-ts-boilerplate/issues"
+  },
+  "homepage": "https://github.com/w3tecch/node-ts-boilerplate#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}
