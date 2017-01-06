@@ -1,0 +1,40 @@
+# @w3tec
+
+# Logs #
+*.log
+*.log*
+
+# Coverage directory used by tools like istanbul #
+/test/coverage
+
+# Node Files #
+/node_modules
+/bower_components
+npm-debug.log
+
+# OS generated files #
+.DS_Store
+Thumbs.db
+
+# Typing #
+/typings/
+
+# Dist #
+/dist
+/releases/
+
+# Cordova #
+cordova/plugins
+cordova/platforms
+www/
+plugins/
+platforms/
+
+# IDE #
+.idea/
+*.swp
+.awcache
+
+# Generated SourceCode #
+src/**/*.js
+test/**/*.js
