@@ -40,5 +40,10 @@
   },
   "homepage": "https://github.com/w3tecch/node-ts-boilerplate#readme",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "ts-node": "^2.0.0",
+    "tslint": "^4.3.1",
+    "typescript": "^2.1.4",
+    "typings": "^2.1.0"
+  }
 }
