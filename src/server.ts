@@ -83,55 +83,29 @@ export class Server {
         //configure routes
         this.routes();
     }
-    /**
-     *
-     *
-     *
-     * @memberOf Server
-     */
+
     public start(): void {
-        //
         this.server = this.app.listen(Server.normalizePort(getConfig().port));
-        //
         this.server.on('error', this.onError.bind(this));
-        //
         this.server.on('listening', this.onListening.bind(this));
     }
-    /**
-     *
-     *
-     * @private
-     *
-     * @memberOf Server
-     */
-    private config(): void {
+
+    public config(): void {
         // enable cors for all routes and origins
         this.app.use(cors());
         // adds winston logger to the express framework
         this.app.use(morgan('combined', { 'stream': loggerStream }));
     }
-    /**
-     *
-     *
-     * @private
-     *
-     * @memberOf Server
-     */
-    private routes(): void {
+
+    public routes(): void {
         // Define default route
         this.app.get('/', (req: express.Request, res: express.Response): void => {
             logger.info('Hello World called');
             res.send('Hello World');
         });
     }
-    /**
-     *
-     *
-     * @private
-     *
-     * @memberOf Server
-     */
-    private onListening() {
+
+    public onListening() {
         const addr = this.server.address();
         const bind = typeof addr === 'string'
             ? `pipe ${addr}`
@@ -140,15 +114,8 @@ export class Server {
         debug(`Listening on ${bind}`);
         logger.info(`[Server] Listening on ${bind}`);
     }
-    /**
-     *
-     *
-     * @private
-     * @param {any} error
-     *
-     * @memberOf Server
-     */
-    private onError(error: Error) {
+
+    public onError(error: Error) {
         if (error['syscall'] !== 'listen') {
             throw error;
         }
