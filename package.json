@@ -1,6 +1,6 @@
 {
   "name": "express-ts-boilerplate",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha",
   "description": "Boilerplate for Node.js app written in TypeScript",
   "main": "src/index.ts",
   "scripts": {
