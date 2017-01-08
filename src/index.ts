@@ -1,1 +1,5 @@
-console.log('Hello World');
+/// <reference path="./all.d.ts" />
+
+import { server } from './server';
+
+server.start();
