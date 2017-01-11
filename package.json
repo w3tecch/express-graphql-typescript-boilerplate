@@ -1,7 +1,7 @@
 {
-  "name": "express-ts-boilerplate",
+  "name": "express-graphql-typescript-boilerplate",
   "version": "1.0.0-alpha",
-  "description": "Boilerplate for Node.js app written in TypeScript",
+  "description": "A Node.Js boilerplate written in TypeScript with express and GraphQL",
   "main": "src/index.ts",
   "scripts": {
     "start": "node src/index.js",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://w3tecch@github.com/w3tecch/express-ts-boilerplate.git"
+    "url": "git+https://w3tecch@github.com/w3tecch/express-graphql-typescript-boilerplate.git"
   },
   "engines": {
     "node": "6.9.2"
@@ -25,6 +25,7 @@
     "NodeJS",
     "TypeScript",
     "express",
+    "GraphQL",
     "boilerplate",
     "skeleton",
     "starter-kit",
@@ -45,9 +46,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/w3tecch/express-ts-boilerplate/issues"
+    "url": "https://github.com/w3tecch/express-graphql-typescript-boilerplate/issues"
   },
-  "homepage": "https://github.com/w3tecch/express-ts-boilerplate#readme",
+  "homepage": "https://github.com/w3tecch/express-graphql-typescript-boilerplate#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",

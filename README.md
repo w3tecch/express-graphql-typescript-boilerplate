@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/w3tecch/express-ts-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-ts-boilerplate.svg?branch=master)
+[![Build Status](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)
 
-# express-ts-boilerplate
+# express-graphql-typescript-boilerplate
 Boilerplate for Node.js app written in TypeScript
 
 # Prerequisites
