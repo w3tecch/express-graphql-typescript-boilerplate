@@ -52,9 +52,6 @@ describe('server', () => {
                 expect(server.app.route('/')).toBeDefined();
             });
         });
-        describe('onListening', () => {
-            // Todo
-        });
         describe('onError', () => {
             it('should throw an error if the syscall was not listen', () => {
                 try {

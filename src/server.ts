@@ -20,22 +20,22 @@ const debug = Debug('express-ts-boilerplate:server');
  */
 export class Server {
     /**
+     * This is used to establish the singleton pattern for this server,
+     * because there should always be one server.
+     */
+    private static instance: Server;
+    /**
      * Create expressjs application
-     *
-     * @memberOf Server
      */
     public app = express();
     /**
      * Http Server instance for the express lib
-     *
-     * @memberOf Server
      */
     public server: http.Server;
     /**
      * Port of the server
      *
      * @type {(number | string | boolean)}
-     * @memberOf Server
      */
     public port: number | string | boolean = false;
     /**
@@ -44,10 +44,12 @@ export class Server {
      * @static
      * @returns {Server}
      *
-     * @memberOf Server
      */
     public static bootstrap(): Server {
-        return new Server();
+        if (!Server.instance) {
+            Server.instance = new Server();
+        }
+        return Server.instance;
     }
     /**
      * Normalizes the given port for the app
