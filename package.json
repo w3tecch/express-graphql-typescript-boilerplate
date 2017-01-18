@@ -1,22 +1,24 @@
 {
-  "name": "express-ts-boilerplate",
-  "version": "1.0.0-alpha",
-  "description": "Boilerplate for Node.js app written in TypeScript",
+  "name": "express-graphql-typescript-boilerplate",
+  "version": "1.0.0-alpha.2",
+  "description": "A Node.Js boilerplate written in TypeScript with express and GraphQL",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node src/index.js",
+    "install:typings": "./node_modules/.bin/typings install",
+    "install:clean": "npm prune && ./node_modules/.bin/typings prune",
     "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts'",
     "serve:debug": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --debug=6666",
     "lint": "./node_modules/.bin/gulp lint",
-    "build": "./node_modules/.bin/gulp build",
     "test": "NODE_ENV=test ./node_modules/.bin/gulp test",
+    "test:pretty": "NODE_ENV=test ./node_modules/.bin/gulp test:pretty",
+    "build": "./node_modules/.bin/gulp build",
     "clean": "./node_modules/.bin/gulp clean",
     "zip": "./node_modules/.bin/gulp zip",
-    "install:typings": "./node_modules/.bin/typings install"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://w3tecch@github.com/w3tecch/express-ts-boilerplate.git"
+    "url": "git+https://w3tecch@github.com/w3tecch/express-graphql-typescript-boilerplate.git"
   },
   "engines": {
     "node": "6.9.2"
@@ -25,6 +27,7 @@
     "NodeJS",
     "TypeScript",
     "express",
+    "GraphQL",
     "boilerplate",
     "skeleton",
     "starter-kit",
@@ -45,10 +48,18 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/w3tecch/express-ts-boilerplate/issues"
+    "url": "https://github.com/w3tecch/express-graphql-typescript-boilerplate/issues"
   },
-  "homepage": "https://github.com/w3tecch/express-ts-boilerplate#readme",
-  "dependencies": {},
+  "homepage": "https://github.com/w3tecch/express-graphql-typescript-boilerplate#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "debug": "^2.6.0",
+    "express": "^4.14.0",
+    "lodash": "^4.17.4",
+    "morgan": "^1.7.0",
+    "winston": "^2.3.0"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",

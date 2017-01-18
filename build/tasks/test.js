@@ -19,7 +19,21 @@ gulp.task('test', (callback) => {
     )
 });
 
+gulp.task('test:pretty', (callback) => {
+    runSequence(
+        'build',
+        'test:pretty:run',
+        'clean',
+        callback
+    )
+});
+
 gulp.task('test:run', () =>
+    gulp.src(['test/lib/setup.ts', path.join(path.join(paths.test, '**/*.spec.js'))], { read: true })
+        .pipe($.jasmine())
+);
+
+gulp.task('test:pretty:run', () =>
     gulp.src(['test/lib/setup.ts', path.join(path.join(paths.test, '**/*.spec.js'))], { read: true })
         .pipe($.jasmine({
             reporter: new SpecReporter()

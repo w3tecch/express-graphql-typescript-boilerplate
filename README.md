@@ -1,94 +1,56 @@
-[![Build Status](https://travis-ci.org/w3tecch/express-ts-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-ts-boilerplate.svg?branch=master)
+# express-graphql-typescript-boilerplate
 
-# express-ts-boilerplate
-Boilerplate for Node.js app written in TypeScript
+[![Build Status](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)
 
-# Prerequisites
+This is a boilerplate for Node.js app written in [TypeScript](https://www.typescriptlang.org/). We used the framework [Express.js](http://expressjs.com/) as a basic layer and on that we setup the awesome [GrapQL](http://graphql.org/) library.
+
+## Getting Started
+### Prerequisites
 Install [Node.js](http://nodejs.org)
 	- on OSX use [homebrew](http://brew.sh) `brew install node`
 	- on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
-# Dependencies
-Navigate to your project folder to install all dependencies
-  ```
-  npm install
-  npm run install:typings
-  ```
+## Installing
+* `fork` this repo
+* `clone` your fork
+* `npm install` to install all dependencies
+* `npm run install:typings` to install all typings
+* `npm run serve` to start the dev server in another tab
 
-#Scripts / Commands
+## Running the app
+After you have installed all dependencies you can now run the app.
+Run `npm run serve` to start a local server using `nodemon` which will watch for changes and then will restart the sever.
+The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:3000/`).
 
-| Scripts from package.json | Description   |
-|:------------------------- |:------------- |
-| `npm run install:typings` | Installs all the typings |
-| `npm run serve`           | Starts a local server and watches for changes to restart |
-| `npm run serve:debug`     | Starts a local server with debugging enabled on port 6666 and watches for changes to restart |
-| `npm run start`           | Starts the built app |
-| `npm run build`           | Builds the app. Transpiles/Compiles all the TypeScript files |
-| `npm run lint`            | Runs the linter over all source and test files |
-| `npm run clean`           | Removes all the JavaScript Files in the source and test folder |
-| `npm run test`            | Runs all written unit-tests |
-| `npm run zip`             | Builds the app and creates a cloudfoundry-ready zip file for upload (if needed) |
+## Scripts / Commands
+### Install
+* Install all dependencies with `npm install`
+* Install all typings with `npm run install:typings`
+* Remove not needed libraries with `npm run install:clean`
 
-#Sources & Tools
-##Structure
-https://gist.github.com/lancejpollard/1398757
+### Linting
+* Run code analysis using `npm run lint`. This runs tshint.
 
-##Tools
-- Mail (inkl. Templating) => https://nodemailer.com/
-- ACL => https://www.npmjs.com/package/acl / https://www.npmjs.com/package/acl-sequelize
-- Resourcefull Rest =>
-- Queing Service => https://github.com/Automattic/kue
-- Middelware => express
-- JWT
-- Events => http://docs.sequelizejs.com/
-- Test Data => https://www.npmjs.com/package/Faker
-- Testing => http://code.tutsplus.com/tutorials/testing-in-nodejs--net-35018
-- Logging => https://github.com/trentm/node-bunyan
-- Performance => http://expressjs.com/en/advanced/best-practice-performance.html
-- Swagger => https://github.com/krakenjs/swaggerize-express
-- Cors => https://github.com/expressjs/cors
-- Body Parser => https://www.npmjs.com/package/body-parser
-- code coverage => https://www.npmjs.com/package/istanbul
-- Resource tool (?) => https://github.com/expressjs/express-resource
-- asynchronous operations => async.js
-- monitoring => https://keymetrics.io, http://newrelic.com/nodejs
+### Tests
+* Run the unit tests using `npm test` or `npm run test:pretty` for more detailed reporting.
 
-##Testing
-- mocha
-- Provides spies, stubs, and mocks for JavaScript => http://sinonjs.org/
-- A library for mocking HTTP connections => https://github.com/node-nock/nock
+### Running in dev mode
+* Run `npm run serve` to start nodemon with ts-node, which will serve your app.
+* The server address will be displayed to you as `http://0.0.0.0:3000`
 
-##Database
-- SQL query builder => http://knexjs.org/#
-- DB migration => http://docs.sequelizejs.com/
-- ORM => http://docs.sequelizejs.com/
+### Cleaning the project
+* Run `npm run clean` to remove all generated JavaScript files.
 
-##Security
-- https://github.com/krakenjs/lusca
-- Security => https://www.npmjs.com/package/helmet
-- http://expressjs.com/en/advanced/best-practice-security.html
-- https://nodesecurity.io/tools
-- https://docs.google.com/presentation/d/1KbBG3Z1rTYcXCO8FHb8Br4K08nvQEDPgo2OXfUuWUAU/edit#slide=id.gc6f73a04f_0_0
-- https://github.com/samartioli/webapp-security
+### Building the project
+* Run `npm run build` to generated all JavaScript files from your TypeScript sources. After this step you can deploy the app on any server.
+* To start the builded app use `npm start`.
+* With `npm run zip` it will generate the JavaScript source and pack them into to a deployable zip file into the dist folder.
 
-##Auth
-- https://github.com/t1msh/node-oauth20-provider
-- https://github.com/andreassolberg/jso
-- http://passportjs.org/
+## Exploring the boilerplate
+### Structure
+Comming Soon
+```
+```
 
-### JWT
-- https://jwt.io/
-- https://scotch.io/tutorials/authenticate-a-node-js-api-with-json-web-tokens
-- https://github.com/auth0/node-jsonwebtoken
-
-##Examples
-- https://github.com/Microsoft/TypeScriptSamples/tree/master/imageboard
-- https://github.com/geraldpereira/rest-crud
-- http://blog.geraldpereira.com/rest/crud/2015/09/10/nodejs-express-typescript.html
-- https://github.com/christianalfoni/webpack-express-boilerplate
-
-##Hosting
-- http://www.hostingadvice.com/blog/where-to-find-free-node-js-hosting/
-
-# License
+## License
  [MIT](/LICENSE)
