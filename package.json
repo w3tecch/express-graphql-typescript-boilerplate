@@ -4,15 +4,17 @@
   "description": "A Node.Js boilerplate written in TypeScript with express and GraphQL",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node src/index.js",
+    "install:typings": "./node_modules/.bin/typings install",
+    "install:clean": "npm prune && ./node_modules/.bin/typings prune",
     "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts'",
     "serve:debug": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --debug=6666",
     "lint": "./node_modules/.bin/gulp lint",
-    "build": "./node_modules/.bin/gulp build",
     "test": "NODE_ENV=test ./node_modules/.bin/gulp test",
+    "test:pretty": "NODE_ENV=test ./node_modules/.bin/gulp test:pretty",
+    "build": "./node_modules/.bin/gulp build",
     "clean": "./node_modules/.bin/gulp clean",
     "zip": "./node_modules/.bin/gulp zip",
-    "install:typings": "./node_modules/.bin/typings install"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",

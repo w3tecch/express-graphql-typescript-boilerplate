@@ -12,6 +12,7 @@ module.exports = (wallaby) => {
         files: [
             { pattern: 'src/**/*.ts' },
             { pattern: 'test/**/*.ts' },
+            { pattern: '!src/index.ts' },
             { pattern: '!src/**/*.d.ts' },
             { pattern: '!test/**/*.spec.ts' }
         ],
