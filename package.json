@@ -1,6 +1,6 @@
 {
   "name": "express-graphql-typescript-boilerplate",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.2",
   "description": "A Node.Js boilerplate written in TypeScript with express and GraphQL",
   "main": "src/index.ts",
   "scripts": {
