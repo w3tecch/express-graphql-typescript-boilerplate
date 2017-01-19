@@ -5,8 +5,9 @@
         "moduleResolution": "node",
         "sourceMap": true
     },
-    "files": [
-        "typings/index.d.ts"
+    "filesGlob": [
+        "typings/**/*.d.ts",
+        "typings_custom/**/*.d.ts"
     ],
     "exclude": [
         "node_modules"

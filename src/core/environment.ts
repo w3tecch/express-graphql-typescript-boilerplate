@@ -1,5 +1,3 @@
-/// <reference path="../all.d.ts" />
-
 const name = (): string => {
     return process.env.NODE_ENV || 'development';
 };

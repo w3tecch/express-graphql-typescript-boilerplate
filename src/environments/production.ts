@@ -1,5 +1,3 @@
-/// <reference path="../all.d.ts" />
-
 export const configuration: environment.Configuration = {
     host: 'my.address.any',
     port: process.env.PORT || '3000',

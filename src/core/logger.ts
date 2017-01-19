@@ -1,5 +1,3 @@
-/// <reference path="../all.d.ts" />
-
 import * as winston from 'winston';
 
 import { configuration } from './environment';
