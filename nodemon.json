@@ -1,8 +1,9 @@
 {
-  "execMap": {
-    "ts": "./node_modules/.bin/ts-node"
-  },
-  "events": {
-    "restart": "osascript -e 'display notification \"restarting server\" with title \"node.js application\"'"
-  }
+    "execMap": {
+        "ts": "./node_modules/.bin/ts-node"
+    },
+    "events": {
+        "restart": "osascript -e 'display notification \"restarting server\" with title \"node.js application\"'"
+    },
+    "exec": "npm run lint && ./node_modules/.bin/ts-node src/index.ts"
 }
