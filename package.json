@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
+    "install:dev": "npm install && npm run install:typings",
     "install:clean": "npm prune && ./node_modules/.bin/typings prune",
     "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts'",
     "serve:debug": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --debug=6666",

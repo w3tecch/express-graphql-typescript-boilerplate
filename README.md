@@ -26,6 +26,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ### Install
 * Install all dependencies with `npm install`
 * Install all typings with `npm run install:typings`
+* To install all dependencies and typings use `npm run install:dev`
 * Remove not needed libraries with `npm run install:clean`
 
 ### Linting
