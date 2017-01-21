@@ -57,6 +57,8 @@
     "cors": "^2.8.1",
     "debug": "^2.6.0",
     "express": "^4.14.0",
+    "express-graphql": "^0.6.1",
+    "graphql": "^0.8.2",
     "helmet": "^3.4.0",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",

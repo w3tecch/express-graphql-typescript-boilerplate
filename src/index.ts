@@ -14,6 +14,7 @@ import * as express from 'express';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
+import * as GraphQLHTTP from 'express-graphql';
 
 // Import local middlewares and core functions
 import { winstonStream, debugStream } from './core/logger';
@@ -34,11 +35,22 @@ app.use(morgan('dev', debugStream));
 app.use(morgan('combined', winstonStream));
 
 
-// Defines Hello World test route
-app.get('/', (req: express.Request, res: express.Response): void => {
-    // this.log.info('Hello World called');
-    debug('Hello World was called');
-    res.send('Hello World');
+// The root provides a resolver function for each API endpoint
+let root = {
+    hello: () => {
+        return 'Hello world!';
+    }
+};
+
+
+// Add GraphQL API to our express app
+import { schema } from './schemas';
+app.use('/graphql', (req: express.Request, res: express.Response) => {
+    GraphQLHTTP({
+        schema: schema,
+        rootValue: root,
+        graphiql: environment.graphiql
+    })(req, res);
 });
 
 

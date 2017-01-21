@@ -3,6 +3,7 @@ declare module environment {
         host: string;
         port: string;
         database: string;
+        graphiql: boolean;
         debug: string;
         logger: ConfigurationLogger;
     }
