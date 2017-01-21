@@ -40,7 +40,11 @@ function transpiler(filePath, isTest) {
 
     let tsProject = !!isTest ? tsProjectTest : tsProjectSource;
     return gulp
-        .src(['./typings/index.d.ts', path.join(filePath, '/**/*.ts')])
+        .src([
+            './typings/index.d.ts',
+            './typings_custom/**/*.d.ts',
+            path.join(filePath, '/**/*.ts')
+        ])
         .pipe($.plumber({ errorHandler: $.notify.onError('Error: <%= error.message %>') }))
         .pipe($.sourcemaps.init({ loadMaps: true }))
         .pipe(tsProject())
