@@ -17,8 +17,7 @@ const bind = (addr) => {
 };
 
 export const onListening = (server: http.Server) => {
-    const addr = server.address();
-    logger.info(`[Server] Listening on ${bind(addr)}`);
+    logger.info(`[Server] Listening on ${bind(server.address())}`);
 };
 
 export const onError = (server: http.Server, error: Error) => {

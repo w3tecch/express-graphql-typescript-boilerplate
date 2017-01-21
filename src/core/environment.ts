@@ -1,7 +1,3 @@
-const name = (): string => {
-    return process.env.NODE_ENV || 'development';
-};
+const name = (): string => process.env.NODE_ENV || 'development';
 
-export const configuration = (): environment.Configuration => {
-    return require(`../environments/${name()}`).configuration;
-};
+export const configuration = (): environment.Configuration => require(`../environments/${name()}`).configuration;

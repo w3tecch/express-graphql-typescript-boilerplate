@@ -5,7 +5,7 @@ export const configuration: environment.Configuration = {
     debug: '',
     logger: {
         console: {
-            level: ''
+            level: 'none'
         }
     }
 };
