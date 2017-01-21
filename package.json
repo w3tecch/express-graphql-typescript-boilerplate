@@ -1,10 +1,11 @@
 {
   "name": "express-graphql-typescript-boilerplate",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "A Node.Js boilerplate written in TypeScript with express and GraphQL",
   "main": "src/index.ts",
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
+    "install:dev": "npm install && npm run install:typings",
     "install:clean": "npm prune && ./node_modules/.bin/typings prune",
     "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts'",
     "serve:debug": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --debug=6666",
@@ -56,6 +57,7 @@
     "cors": "^2.8.1",
     "debug": "^2.6.0",
     "express": "^4.14.0",
+    "helmet": "^3.4.0",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
     "winston": "^2.3.0"

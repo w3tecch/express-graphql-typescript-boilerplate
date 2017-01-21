@@ -1,5 +1,3 @@
-/// <reference path="../all.d.ts" />
-
 export const configuration: environment.Configuration = {
     host: 'localhost',
     port: process.env.PORT || '3030',
@@ -7,7 +5,7 @@ export const configuration: environment.Configuration = {
     debug: '',
     logger: {
         console: {
-            level: ''
+            level: 'none'
         }
     }
 };

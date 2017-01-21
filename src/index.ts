@@ -1,4 +1,3 @@
-/// <reference path="./all.d.ts" />
 //See: https://medium.com/the-graphqlhub/your-first-graphql-server-3c766ab4f0a2#.giyyd9tzx
 
 // Get environment configurations
@@ -12,6 +11,7 @@ const debug = Debug('app');
 
 // Import all express libs
 import * as express from 'express';
+import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
 
@@ -23,6 +23,8 @@ import { listenTo } from './core/server';
 import { init, run } from './core/application';
 const app = init();
 
+// Helmet helps you secure your Express apps by setting various HTTP headers
+app.use(helmet());
 
 // Enable cors for all routes and origins
 app.use(cors());

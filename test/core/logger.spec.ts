@@ -1,5 +1,3 @@
-/// <reference path="./../all.d.ts" />
-
 import { logger, debugStream, winstonStream } from '../../src/core/logger';
 
 describe('Core:Logger', () => {
