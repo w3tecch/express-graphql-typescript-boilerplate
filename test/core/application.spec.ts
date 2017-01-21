@@ -1,5 +1,3 @@
-/// <reference path="./../all.d.ts" />
-
 import { init, run } from '../../src/core/application';
 
 describe('Core:Application', () => {

@@ -1,5 +1,3 @@
-/// <reference path="./../all.d.ts" />
-
 import { configuration } from './../../src/environments/production';
 
 describe('Environments:Development', () => {

@@ -1,5 +1,3 @@
-/// <reference path="./../all.d.ts" />
-
 import { listenTo, onListening, onError } from '../../src/core/server';
 import * as Server from '../../src/core/server';
 

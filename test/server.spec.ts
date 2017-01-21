@@ -1,5 +1,3 @@
-// /// <reference path="./all.d.ts" />
-
 // import { Server, server } from './../src/server';
 
 // describe('server', () => {
