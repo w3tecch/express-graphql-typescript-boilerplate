@@ -5,5 +5,5 @@
     "events": {
         "restart": "osascript -e 'display notification \"restarting server\" with title \"node.js application\"'"
     },
-    "exec": "npm run lint && ./node_modules/.bin/ts-node src/index.ts"
+    "exec": "./node_modules/.bin/tslint -c ./tslint.json 'src/**/*.ts' --format stylish --force && ./node_modules/.bin/ts-node src/index.ts"
 }
