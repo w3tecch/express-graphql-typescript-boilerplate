@@ -48,7 +48,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * With `npm run zip` it will generate the JavaScript source and pack them into to a deployable zip file into the dist folder.
 
 ### Docs
-* Run 'npm run docs' to generate all doc files and serve it on `http://0.0.0.0:8080`
+* Run `npm run docs` to generate all doc files and serve it on `http://0.0.0.0:8080`
 
 ## Exploring the boilerplate
 ### Structure
