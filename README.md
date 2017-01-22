@@ -47,6 +47,9 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * To start the builded app use `npm start`.
 * With `npm run zip` it will generate the JavaScript source and pack them into to a deployable zip file into the dist folder.
 
+### Docs
+* Run 'npm run docs' to generate all doc files and serve it on `http://0.0.0.0:8080`
+
 ## Exploring the boilerplate
 ### Structure
 ```
@@ -55,6 +58,8 @@ express-graphql-typescript-boilerplate
  |    |-- tasks/                    * gulp tasks
  |    |-- paths.js                  * project path setup for our gulp tasks
  |    |-- util.js                   * our gulp helper functions
+ |
+ |-- docs/                          * our generated doc files
  |
  |-- src/                           * our source files that will be compiled to javascript
  |    |-- core/                     * our core functionalities
