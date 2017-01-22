@@ -20,7 +20,7 @@ gulp.task('zip:create', () => {
     const packageFileFilter = $.filter(['package.json'], { restore: true });
     return gulp
         .src([
-            path.join(paths.root, '**/*.js'),
+            path.join(paths.src, '**/*.js'),
             'manifest.yml',
             'package.json'
         ])

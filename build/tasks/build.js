@@ -21,7 +21,7 @@ gulp.task('build', (callback) => runSequence(
     callback
 ));
 
-gulp.task('build:transpile:src', () => transpiler(paths.root));
+gulp.task('build:transpile:src', () => transpiler(paths.src));
 gulp.task('build:transpile:test', () => transpiler(paths.test, true));
 
 function transpiler(filePath, isTest) {

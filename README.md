@@ -47,10 +47,59 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * To start the builded app use `npm start`.
 * With `npm run zip` it will generate the JavaScript source and pack them into to a deployable zip file into the dist folder.
 
+### Docs
+* Run 'npm run docs' to generate all doc files and serve it on `http://0.0.0.0:8080`
+
 ## Exploring the boilerplate
 ### Structure
-Comming Soon
 ```
+express-graphql-typescript-boilerplate
+ |-- build/                         * our task runner configurations and tasks
+ |    |-- tasks/                    * gulp tasks
+ |    |-- paths.js                  * project path setup for our gulp tasks
+ |    |-- util.js                   * our gulp helper functions
+ |
+ |-- docs/                          * our generated doc files
+ |
+ |-- src/                           * our source files that will be compiled to javascript
+ |    |-- core/                     * our core functionalities
+ |    |    |-- application.ts       * our express helper functions to init and run the server
+ |    |    |-- environment.ts       * gets us the configuration for the given environment
+ |    |    |-- logger.ts            * our logger configurations
+ |    |    |-- server.ts            * our server error handling
+ |    |
+ |    |-- environments/             * our environment configurations
+ |    |    |-- development.ts       * our development environment configuration to run our server locally
+ |    |    |-- production.ts        * the production environment is used to run on a server(cloud)
+ |    |    |-- test.ts              * our test environment configurations
+ |    |
+ |    |-- middlewares/              * our express custom middlewares (/*.middleware.ts)
+ |    |
+ |    |-- models/                   * our database models (/*.model.ts)
+ |    |
+ |    |-- repositories/             * use a repository to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model
+ |    |    |-- **/*.ts              * use a single file for every query function.
+ |    |
+ |    |-- schemas/                  * our graphql schema definitions
+ |    |    |-- **/*.type.spec       * our graphql type files
+ |    |    |-- **/*.query.spec      * our graphql query files
+ |    |    |-- **/*.mutation.spec   * our graphql mutation files
+ |    |
+ |    |-- index.ts                  * main entry point for our application
+ |
+ |-- test/                          * our test files that will test our application
+ |    |-- mocks                     * we use this to simulate other functions, classes or objects
+ |    |-- **/*.spec.ts              * our test cases
+ |
+ |-- typings_custom/                * our local type definitions
+ |
+ |-- gulpfile.js                    * entry point for our gulp tasks
+ |-- nodemon.json                   * nodemon setup, so that it uses typescript and runs tslint
+ |-- package.json                   * what npm uses to manage it's dependencies
+ |-- tslint.json                    * typescript lint config
+ |-- typedoc.json                   * typescript documentation generator
+ |-- tsconfig.json                  * typescript config
+ |-- wallaby.js                     * our wallaby configuration
 ```
 
 ## License

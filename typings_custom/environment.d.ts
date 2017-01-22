@@ -3,6 +3,7 @@ declare module environment {
         host: string;
         port: string;
         database: string;
+        graphiql: boolean;
         debug: string;
         logger: ConfigurationLogger;
     }
@@ -10,11 +11,11 @@ declare module environment {
     interface ConfigurationLogger {
         host?: string;
         port?: string;
-        file?: ConfigurationLoggerConsole
-        console: ConfigurationLoggerConsole
+        file?: ConfigurationLoggerConsole;
+        console: ConfigurationLoggerConsole;
     }
 
     interface ConfigurationLoggerConsole {
-        level: string
+        level: string;
     }
 }

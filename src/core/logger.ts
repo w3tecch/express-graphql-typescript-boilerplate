@@ -10,7 +10,7 @@ export const logger = new winston.Logger({
     transports: [
         new winston.transports.Console({
             level: environment.logger.console.level,
-            handleExceptions: true,
+            handleExceptions: process.env.NODE_ENV === 'production',
             json: process.env.NODE_ENV === 'production',
             colorize: process.env.NODE_ENV !== 'production'
         })

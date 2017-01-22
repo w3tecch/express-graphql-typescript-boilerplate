@@ -6,7 +6,7 @@
  */
 module.exports = {
     main: 'index.ts',
-    root: 'src',
+    src: 'src',
     test: 'test',
     docs: 'docs',
     dist: 'dist'

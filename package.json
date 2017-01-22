@@ -1,6 +1,6 @@
 {
   "name": "express-graphql-typescript-boilerplate",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-beta.1",
   "description": "A Node.Js boilerplate written in TypeScript with express and GraphQL",
   "main": "src/index.ts",
   "scripts": {
@@ -15,6 +15,9 @@
     "build": "./node_modules/.bin/gulp build",
     "clean": "./node_modules/.bin/gulp clean",
     "zip": "./node_modules/.bin/gulp zip",
+    "docs": "npm run docs:generate && npm run docs:server",
+    "docs:generate": "./node_modules/.bin/gulp docs",
+    "docs:server": "./node_modules/.bin/http-server ./docs --cors",
     "start": "node src/index.js"
   },
   "repository": {
@@ -57,6 +60,8 @@
     "cors": "^2.8.1",
     "debug": "^2.6.0",
     "express": "^4.14.0",
+    "express-graphql": "^0.6.1",
+    "graphql": "^0.8.2",
     "helmet": "^3.4.0",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
@@ -67,17 +72,19 @@
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-copy": "^1.0.0",
+    "gulp-filter": "^4.0.0",
     "gulp-jasmine": "^2.4.2",
+    "gulp-json-editor": "^2.2.1",
     "gulp-load-plugins": "^1.4.0",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.9.1",
     "gulp-tslint": "^7.0.1",
-    "gulp-json-editor": "^2.2.1",
-    "gulp-filter": "^4.0.0",
-    "gulp-zip": "^3.2.0",
+    "gulp-typedoc": "^2.0.2",
     "gulp-typescript": "^3.1.4",
+    "gulp-zip": "^3.2.0",
+    "http-server": "^0.9.0",
     "jasmine": "^2.5.2",
     "jasmine-spec-reporter": "^3.0.0",
     "path": "^0.12.7",
@@ -85,6 +92,7 @@
     "run-sequence": "^1.2.2",
     "ts-node": "^2.0.0",
     "tslint": "^4.3.1",
+    "typedoc": "^0.5.5",
     "typescript": "^2.1.4",
     "typings": "^2.1.0"
   }
