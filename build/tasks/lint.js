@@ -8,23 +8,20 @@ const $ = require('gulp-load-plugins')({
     lazy: true
 });
 
-gulp.task('lint', [
-    'lint:src',
-    'lint:test'
-]);
-
-gulp.task('lint:src', () => linter(paths.src));
-gulp.task('lint:test', () => linter(paths.test));
-
-function linter(filePath) {
+gulp.task('lint', () => {
     return gulp
-        .src(['./typings/main.d.ts', path.join(filePath, '/**/*.ts')])
+        .src([
+            './typings/index.d.ts',
+            './typings_custom/**/*.d.ts',
+            path.join(paths.src, '/**/*.ts'),
+            path.join(paths.test, '/**/*.ts')
+        ])
         .pipe($.tslint({
             emitError: false,
             formatter: 'verbose'
         }))
         .pipe($.tslint.report())
-        .on('error', function() {
+        .on('error', function () {
             util.notify('TSLINT failed!');
         });
-}
+});
