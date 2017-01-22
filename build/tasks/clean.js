@@ -14,15 +14,15 @@ gulp.task('clean', [
 ]);
 
 gulp.task('clean:build', [
-    'clean:root:src',
-    'clean:root:map',
+    'clean:src:src',
+    'clean:src:map',
     'clean:test:src',
     'clean:test:map'
 ]);
 
 gulp.task('clean:docs', () => cleaner(paths.docs));
-gulp.task('clean:root:src', () => cleaner(paths.root, 'js'));
-gulp.task('clean:root:map', () => cleaner(paths.root, 'map'));
+gulp.task('clean:src:src', () => cleaner(paths.src, 'js'));
+gulp.task('clean:src:map', () => cleaner(paths.src, 'map'));
 gulp.task('clean:test:src', () => cleaner(paths.test, 'js'));
 gulp.task('clean:test:map', () => cleaner(paths.test, 'map'));
 

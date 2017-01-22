@@ -9,11 +9,11 @@ const $ = require('gulp-load-plugins')({
 });
 
 gulp.task('lint', [
-    'lint:root',
+    'lint:src',
     'lint:test'
 ]);
 
-gulp.task('lint:root', () => linter(paths.root));
+gulp.task('lint:src', () => linter(paths.src));
 gulp.task('lint:test', () => linter(paths.test));
 
 function linter(filePath) {
