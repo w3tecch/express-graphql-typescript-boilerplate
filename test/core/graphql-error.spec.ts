@@ -6,7 +6,7 @@ import {
 
 import {
     defaultHandler,
-    maskErrors,
+    handlingErrors,
     Processed,
     setDefaultHandler,
     UserError
@@ -89,10 +89,10 @@ describe('app:core', () => {
         });
     });
 
-    describe('maskErrors', function () {
+    describe('handlingErrors', function () {
         it('should mask errors in fields', async function () {
             const field = schema.getTypeMap().RootQueryType.getFields().throwError;
-            maskErrors(field);
+            handlingErrors(field);
             expect(field[Processed]).toEqual(true);
             let resolveErr = null;
             try {
@@ -106,7 +106,7 @@ describe('app:core', () => {
         it('should mask errors in types', async function () {
             const type = schema.getTypeMap().RootQueryType;
             const fields = schema.getTypeMap().RootQueryType.getFields();
-            maskErrors(type);
+            handlingErrors(type);
 
             for (const fieldName in fields) {
                 if (!fields.hasOwnProperty(fieldName)) {
@@ -133,7 +133,7 @@ describe('app:core', () => {
 
         it('should mask errors in schema', async function () {
             const fields = schema.getTypeMap().RootQueryType.getFields();
-            maskErrors(schema);
+            handlingErrors(schema);
 
             for (const fieldName in fields) {
                 if (!fields.hasOwnProperty(fieldName)) {
