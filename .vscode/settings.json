@@ -4,4 +4,6 @@
         "src/**/*.js": true,
         "test/**/*.js": true
     }
+,
+"vsicons.presets.angular": false
 }
