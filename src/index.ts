@@ -4,10 +4,8 @@
 import { configuration } from './core/environment';
 const environment = configuration();
 
-// Configure the debug module
-process.env.DEBUG = environment.debug;
-import * as Debug from 'debug';
-const debug = Debug('app');
+import { Logger } from './core/logger';
+const log = Logger('app:main');
 
 // Import all express libs
 import * as express from 'express';
@@ -57,4 +55,4 @@ app.use('/graphql', (req: express.Request, res: express.Response) => {
 // Starts the server and listens for common errors
 const server = run(app, environment.port);
 listenTo(server);
-debug('Server was started');
+log.debug('Server was started');
