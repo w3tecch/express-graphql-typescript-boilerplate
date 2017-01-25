@@ -1,4 +1,6 @@
-import { logger, debugStream, winstonStream } from '../../src/core/logger';
+import { Logger, debugStream, winstonStream } from '../../src/core/logger';
+
+const log = Logger('test');
 
 describe('Core:Logger', () => {
     describe('debugStream', () => {
@@ -17,21 +19,21 @@ describe('Core:Logger', () => {
             expect(winstonStream.stream.write()).toBeUndefined();
         });
     });
-    describe('logger', () => {
+    describe('log', () => {
         it('Should have a debug method', () => {
-            expect(logger.debug).toBeDefined();
+            expect(log.debug).toBeDefined();
         });
-        it('Should have a log method', () => {
-            expect(logger.log).toBeDefined();
+        it('Should have a verbose method', () => {
+            expect(log.verbose).toBeDefined();
         });
         it('Should have a info method', () => {
-            expect(logger.info).toBeDefined();
+            expect(log.info).toBeDefined();
         });
         it('Should have a warn method', () => {
-            expect(logger.warn).toBeDefined();
+            expect(log.warn).toBeDefined();
         });
         it('Should have a error method', () => {
-            expect(logger.error).toBeDefined();
+            expect(log.error).toBeDefined();
         });
     });
 });
