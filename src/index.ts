@@ -19,7 +19,7 @@ import { winstonStream, debugStream } from './core/logger';
 
 // Application & Server from core to get the app started
 import { listenTo } from './core/server';
-import { init, run } from './core/application';
+import { init, run } from './core/bootstrap';
 const app = init();
 
 // Helmet helps you secure your Express apps by setting various HTTP headers
@@ -47,12 +47,12 @@ app.use('/graphql', (req: express.Request, res: express.Response) => {
     GraphQLHTTP({
         schema: schema,
         rootValue: root,
-        graphiql: environment.graphiql
+        graphiql: environment.server.graphiql
     })(req, res);
 });
 
 
 // Starts the server and listens for common errors
-const server = run(app, environment.port);
+const server = run(app, environment.server.port);
 listenTo(server);
 log.debug('Server was started on environment %s', name());
