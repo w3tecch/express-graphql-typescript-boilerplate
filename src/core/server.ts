@@ -5,6 +5,7 @@ import * as http from 'http';
 import { Logger } from './logger';
 const log = Logger('app:core:server');
 
+
 const bind = (addr) => {
     return typeof addr === 'string'
         ? `pipe ${addr}`

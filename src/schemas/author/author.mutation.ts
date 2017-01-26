@@ -12,6 +12,7 @@ const log = Logger('app:schemas:author:mutation');
 import { AuthorType } from './author.type';
 import { createAuthor } from '../../repositories/author/author.create';
 
+
 export const createAuthorMutation = (): GraphQLFieldConfig => ({
     type: AuthorType,
     args: {

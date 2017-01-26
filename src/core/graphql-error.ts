@@ -1,6 +1,7 @@
 import * as uuid from 'uuid';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
+
 // Mark field/type/schema
 export const Processed = Symbol();
 

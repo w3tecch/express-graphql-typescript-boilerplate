@@ -8,6 +8,7 @@ import { AuthorModel } from '../../models/author.model';
 import { Logger } from '../../core/logger';
 const log = Logger('app:repositories:author:read');
 
+
 const AuthorNotFound = NotFound(AuthorModel);
 
 export const getAuthors = (): Promise<models.author.Instance[]> => AuthorModel.findAll();

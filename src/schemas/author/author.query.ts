@@ -13,6 +13,7 @@ const log = Logger('app:schemas:author:query');
 import { AuthorType } from './author.type';
 import { getAuthor, getAuthors } from '../../repositories/author/author.read';
 
+
 export const getAuthorsQuery = (): GraphQLFieldConfig => ({
     type: new GraphQLList(AuthorType),
     // args: {}, here u can add filters and orders

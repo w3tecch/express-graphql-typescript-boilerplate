@@ -3,6 +3,7 @@ import * as winston from 'winston';
 import { configuration, isProduction } from './environment';
 const environment = configuration();
 
+
 /**
  * Configures the winston logger. There are also file and remote transports available
  */
