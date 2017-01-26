@@ -23,7 +23,7 @@ describe('app:core', () => {
                 fields: {
                     throwError: {
                         type: GraphQLString,
-                        resolve() { throw new Error('secret error'); },
+                        resolve() { throw new Error('secret error'); }
                     },
                     throwInPromise: {
                         type: GraphQLString,
@@ -35,7 +35,7 @@ describe('app:core', () => {
                     },
                     throwUserError: {
                         type: GraphQLString,
-                        resolve() { throw new UserError('custom error'); },
+                        resolve() { throw new UserError('custom error'); }
                     },
                     rejectPromise: {
                         type: GraphQLString,
