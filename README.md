@@ -105,5 +105,25 @@ express-graphql-typescript-boilerplate
  |-- wallaby.js                     * our wallaby configuration
 ```
 
-## License
+# Sequelize and the Sequelize CLI: Migration
+[Documentation](http://docs.sequelizejs.com/en/v3/docs/migrations/)
+
+## Install
+* Navigate to your app's root directory in the terminal
+* `npm install --save-dev sequelize-cli`
+
+## Configure
+Create a file called `.sequelizerc` in your project root folder
+```
+var path = require('path');
+
+module.exports = {
+    'config': path.resolve('src/core', 'config.js'),
+    'seeders-path': path.resolve('src/database', 'seeders'),
+    'migrations-path': path.resolve('src/database', 'migrations'),
+    'models-path': path.resolve('src', 'models')
+};
+```
+
+# License
  [MIT](/LICENSE)
