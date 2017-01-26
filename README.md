@@ -57,52 +57,61 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ### Structure
 ```
 express-graphql-typescript-boilerplate
- |-- build/                         * our task runner configurations and tasks
- |    |-- tasks/                    * gulp tasks
- |    |-- paths.js                  * project path setup for our gulp tasks
- |    |-- util.js                   * our gulp helper functions
+ |-- build/                                     * our task runner configurations and tasks
+ |    |-- tasks/                                * gulp tasks
+ |    |-- paths.js                              * project path setup for our gulp tasks
+ |    |-- util.js                               * our gulp helper functions
  |
- |-- docs/                          * our generated doc files
+ |-- docs/                                      * our generated doc files
  |
- |-- src/                           * our source files that will be compiled to javascript
- |    |-- core/                     * our core functionalities
- |    |    |-- application.ts       * our express helper functions to init and run the server
- |    |    |-- environment.ts       * gets us the configuration for the given environment
- |    |    |-- logger.ts            * our logger configurations
- |    |    |-- server.ts            * our server error handling
+ |-- src/                                       * our source files that will be compiled to javascript
+ |    |-- common/                               * common helpers
+ |    |    |-- exceptions.ts                    * our common exceptions like "NotFound"
  |    |
- |    |-- environments/             * our environment configurations
- |    |    |-- development.ts       * our development environment configuration to run our server locally
- |    |    |-- production.ts        * the production environment is used to run on a server(cloud)
- |    |    |-- test.ts              * our test environment configurations
+ |    |-- core/                                 * our core functionalities
+ |    |    |-- bootstrap.ts                     * our express helper functions to init and run the server
+ |    |    |-- config.ts                        * has our configuration for our different environments
+ |    |    |-- database.ts                      * our database setup
+ |    |    |-- environment.ts                   * gets us the configuration for the given environment
+ |    |    |-- graphql-error-handling.ts        * our error handling
+ |    |    |-- logger.ts                        * our logger configurations
+ |    |    |-- server.ts                        * our server error handling
  |    |
- |    |-- middlewares/              * our express custom middlewares (/*.middleware.ts)
+ |    |-- database/                             * our database tasks
+ |    |    |-- factories                        * our factories to create simple fake data
+ |    |    |-- migrations                       * our database migration tasks
+ |    |    |-- seeders                          * our database seeder tasks
  |    |
- |    |-- models/                   * our database models (/*.model.ts)
+ |    |-- middlewares/                          * our express custom middlewares (/*.middleware.ts)
  |    |
- |    |-- repositories/             * use a repository to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model
- |    |    |-- **/*.ts              * use a single file for every query function.
+ |    |-- models/                               * our database models (/*.model.ts)
  |    |
- |    |-- schemas/                  * our graphql schema definitions
- |    |    |-- **/*.type.spec       * our graphql type files
- |    |    |-- **/*.query.spec      * our graphql query files
- |    |    |-- **/*.mutation.spec   * our graphql mutation files
+ |    |-- repositories/                         * use a repository to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model
+ |    |    |-- **/*.read.ts                     * use a single file for every query action.
+ |    |    |-- **/*.create.ts
+ |    |    |-- **/*.update.ts
+ |    |    |-- **/*.delete.ts
  |    |
- |    |-- index.ts                  * main entry point for our application
+ |    |-- schemas/                              * our graphql schema definitions
+ |    |    |-- **/*.type.spec                   * our graphql type files
+ |    |    |-- **/*.query.spec                  * our graphql query files
+ |    |    |-- **/*.mutation.spec               * our graphql mutation files
+ |    |
+ |    |-- index.ts                              * main entry point for our application
  |
- |-- test/                          * our test files that will test our application
- |    |-- mocks                     * we use this to simulate other functions, classes or objects
- |    |-- **/*.spec.ts              * our test cases
+ |-- test/                                      * our test files that will test our application
+ |    |-- mocks                                 * we use this to simulate other functions, classes or objects
+ |    |-- **/*.spec.ts                          * our test cases
  |
- |-- typings_custom/                * our local type definitions
+ |-- typings_custom/                            * our local type definitions
  |
- |-- gulpfile.js                    * entry point for our gulp tasks
- |-- nodemon.json                   * nodemon setup, so that it uses typescript and runs tslint
- |-- package.json                   * what npm uses to manage it's dependencies
- |-- tslint.json                    * typescript lint config
- |-- typedoc.json                   * typescript documentation generator
- |-- tsconfig.json                  * typescript config
- |-- wallaby.js                     * our wallaby configuration
+ |-- gulpfile.js                                * entry point for our gulp tasks
+ |-- nodemon.json                               * nodemon setup, so that it uses typescript and runs tslint
+ |-- package.json                               * what npm uses to manage it's dependencies
+ |-- tslint.json                                * typescript lint config
+ |-- typedoc.json                               * typescript documentation generator
+ |-- tsconfig.json                              * typescript config
+ |-- wallaby.js                                 * our wallaby configuration
 ```
 
 ## Sequelize and the Sequelize CLI: Migration
