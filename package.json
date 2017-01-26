@@ -70,7 +70,6 @@
     "morgan": "^1.7.0",
     "mysql": "^2.13.0",
     "sequelize": "^3.30.0",
-    "sqlite3": "^3.1.8",
     "uuid": "^3.0.1",
     "winston": "^2.3.0"
   },
@@ -97,6 +96,7 @@
     "path": "^0.12.7",
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2",
+    "sqlite3": "^3.1.8",
     "ts-node": "^2.0.0",
     "tslint": "^4.3.1",
     "typedoc": "^0.5.5",
