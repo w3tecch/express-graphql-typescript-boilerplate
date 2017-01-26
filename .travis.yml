@@ -2,10 +2,7 @@ language: node_js
 node_js:
   - "6.9.2"
 install:
-  - npm install
-  - npm install -g typings
-before_script:
-  - typings install
+  - npm run install:dev
 scripts:
   - npm test
 notifications:
