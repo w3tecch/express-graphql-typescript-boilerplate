@@ -1,11 +1,11 @@
-import { configuration, name } from '../core/environment';
+import { configuration, name } from '../../core/environment';
 const environment = configuration();
 
-import { Logger } from '../core/logger';
-const log = Logger('app:seed');
+import { Logger } from '../../core/logger';
+const log = Logger('app:database:seed');
 
-import { db } from '../core/database';
-import { AuthorModel } from '../models/author.model';
+import { db } from '../../core/database';
+import { AuthorModel } from '../../models/author.model';
 
 log.debug('Starting on environment %s', name());
 
