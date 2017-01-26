@@ -36,7 +36,7 @@ export const winstonStream = stream(write(logger.info));
 process.env.DEBUG = environment.debug;
 // imports debug moduel
 import * as Debug from 'debug';
-const debug = Debug('app:request');
+const debug = Debug('app:response');
 
 /**
  * Debug stream for the morgan plugin
