@@ -1,4 +1,4 @@
-const name = (): string => process.env.NODE_ENV || 'development';
+export const name = (): string => process.env.NODE_ENV || 'development';
 
 export const isTest = () => process.env.NODE_ENV === 'test';
 
