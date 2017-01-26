@@ -12,6 +12,6 @@ describe('Environments:Development', () => {
         expect(configuration.debug.length).toBe(0);
     });
     it('Should hava a logger console', () => {
-        expect(configuration.logger.console.level).toBe('error');
+        expect(configuration.logger.console.level).toBe('debug');
     });
 });

@@ -9,9 +9,9 @@ describe('Environments:Development', () => {
         expect(configuration.database).toBeDefined();
     });
     it('Should hava a debug scope', () => {
-        expect(configuration.debug.length).toBeGreaterThan(0);
+        expect(configuration.debug.length).toBeDefined();
     });
     it('Should hava a logger console', () => {
-        expect(configuration.logger.console.level).toBeDefined();
+        expect(configuration.logger.console.level).toBe('error');
     });
 });
