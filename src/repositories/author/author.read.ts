@@ -2,7 +2,7 @@ import { models } from 'models';
 
 import { db } from '../../core/database';
 import { UserError } from '../../core/graphql-error';
-import { NotFound } from '../../common/errors';
+import { NotFound } from '../../common/exceptions';
 import { AuthorModel } from '../../models/author.model';
 
 import { Logger } from '../../core/logger';

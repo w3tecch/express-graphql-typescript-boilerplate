@@ -34,7 +34,7 @@ const write = (writeFunction) => ({
 export const winstonStream = stream(write(logger.info));
 
 // Configure the debug module
-process.env.DEBUG = environment.debug;
+process.env.DEBUG = environment.logger.debug;
 // imports debug moduel
 import * as Debug from 'debug';
 const debug = Debug('app:response');

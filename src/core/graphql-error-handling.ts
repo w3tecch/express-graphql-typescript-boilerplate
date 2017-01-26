@@ -1,6 +1,8 @@
 import * as uuid from 'uuid';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
+import { isTest } from './environment';
+
 
 // Mark field/type/schema
 export const Processed = Symbol();
@@ -26,7 +28,9 @@ export let defaultHandler = (err?) => {
     }
     const errId = uuid.v4();
     err.message = `${err.message}: ${errId}`;
-    console.error(err && err.stack || err);
+    if (!isTest()) {
+        console.error(err && err.stack || err);
+    }
     err.message = `Internal Error: ${errId}`;
     return err;
 };

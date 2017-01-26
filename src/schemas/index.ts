@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
-import { handlingErrors } from '../core/graphql-error';
+import { handlingErrors } from '../core/graphql-error-handling';
 
 
 /**

@@ -1,6 +1,6 @@
-import { init, run } from '../../src/core/application';
+import { init, run } from '../../src/core/bootstrap';
 
-describe('Core:Application', () => {
+describe('Core:Bootstrap', () => {
     describe('init', () => {
         it('Should return a defined object', () => {
             expect(init()).toBeDefined();

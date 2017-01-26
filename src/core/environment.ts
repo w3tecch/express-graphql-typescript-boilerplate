@@ -1,9 +1,11 @@
+const config = require('./config');
+
 export const name = (): string => process.env.NODE_ENV || 'development';
 
-export const isTest = () => process.env.NODE_ENV === 'test';
+export const isTest = () => name() === 'test';
 
-export const isDevelopment = () => process.env.NODE_ENV === 'development';
+export const isDevelopment = () => name() === 'development';
 
-export const isProduction = () => process.env.NODE_ENV === 'production';
+export const isProduction = () => name() === 'production';
 
-export const configuration = (): environment.Configuration => require(`../environments/${name()}`).configuration;
+export const configuration = (): config.Configuration => config[name()];
