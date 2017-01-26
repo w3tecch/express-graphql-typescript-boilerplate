@@ -1,6 +1,6 @@
 import * as winston from 'winston';
 
-import { configuration } from './environment';
+import { configuration, isProduction } from './environment';
 const environment = configuration();
 
 /**
@@ -10,9 +10,10 @@ const logger = new winston.Logger({
     transports: [
         new winston.transports.Console({
             level: environment.logger.console.level,
-            handleExceptions: process.env.NODE_ENV === 'production',
-            json: process.env.NODE_ENV === 'production',
-            colorize: process.env.NODE_ENV !== 'production'
+            timestamp: isProduction(),
+            handleExceptions: isProduction(),
+            json: isProduction(),
+            colorize: !isProduction()
         })
     ],
     exitOnError: false
@@ -53,7 +54,7 @@ export const Logger = (scope: string) => {
     const scopeDebug = Debug(scope);
     return {
         debug: (message: string, ...args: any[]) => {
-            if (process.env.NODE_ENV === 'production') {
+            if (isProduction()) {
                 logger.debug(format(scope, message), parse(args));
             }
             scopeDebug(message, parse(args));

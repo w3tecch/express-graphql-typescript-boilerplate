@@ -6,7 +6,7 @@ export const configuration: environment.Configuration = {
     debug: '',
     logger: {
         console: {
-            level: 'error'
+            level: 'debug'
         }
     }
 };
