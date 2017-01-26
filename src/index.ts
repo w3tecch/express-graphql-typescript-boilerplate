@@ -1,7 +1,7 @@
 //See: https://medium.com/the-graphqlhub/your-first-graphql-server-3c766ab4f0a2#.giyyd9tzx
 
 // Get environment configurations
-import { configuration } from './core/environment';
+import { configuration, name } from './core/environment';
 const environment = configuration();
 
 import { Logger } from './core/logger';
@@ -55,4 +55,4 @@ app.use('/graphql', (req: express.Request, res: express.Response) => {
 // Starts the server and listens for common errors
 const server = run(app, environment.port);
 listenTo(server);
-log.debug('Server was started');
+log.debug('Server was started on environment %s', name());
