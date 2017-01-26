@@ -2,6 +2,7 @@
     "globalDependencies": {
         "express-graphql": "registry:dt/express-graphql#0.0.0+20160626095004",
         "express-serve-static-core": "registry:dt/express-serve-static-core#4.0.0+20161012061536",
+        "faker": "registry:dt/faker#3.1.0+20161119044246",
         "jasmine": "registry:dt/jasmine#2.5.0+20170117213604",
         "morgan": "registry:dt/morgan#1.7.0+20160524142355",
         "sequelize": "registry:dt/sequelize#3.4.1+20160929080558",
