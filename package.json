@@ -7,8 +7,8 @@
     "install:typings": "./node_modules/.bin/typings install",
     "install:dev": "npm install && npm run install:typings",
     "install:clean": "npm prune && ./node_modules/.bin/typings prune",
-    "serve": "./node_modules/.bin/nodemon --watch 'src/**/*.ts'",
-    "serve:debug": "./node_modules/.bin/nodemon --watch 'src/**/*.ts' --debug=6666",
+    "serve": "./node_modules/.bin/nodemon --watch './src/**/*.ts'",
+    "serve:debug": "./node_modules/.bin/nodemon --watch './src/**/*.ts' --debug=6666",
     "lint": "./node_modules/.bin/gulp lint",
     "test": "NODE_ENV=test ./node_modules/.bin/gulp test",
     "test:pretty": "NODE_ENV=test ./node_modules/.bin/gulp test:pretty",
@@ -18,7 +18,9 @@
     "docs": "npm run docs:generate && npm run docs:server",
     "docs:generate": "./node_modules/.bin/gulp docs",
     "docs:server": "./node_modules/.bin/http-server ./docs --cors",
-    "start": "node src/index.js"
+    "seed": "node ./src/seed/index.js",
+    "seed:ts": "./node_modules/.bin/ts-node ./src/seed/index.ts",
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -57,6 +59,7 @@
   "homepage": "https://github.com/w3tecch/express-graphql-typescript-boilerplate#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "continuation-local-storage": "^3.2.0",
     "cors": "^2.8.1",
     "debug": "^2.6.0",
     "express": "^4.14.0",
@@ -65,6 +68,9 @@
     "helmet": "^3.4.0",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.0",
+    "sqlite3": "^3.1.8",
     "uuid": "^3.0.1",
     "winston": "^2.3.0"
   },
