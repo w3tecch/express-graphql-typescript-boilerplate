@@ -1,7 +1,7 @@
 import { models } from 'models';
 
 import { db } from '../../core/database';
-import { UserError } from '../../core/graphql-error';
+import { UserError } from '../../core/graphql-error-handling';
 import { AuthorModel } from '../../models/author.model';
 
 

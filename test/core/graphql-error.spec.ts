@@ -10,7 +10,7 @@ import {
     Processed,
     setDefaultHandler,
     UserError
-} from '../../src/core/graphql-error';
+} from '../../src/core/graphql-error-handling';
 
 describe('app:core', () => {
 
