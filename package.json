@@ -61,7 +61,6 @@
   "homepage": "https://github.com/w3tecch/express-graphql-typescript-boilerplate#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "continuation-local-storage": "^3.2.0",
     "cors": "^2.8.1",
     "debug": "^2.6.0",
     "express": "^4.14.0",
@@ -72,7 +71,6 @@
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
     "mysql": "^2.13.0",
-    "sequelize": "^3.30.0",
     "uuid": "^3.0.1",
     "winston": "^2.3.0"
   },

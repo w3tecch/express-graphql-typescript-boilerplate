@@ -5,8 +5,6 @@
         "faker": "registry:dt/faker#3.1.0+20161119044246",
         "jasmine": "registry:dt/jasmine#2.5.0+20170117213604",
         "morgan": "registry:dt/morgan#1.7.0+20160524142355",
-        "sequelize": "registry:dt/sequelize#3.4.1+20160929080558",
-        "validator": "registry:dt/validator#5.7.0+20161105193831",
         "winston": "registry:dt/winston#0.0.0+20161108133445"
     },
     "dependencies": {
