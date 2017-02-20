@@ -7,9 +7,8 @@ declare module config {
     }
 
     interface Configuration {
-        dialect: string;
-        url?: string;
-        storage?: string;
+        client: string;
+        connection?: string;
         server: ConfigurationServer;
         logger: ConfigurationLogger;
     }

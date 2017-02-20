@@ -1,10 +1,7 @@
 export = <config.Environments>{
     development: {
-        url: 'mysql://root:root@localhost:3306/my-database',
-        dialect: 'mysql',
-        // username: 'root',
-        // password: 'root',
-        // host: 'localhost:3306',
+        connection: 'mysql://root:root@localhost:3306/my-database-dev',
+        client: 'mysql',
         server: {
             host: 'localhost',
             port: process.env.PORT || '3000',
@@ -18,9 +15,8 @@ export = <config.Environments>{
         }
     },
     test: {
-        storage: '.ghost/test_database.sqlite',
-        // url: 'sqlite://',
-        dialect: 'sqlite',
+        connection: 'mysql://root:root@localhost:3306/my-database-test',
+        client: 'mysql',
         server: {
             host: 'localhost',
             port: process.env.PORT || '3000',
@@ -34,8 +30,8 @@ export = <config.Environments>{
         }
     },
     production: {
-        url: 'mariadb://root:root@localhost:3306/my-database',
-        dialect: 'mariadb',
+        connection: 'mariadb://root:root@localhost:3306/my-database-prod',
+        client: 'mysql',
         server: {
             host: 'localhost',
             port: process.env.PORT || '3000',
