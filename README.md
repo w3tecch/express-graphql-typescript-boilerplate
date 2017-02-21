@@ -15,6 +15,9 @@ Install [Node.js](http://nodejs.org)
 * `clone` your fork
 * `npm install` to install all dependencies
 * `npm run install:typings` to install all typings
+* Create new database. You will find the name in the `config.ts` file.
+* `npm run db:migrate` to create the schema
+* `npm run db:seed` to insert some test data
 * `npm run serve` to start the dev server in another tab
 
 ## Running the app
@@ -50,11 +53,12 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ### Docs
 * Run `npm run docs` to generate all doc files and serve it on `http://0.0.0.0:8080`
 
-### Seed (Coming Soon)
-* Run `npm run seed` to seed some data into the database
+### Seed
+* Run `npm run sdb:eed` to seed some data into the database
 
-### Migration (Coming Soon)
-* Run `npm run migration` to migration the new schema to the database
+### Migration
+* Run `npm run migrate` to migration the new schema to the database
+* Run `npm run migrate:rollback` to rollback one version
 
 ## Exploring the boilerplate
 ### Structure
@@ -73,7 +77,6 @@ express-graphql-typescript-boilerplate
  |    |
  |    |-- core/                                 * our core functionalities
  |    |    |-- bootstrap.ts                     * our express helper functions to init and run the server
- |    |    |-- config.ts                        * has our configuration for our different environments
  |    |    |-- database.ts                      * our database setup
  |    |    |-- environment.ts                   * gets us the configuration for the given environment
  |    |    |-- graphql-error-handling.ts        * our error handling
@@ -83,7 +86,7 @@ express-graphql-typescript-boilerplate
  |    |-- database/                             * our database tasks
  |    |    |-- factories                        * our factories to create simple fake data
  |    |    |-- migrations                       * our database migration tasks
- |    |    |-- seeders                          * our database seeder tasks
+ |    |    |-- seeds                            * our database seeder tasks
  |    |
  |    |-- middlewares/                          * our express custom middlewares (/*.middleware.ts)
  |    |
@@ -108,6 +111,8 @@ express-graphql-typescript-boilerplate
  |
  |-- typings_custom/                            * our local type definitions
  |
+ |-- config.ts                                  * has our configuration for our different environments
+ |-- knexfile.ts                                * this has our database configuration from the config.ts
  |-- gulpfile.js                                * entry point for our gulp tasks
  |-- nodemon.json                               * nodemon setup, so that it uses typescript and runs tslint
  |-- package.json                               * what npm uses to manage it's dependencies
@@ -117,25 +122,6 @@ express-graphql-typescript-boilerplate
  |-- wallaby.js                                 * our wallaby configuration
 ```
 
-## Sequelize and the Sequelize CLI: Migration
-[Documentation](http://docs.sequelizejs.com/en/v3/docs/migrations/)
-
-### Install
-* Navigate to your app's root directory in the terminal
-* `npm install --save-dev sequelize-cli`
-
-### Configure
-Create a file called `.sequelizerc` in your project root folder
-```
-var path = require('path');
-
-module.exports = {
-    'config': path.resolve('src/core', 'config.js'),
-    'seeders-path': path.resolve('src/database', 'seeders'),
-    'migrations-path': path.resolve('src/database', 'migrations'),
-    'models-path': path.resolve('src', 'models')
-};
-```
 
 ## License
  [MIT](/LICENSE)

@@ -11,26 +11,26 @@ import { Logger } from '../../core/logger';
 const log = Logger('app:schemas:author:query');
 
 import { AuthorType } from './author.type';
-import { getAuthor, getAuthors } from '../../repositories/author/author.read';
+import { findAllAuthors, findAuthorById } from '../../repositories/author';
 
 
-export const getAuthorsQuery = (): GraphQLFieldConfig => ({
+export const findAllAuthorsQuery = (): GraphQLFieldConfig => ({
     type: new GraphQLList(AuthorType),
     // args: {}, here u can add filters and orders
     resolve: (root, args) => {
-        log.debug('resolve getAuthors()');
-        return getAuthors();
+        log.debug('resolve findAllAuthors()');
+        return findAllAuthors();
     }
 });
 
-export const getAuthorQuery = (): GraphQLFieldConfig => ({
+export const findAuthorByIdQuery = (): GraphQLFieldConfig => ({
     type: AuthorType,
     args: {
         id: { type: GraphQLID }
     },
     resolve: (root, args: arguments.ID) => {
-        log.debug('resolve getAuthor(%s)', args.id);
-        return getAuthor(args.id);
+        log.debug('resolve findAuthorById(%s)', args.id);
+        return findAuthorById(args.id);
     }
 });
 

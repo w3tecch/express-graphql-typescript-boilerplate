@@ -8,6 +8,7 @@
         "winston": "registry:dt/winston#0.0.0+20161108133445"
     },
     "dependencies": {
+        "bluebird": "registry:dt/bluebird#3.0.0+20161229155504",
         "body-parser": "registry:npm/body-parser#1.15.2+20161116154925",
         "cors": "registry:npm/cors#2.7.0+20160902012746",
         "debug": "registry:npm/debug#2.0.0+20160723033700",

@@ -24,7 +24,11 @@ gulp.task('build', (callback) => runSequence(
 gulp.task('build:transpile:src', () => transpiler(paths.src));
 gulp.task('build:transpile:test', () => transpiler(paths.test, true));
 
-function transpiler(filePath, isTest) {
+function transpiler(filePath, isTest, files) {
+
+    if (files === undefined) {
+        files = '/**/*.ts';
+    }
 
     if (!tsProjectSource && !isTest) {
         tsProjectSource = $.typescript.createProject('tsconfig.json', {
@@ -43,7 +47,7 @@ function transpiler(filePath, isTest) {
         .src([
             './typings/index.d.ts',
             './typings_custom/**/*.d.ts',
-            path.join(filePath, '/**/*.ts')
+            path.join(filePath, files)
         ])
         .pipe($.plumber({ errorHandler: $.notify.onError('Error: <%= error.message %>') }))
         .pipe($.sourcemaps.init({ loadMaps: true }))

@@ -7,10 +7,14 @@ declare module config {
     }
 
     interface Configuration {
-        client: string;
-        connection?: string;
+        database: ConfigurationDatabase;
         server: ConfigurationServer;
         logger: ConfigurationLogger;
+    }
+
+    interface ConfigurationDatabase {
+        client: string;
+        connection?: string;
     }
 
     interface ConfigurationServer {

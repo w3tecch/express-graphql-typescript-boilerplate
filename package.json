@@ -18,10 +18,9 @@
     "docs": "npm run docs:generate && npm run docs:server",
     "docs:generate": "./node_modules/.bin/gulp docs",
     "docs:server": "./node_modules/.bin/http-server ./docs --cors",
-    "seed": "node ./src/database/seeders/index.js",
-    "seed:ts": "./node_modules/.bin/ts-node ./src/database/seeders/index.ts",
-    "migration": "node ./src/database/migrations/index.js",
-    "migration:ts": "./node_modules/.bin/ts-node ./src/database/migrations/index.ts",
+    "db:migrate": "./node_modules/.bin/knex migrate:latest",
+    "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
+    "db:seed": "./node_modules/.bin/knex seed:run",
     "start": "node ./src/index.js"
   },
   "repository": {

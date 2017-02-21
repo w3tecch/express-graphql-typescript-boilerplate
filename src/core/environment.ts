@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('../../config');
 
 export const name = (): string => process.env.NODE_ENV || 'development';
 
