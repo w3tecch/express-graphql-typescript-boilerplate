@@ -88,8 +88,7 @@ export class AuthorBuilder implements AbstactBuilder<models.author.Attributes, m
     }
 
     public validate(): boolean {
-        // TODO Check id all required attributes ar given
-        return true;
+        return !!this.firstName && !!this.lastName;
     }
 
     public build(): Author {
