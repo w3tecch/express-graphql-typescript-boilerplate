@@ -21,6 +21,7 @@
     "db:migrate": "./node_modules/.bin/knex migrate:latest",
     "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
     "db:seed": "./node_modules/.bin/knex seed:run",
+    "prestart": "npm run db:migrate",
     "start": "node ./src/index.js"
   },
   "repository": {
@@ -28,7 +29,7 @@
     "url": "git+https://w3tecch@github.com/w3tecch/express-graphql-typescript-boilerplate.git"
   },
   "engines": {
-    "node": "6.9.2"
+    "node": "^6.9.2"
   },
   "keywords": [
     "NodeJS",

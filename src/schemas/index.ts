@@ -1,20 +1,25 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
 import { handlingErrors } from '../core/graphql-error-handling';
-
+import { db } from '../core/database';
 
 /**
  * Queries
  */
 import { helloQuery } from './hello/hello.query';
-import { findAllAuthorsQuery, findAuthorByIdQuery } from './author/author.query';
+
+import { AuthorRepository } from '../repositories/author.repository';
+import { AuthorBuilder } from '../builders/author.builder';
+import { AuthorQuery } from '../schemas/author/author.query';
+
+const authorQuery = new AuthorQuery(new AuthorRepository(db));
 
 const RootQuery: GraphQLObjectType = new GraphQLObjectType({
     name: 'Query',
     fields: {
         hello: helloQuery(),
-        findAllAuthors: findAllAuthorsQuery(),
-        findAuthorById: findAuthorByIdQuery()
+        findAllAuthors: authorQuery.findAllAuthorsQuery(),
+        findAuthorById: authorQuery.findAuthorByIdQuery()
     }
 });
 

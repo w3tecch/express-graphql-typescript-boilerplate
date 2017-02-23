@@ -1,6 +1,5 @@
 import {
     GraphQLID,
-    GraphQLString,
     GraphQLList,
     GraphQLFieldConfig,
     GraphQLNonNull
@@ -11,26 +10,28 @@ import { Logger } from '../../core/logger';
 const log = Logger('app:schemas:author:query');
 
 import { AuthorType } from './author.type';
-import { findAllAuthors, findAuthorById } from '../../repositories/author';
+import { AuthorRepository } from '../../repositories/author.repository';
+import { AbstractQuery } from '../common/abstract.query';
 
+export class AuthorQuery extends AbstractQuery<AuthorRepository> {
 
-export const findAllAuthorsQuery = (): GraphQLFieldConfig => ({
-    type: new GraphQLList(AuthorType),
-    // args: {}, here u can add filters and orders
-    resolve: (root, args) => {
-        log.debug('resolve findAllAuthors()');
-        return findAllAuthors();
-    }
-});
+    public findAllAuthorsQuery = (): GraphQLFieldConfig => ({
+        type: new GraphQLList(AuthorType),
+        resolve: (root, args) => {
+            log.debug('resolve findAllAuthors()');
+            return this.repo.findAllAuthors();
+        }
+    })
 
-export const findAuthorByIdQuery = (): GraphQLFieldConfig => ({
-    type: AuthorType,
-    args: {
-        id: { type: GraphQLID }
-    },
-    resolve: (root, args: arguments.ID) => {
-        log.debug('resolve findAuthorById(%s)', args.id);
-        return findAuthorById(args.id);
-    }
-});
+    public findAuthorByIdQuery = (): GraphQLFieldConfig => ({
+        type: AuthorType,
+        args: {
+            id: { type: new GraphQLNonNull(GraphQLID) }
+        },
+        resolve: (root, args: arguments.ID) => {
+            log.debug('resolve findAuthorById(%s)', args.id);
+            return this.repo.findAuthorById(args.id);
+        }
+    })
 
+}
