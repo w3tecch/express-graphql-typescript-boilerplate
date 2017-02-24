@@ -4,7 +4,8 @@
         "target": "es6",
         "moduleResolution": "node",
         "sourceMap": true,
-        "noUnusedLocals": true
+        "noUnusedLocals": true,
+        "noUnusedParameters": false
     },
     "filesGlob": [
         "typings/**/*.d.ts",

@@ -16,7 +16,7 @@ export class BookQuery extends AbstractQuery<BookRepository> {
 
     public findAllBooksQuery = (): GraphQLFieldConfig => ({
         type: new GraphQLList(BookType),
-        resolve: (root, args) => {
+        resolve: () => {
             log.debug('resolve findAllAuthors()');
             return this.repo.findAllBooks();
         }

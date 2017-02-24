@@ -6,5 +6,5 @@ import {
 
 export const helloQuery = (): GraphQLFieldConfig => ({
     type: GraphQLString,
-    resolve: (root, args) => root.hello()
+    resolve: (root) => root.hello()
 });

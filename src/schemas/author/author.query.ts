@@ -16,7 +16,7 @@ export class AuthorQuery extends AbstractQuery<AuthorRepository> {
 
     public findAllAuthorsQuery = (): GraphQLFieldConfig => ({
         type: new GraphQLList(AuthorType),
-        resolve: (root, args) => {
+        resolve: () => {
             log.debug('resolve findAllAuthors()');
             return this.repo.findAllAuthors();
         }

@@ -25,7 +25,7 @@ const stream = (streamFunction) => ({
 });
 
 const write = (writeFunction) => ({
-    write: (message: string, encoding?: any) => writeFunction(message)
+    write: (message: string) => writeFunction(message)
 });
 
 /**
