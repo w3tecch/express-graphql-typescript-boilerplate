@@ -11,14 +11,25 @@ import { helloQuery } from './hello/hello.query';
 import { AuthorRepository } from '../repositories/author.repository';
 import { AuthorQuery } from '../schemas/author/author.query';
 
-const authorQuery = new AuthorQuery(new AuthorRepository(db));
+import { BookRepository } from '../repositories/book.repository';
+import { BookQuery } from '../schemas/book/book.query';
 
+const authorQuery = new AuthorQuery(new AuthorRepository(db));
+const bookQuery = new BookQuery(new BookRepository(db));
+
+/**
+ * RootQuery
+ *
+ * This will be published to the clients
+ */
 const RootQuery: GraphQLObjectType = new GraphQLObjectType({
     name: 'Query',
     fields: {
         hello: helloQuery(),
         findAllAuthors: authorQuery.findAllAuthorsQuery(),
-        findAuthorById: authorQuery.findAuthorByIdQuery()
+        findAuthorById: authorQuery.findAuthorByIdQuery(),
+        findAllBooks: bookQuery.findAllBooksQuery(),
+        findBookById: bookQuery.findBookByIdQuery()
     }
 });
 
@@ -28,6 +39,11 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
 //  */
 // import { createAuthorMutation } from './author/author.mutation';
 
+// /**
+//  * RootMutation
+//  *
+//  * This will be published to the clients
+//  */
 // const RootMutation: GraphQLObjectType = new GraphQLObjectType({
 //     name: 'Mutation',
 //     fields: {

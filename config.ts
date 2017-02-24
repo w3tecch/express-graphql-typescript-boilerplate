@@ -7,7 +7,7 @@ export = <config.Environments>{
      */
     development: {
         database: {
-            connection: 'mysql://root:root@localhost:3306/my-database-dev',
+            connection: 'mysql://root@localhost:3306/my-database-dev',
             client: 'mysql',
             migrations: {
                 directory: './src/database/migrations',

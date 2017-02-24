@@ -1,5 +1,4 @@
 import { lorem, random, date } from 'faker';
-import { models } from 'models';
 
 import { BookBuilder } from '../../builders/book.builder';
 

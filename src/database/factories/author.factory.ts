@@ -1,5 +1,4 @@
 import { name } from 'faker';
-import { models } from 'models';
 
 import { AuthorBuilder } from '../../builders/author.builder';
 
