@@ -1,5 +1,3 @@
-import { models } from 'models';
-
 import {
     GraphQLID,
     GraphQLString,

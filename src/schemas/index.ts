@@ -9,7 +9,6 @@ import { db } from '../core/database';
 import { helloQuery } from './hello/hello.query';
 
 import { AuthorRepository } from '../repositories/author.repository';
-import { AuthorBuilder } from '../builders/author.builder';
 import { AuthorQuery } from '../schemas/author/author.query';
 
 const authorQuery = new AuthorQuery(new AuthorRepository(db));

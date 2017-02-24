@@ -4,8 +4,6 @@ import { models } from 'models';
 import { AUTHOR } from '../common/tables';
 import { AuthorBuilder } from '../builders/author.builder';
 import { AbstractRepository } from './abstract.repository';
-import { UserError } from '../core/graphql-error-handling';
-import { NotFound } from '../common/exceptions';
 import { single, assertResults, mapResults } from '../common/utils';
 
 

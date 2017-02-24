@@ -4,7 +4,6 @@ import {
     GraphQLFieldConfig,
     GraphQLNonNull
 } from 'graphql';
-import { Request } from 'express';
 
 import { Logger } from '../../core/logger';
 const log = Logger('app:schemas:author:query');
