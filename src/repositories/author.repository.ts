@@ -6,6 +6,9 @@ import { AuthorBuilder } from '../builders/author.builder';
 import { AbstractRepository } from './abstract.repository';
 import { single, assertResults, mapResults } from '../common/utils';
 
+import { Logger } from '../core/logger';
+const log = Logger('app:repo:author');
+
 
 export class AuthorRepository extends AbstractRepository<Knex> {
 
@@ -17,6 +20,7 @@ export class AuthorRepository extends AbstractRepository<Knex> {
      * @memberOf AuthorRepository
      */
     public async findAllAuthors(): Promise<models.author.Attributes[]> {
+        log.debug('findAllAuthors called');
         const results = await this.db.select().from(AUTHOR);
         return mapResults(results, (result) => (new AuthorBuilder(result)).build());
     }
@@ -30,9 +34,25 @@ export class AuthorRepository extends AbstractRepository<Knex> {
      * @memberOf AuthorRepository
      */
     public async findAuthorById(id: number): Promise<models.author.Attributes> {
+        log.debug('findAuthorById called with id=', id);
         const results = await this.db.select().from(AUTHOR).where('id', id);
         assertResults(results, id);
         return (new AuthorBuilder(single(results))).build();
+    }
+
+    /**
+     *
+     *
+     * @param {number[]} ids
+     * @returns {Promise<models.author.Attributes[]>}
+     *
+     * @memberOf AuthorRepository
+     */
+    public async findAuthorsByIds(ids: number[]): Promise<models.author.Attributes[]> {
+        log.debug('findAuthorByIds called with ids=', ids);
+        const results = await this.db.select().from(AUTHOR).whereIn('id', ids);
+        assertResults(results, ids);
+        return mapResults(results, (result) => (new AuthorBuilder(result)).build());
     }
 
 }

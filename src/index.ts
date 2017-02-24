@@ -33,22 +33,32 @@ app.use(morgan('dev', debugStream));
 app.use(morgan('combined', winstonStream));
 
 
-// The root provides a resolver function for each API endpoint
-let root = {
-    hello: () => {
-        return 'Hello world!';
-    }
-};
-
-
 // Add GraphQL API to our express app
+import { db } from './core/database';
 import { schema } from './schemas';
-app.use('/graphql', (req: express.Request, res: express.Response) => {
+import { RootValue } from './root-value';
+import { Context } from './context';
+
+import { AuthorRepository } from './repositories/author.repository';
+import { BookRepository } from './repositories/book.repository';
+
+// Requests to /graphql redirect to /
+app.all('/graphql', (req, res) => res.redirect('/'));
+
+app.use('/', (req: express.Request, res: express.Response) => {
+    log.debug('Setup GraphQLHTTP');
+
+    const context = new Context(req, res)
+        .setAuthorRepository(new AuthorRepository(db))
+        .setBookRepository(new BookRepository(db));
+
     GraphQLHTTP({
         schema: schema,
-        rootValue: root,
+        rootValue: new RootValue(),
+        context: context,
         graphiql: environment.server.graphiql
     })(req, res);
+
 });
 
 

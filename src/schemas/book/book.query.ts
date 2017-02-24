@@ -5,20 +5,19 @@ import {
     GraphQLNonNull
 } from 'graphql';
 
+import { Context } from '../../context';
 import { Logger } from '../../core/logger';
-const log = Logger('app:schemas:author:query');
+const log = Logger('app:schemas:book:query');
 
 import { BookType } from './book.type';
-import { BookRepository } from '../../repositories/book.repository';
-import { AbstractQuery } from '../common/abstract.query';
 
-export class BookQuery extends AbstractQuery<BookRepository> {
+export class BookQuery {
 
     public findAllBooksQuery = (): GraphQLFieldConfig => ({
         type: new GraphQLList(BookType),
-        resolve: () => {
+        resolve: (root, args, context: Context) => {
             log.debug('resolve findAllAuthors()');
-            return this.repo.findAllBooks();
+            return  context.repos.book.findAllBooks();
         }
     })
 
@@ -27,9 +26,9 @@ export class BookQuery extends AbstractQuery<BookRepository> {
         args: {
             id: { type: new GraphQLNonNull(GraphQLID) }
         },
-        resolve: (root, args: arguments.ID) => {
+        resolve: (root, args: arguments.ID, context: Context) => {
             log.debug('resolve findAuthorById(%s)', args.id);
-            return this.repo.findBookById(args.id);
+            return context.repos.book.findBookById(args.id);
         }
     })
 

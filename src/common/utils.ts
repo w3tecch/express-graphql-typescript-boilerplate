@@ -3,7 +3,7 @@ import { NotFound } from './exceptions';
 
 export const hasResults = <T>(list: T[]): boolean => list.length === 0;
 
-export const assertResults = <T>(list: T[], idOrKey: number | string) => {
+export const assertResults = <T>(list: T[], idOrKey: number | string | number[]) => {
     if (hasResults(list)) {
         throw new UserError(NotFound(`${idOrKey}`));
     }

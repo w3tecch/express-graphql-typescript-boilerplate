@@ -1,21 +1,19 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
 import { handlingErrors } from '../core/graphql-error-handling';
-import { db } from '../core/database';
+
 
 /**
  * Queries
  */
 import { helloQuery } from './hello/hello.query';
 
-import { AuthorRepository } from '../repositories/author.repository';
 import { AuthorQuery } from '../schemas/author/author.query';
-
-import { BookRepository } from '../repositories/book.repository';
 import { BookQuery } from '../schemas/book/book.query';
 
-const authorQuery = new AuthorQuery(new AuthorRepository(db));
-const bookQuery = new BookQuery(new BookRepository(db));
+const authorQuery = new AuthorQuery();
+const bookQuery = new BookQuery();
+
 
 /**
  * RootQuery
