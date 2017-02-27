@@ -31,6 +31,7 @@ export class Context {
     ) { }
 
     public hasUserRoles(roles: string[]): boolean {
+        // TODO: Here you should check if the user as the needed roles for the requested query
         return true;
     }
 
