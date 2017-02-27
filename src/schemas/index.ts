@@ -9,11 +9,10 @@ import { handlingErrors } from '../core/graphql-error-handling';
 import { helloQuery } from './hello/hello.query';
 
 import { AuthorQuery } from '../schemas/author/author.query';
-import { BookQuery } from '../schemas/book/book.query';
+import { FindAllBooksQuery } from '../schemas/book/findAllBooks.query';
+import { FindBookByIdQuery } from '../schemas/book/findBookById.query';
 
 const authorQuery = new AuthorQuery();
-const bookQuery = new BookQuery();
-
 
 /**
  * RootQuery
@@ -26,8 +25,8 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
         hello: helloQuery(),
         findAllAuthors: authorQuery.findAllAuthorsQuery(),
         findAuthorById: authorQuery.findAuthorByIdQuery(),
-        findAllBooks: bookQuery.findAllBooksQuery(),
-        findBookById: bookQuery.findBookByIdQuery()
+        findAllBooks: new FindAllBooksQuery(),
+        findBookById: new FindBookByIdQuery()
     }
 });
 

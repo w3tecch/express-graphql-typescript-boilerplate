@@ -23,16 +23,16 @@ export class Context {
 
     constructor(
         private request: Express.Request,
-        private repsonse: Express.Response
+        public repsonse: Express.Response
     ) { }
 
-    public get getResponse() {
-        return this.repsonse;
-    };
+    public hasUserRoles(roles: string[]): boolean {
+        return true;
+    }
 
     public get getLanguage() {
         return this.request.acceptsLanguages();
-    };
+    }
 
     public setAuthorRepository(authorRepository: AuthorRepository): Context {
         this.repos.author = authorRepository;
