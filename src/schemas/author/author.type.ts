@@ -5,6 +5,7 @@ import {
     FirstNameField,
     LastNameField
 } from '../common/fields';
+import { BooksField } from '../book/books.field';
 
 
 export const AuthorType = new GraphQLObjectType({
@@ -13,6 +14,7 @@ export const AuthorType = new GraphQLObjectType({
     fields: () => ({
         id: new IdField(),
         firstName: new FirstNameField(),
-        lastName: new LastNameField()
+        lastName: new LastNameField(),
+        books: new BooksField()
     })
 });
