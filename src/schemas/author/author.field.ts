@@ -20,11 +20,15 @@ export class AuthorField extends AbstractField implements GraphQLFieldDefinition
     public execute(source: any, args, context: Context) {
         log.debug('Resolve auhtor %s of the book ' + source.id, source.authorId);
 
-        // Repo way ca 70-100ms
+        // Repo way
         // return context.repos.author.findAuthorById(source.authorId);
 
-        // DataLoader way ca 50-60ms
+        // DataLoader
         return context.loaders.author.load(source.authorId);
+
+        // Benchmark with 1000 Authors and per Author 10 Books
+        // With Loaders => ca. 2s
+        // Without Loaders => ca. 4s
     }
 
 }
