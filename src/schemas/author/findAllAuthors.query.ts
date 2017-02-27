@@ -1,22 +1,18 @@
-import { GraphQLID, GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
+import { GraphQLList, GraphQLFieldConfig } from 'graphql';
 
 import { Context } from '../../context';
-import { BookType } from './book.type';
+import { AuthorType } from './author.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
 
 import { Logger } from '../../core/logger';
-const log = Logger('app:schemas:book:FindBookByIdQuery');
+const log = Logger('app:schemas:author:FindAllAuthorsQuery');
 
 
-export class FindBookByIdQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
+export class FindAllAuthorsQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
 
-    public type = BookType;
+    public type = new GraphQLList(AuthorType);
 
     public allow = ['admin'];
-
-    public args = {
-        id: { type: new GraphQLNonNull(GraphQLID) }
-    };
 
     public before(context: Context, args: arguments.ID) {
         log.debug('hook before args', args);
@@ -29,9 +25,8 @@ export class FindBookByIdQuery extends AbstractQuery implements GraphQLFieldConf
         return Promise.resolve(result);
     }
 
-    public execute(root, args: arguments.ID, context: Context) {
-        log.debug('resolve findBookById(%s)', args.id);
-        return context.repos.book.findBookById(args.id);
+    public execute(root, args, context: Context) {
+        log.debug('resolve findAllAuthors()');
+        return context.repos.author.findAllAuthors();
     }
-
 }

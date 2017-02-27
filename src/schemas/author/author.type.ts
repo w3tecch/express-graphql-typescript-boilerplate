@@ -1,25 +1,18 @@
+import { GraphQLObjectType } from 'graphql';
+
 import {
-    GraphQLID,
-    GraphQLString,
-    GraphQLObjectType
-} from 'graphql';
+    IdField,
+    FirstNameField,
+    LastNameField
+} from '../common/fields';
 
 
 export const AuthorType = new GraphQLObjectType({
     name: 'Author',
     description: 'A single author.',
     fields: () => ({
-        id: {
-            type: GraphQLID,
-            description: 'The ID'
-        },
-        firstName: {
-            type: GraphQLString,
-            description: 'The first name of the author.'
-        },
-        lastName: {
-            type: GraphQLString,
-            description: 'The last name of the author.'
-        }
+        id: new IdField(),
+        firstName: new FirstNameField(),
+        lastName: new LastNameField()
     })
 });

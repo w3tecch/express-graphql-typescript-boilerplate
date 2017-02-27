@@ -7,7 +7,7 @@ import { AbstractRepository } from './abstract.repository';
 import { single, assertResults, mapResults } from '../common/utils';
 
 import { Logger } from '../core/logger';
-const log = Logger('app:repo:author');
+const log = Logger('app:repo:AuthorRepository');
 
 
 export class AuthorRepository extends AbstractRepository<Knex> {

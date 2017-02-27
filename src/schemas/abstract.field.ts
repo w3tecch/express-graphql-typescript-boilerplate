@@ -1,15 +1,15 @@
 import { Context } from '../context';
 
 
-export interface IGraphQLQuery {
+export interface IGraphQLField {
     allow: string[];
-    before<A, S>(context: Context, args: A, source?: S): Promise<A>;
-    after<R, A, S>(result: R, context: Context, args: A, source?: S): Promise<R>;
-    execute<R>(root, args, context: Context): Promise<R>;
+    before<A, S>(context: Context, args: A, source: S): Promise<A>;
+    after<R, A, S>(result: R, context: Context, args: A, source: S): Promise<R>;
+    execute<R>(source, args, context: Context): Promise<R>;
 }
 
 
-export class AbstractQuery {
+export class AbstractField {
 
     /**
      * Here you can add your needed permisson
@@ -35,7 +35,7 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public before<A, S>(context: Context, args: A, source?: S): Promise<A> {
+    public before<A, S>(context: Context, args: A, source: S): Promise<A> {
         return Promise.resolve(args);
     }
 
@@ -54,7 +54,7 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public after<R, A, S>(result: R, context: Context, args?: A, source?: S): Promise<R> {
+    public after<R, A, S>(result: R, context: Context, args: A, source: S): Promise<R> {
         return Promise.resolve(result);
     }
 
@@ -62,14 +62,14 @@ export class AbstractQuery {
      * This our resolver, which should gather the needed data;
      *
      * @template R
-     * @param {any} root
+     * @param {any} source
      * @param {any} args
      * @param {Context} context
      * @returns {Promise<R>}
      *
      * @memberOf AbstractQuery
      */
-    public execute<R>(root, args, context: Context): Promise<R> {
+    public execute<R>(source, args, context: Context): Promise<R> {
         return undefined;
     }
 
@@ -81,20 +81,20 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public resolve = async (root, args, context: Context): Promise<any> => {
+    public resolve = async (source, args, context: Context): Promise<any> => {
         //first check roles
         if (!context.hasUserRoles(this.allow)) {
             return context.repsonse.send(401);
         }
 
         //go throw before
-        args = await this.before(context, args);
+        args = await this.before(context, args, source);
 
         //run execute
-        let result = await this.execute(root, args, context);
+        let result = await this.execute(source, args, context);
 
         //call after
-        await this.after(result, context, args);
+        await this.after(result, context, args, source);
 
         //return
         return result;

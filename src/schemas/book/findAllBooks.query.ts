@@ -1,17 +1,18 @@
 import { GraphQLList, GraphQLFieldConfig } from 'graphql';
 
 import { Context } from '../../context';
-import { Logger } from '../../core/logger';
-const log = Logger('app:schemas:book:query');
-
 import { BookType } from './book.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
+
+import { Logger } from '../../core/logger';
+const log = Logger('app:schemas:book:FindAllBooksQuery');
+
 
 export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
 
     public type = new GraphQLList(BookType);
 
-    public allow = ['MA'];
+    public allow = ['admin'];
 
     public before(context: Context, args: arguments.ID) {
         log.debug('hook before args', args);
@@ -25,7 +26,7 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
     }
 
     public execute(root, args, context: Context) {
-        log.debug('resolve findAllAuthors()');
+        log.debug('resolve findAllBooks()');
         return context.repos.book.findAllBooks();
     }
 }

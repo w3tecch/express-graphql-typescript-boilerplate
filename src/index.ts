@@ -48,10 +48,12 @@ app.all('/graphql', (req, res) => res.redirect('/'));
 app.use('/', (req: express.Request, res: express.Response) => {
     log.debug('Setup GraphQLHTTP');
 
+    // Set all needed repositories and config a data loader within the setter
     const context = new Context(req, res)
         .setAuthorRepository(new AuthorRepository(db))
         .setBookRepository(new BookRepository(db));
 
+    // Creates a GraphQLHTTP per request
     GraphQLHTTP({
         schema: schema,
         rootValue: new RootValue(),
