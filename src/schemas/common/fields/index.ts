@@ -4,3 +4,4 @@ export * from './title.field';
 export * from './price.field';
 export * from './firstName.field';
 export * from './lastName.field';
+export * from './publishedAt.field';

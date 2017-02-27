@@ -14,4 +14,6 @@ export class Utils {
 
     static single = <T>(list: T[]): T => Utils.hasResults(list) ? null : list[0];
 
+    static isPosiitve = (number: number): boolean => number >= 0;
+
 }

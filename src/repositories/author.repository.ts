@@ -19,9 +19,13 @@ export class AuthorRepository extends AbstractRepository<Knex> {
      *
      * @memberOf AuthorRepository
      */
-    public async findAllAuthors(): Promise<models.author.Attributes[]> {
+    public async findAllAuthors(options: common.PageinationArguments): Promise<models.author.Attributes[]> {
         log.debug('findAllAuthors called');
-        const results = await this.db.select().from(AUTHOR);
+        const results = await this.db
+            .select()
+            .from(AUTHOR)
+            .limit(options.limit)
+            .offset(options.offset);
         return results.map((result) => new AuthorBuilder(result).build());
     }
 

@@ -19,9 +19,13 @@ export class BookRepository extends AbstractRepository<Knex> {
      *
      * @memberOf BookRepository
      */
-    public async findAllBooks(): Promise<models.book.Attributes[]> {
+    public async findAllBooks(options: common.PageinationArguments): Promise<models.book.Attributes[]> {
         log.debug('findAllBooks called');
-        const results = await this.db.select().from(BOOK);
+        const results = await this.db
+            .select()
+            .from(BOOK)
+            .limit(options.limit)
+            .offset(options.offset);
         return results.map((result) => new BookBuilder(result).build());
     }
 

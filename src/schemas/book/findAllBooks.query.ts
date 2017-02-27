@@ -3,6 +3,7 @@ import { GraphQLList, GraphQLFieldConfig } from 'graphql';
 import { Context } from '../../context';
 import { BookType } from './book.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
+import { LimitArgument, OffsetArgument } from '../common/arguments';
 
 import { Logger } from '../../core/logger';
 const log = Logger('app:schemas:book:FindAllBooksQuery');
@@ -14,8 +15,15 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
 
     public allow = ['admin'];
 
-    public before(context: Context, args: arguments.ID) {
+    public args = {
+        limit: new LimitArgument(),
+        offset: new OffsetArgument()
+    };
+
+    public before(context: Context, args: common.PageinationArguments) {
         log.debug('hook before args', args);
+        LimitArgument.verify(args.limit);
+        OffsetArgument.verify(args.limit);
         return Promise.resolve(args);
     }
 
@@ -25,8 +33,11 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
         return Promise.resolve(result);
     }
 
-    public execute(root, args, context: Context) {
+    public execute(root, args: common.PageinationArguments, context: Context) {
         log.debug('resolve findAllBooks()');
-        return context.repos.book.findAllBooks();
+        return context.repos.book.findAllBooks({
+            limit: args.limit,
+            offset: args.offset
+        });
     }
 }
