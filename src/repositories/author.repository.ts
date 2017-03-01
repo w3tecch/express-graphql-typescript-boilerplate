@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 
 import { models } from 'models';
 import { AUTHOR } from '../common/tables';
-import { AuthorBuilder } from '../builders/author.builder';
+import { AuthorModel } from '../models/author.model';
 import { AbstractRepository } from './abstract.repository';
 import { Utils } from '../common/utils';
 
@@ -26,7 +26,7 @@ export class AuthorRepository extends AbstractRepository<Knex> {
             .from(AUTHOR)
             .limit(options.limit)
             .offset(options.offset);
-        return results.map((result) => new AuthorBuilder(result).build());
+        return results.map((result) => new AuthorModel(result).toJson());
     }
 
     /**
@@ -41,7 +41,7 @@ export class AuthorRepository extends AbstractRepository<Knex> {
         log.debug('findAuthorById called with id=', id);
         const results = await this.db.select().from(AUTHOR).where('id', id);
         Utils.assertResults(results, id);
-        return (new AuthorBuilder(Utils.single(results))).build();
+        return (new AuthorModel(Utils.single(results))).toJson();
     }
 
     /**
@@ -56,7 +56,7 @@ export class AuthorRepository extends AbstractRepository<Knex> {
         log.debug('findAuthorByIds called with ids=', ids);
         const results = await this.db.select().from(AUTHOR).whereIn('id', ids);
         Utils.assertResults(results, ids);
-        return results.map((result) => new AuthorBuilder(result).build());
+        return results.map((result) => new AuthorModel(result).toJson());
     }
 
 }

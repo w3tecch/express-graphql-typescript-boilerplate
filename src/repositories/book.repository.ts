@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 
 import { models } from 'models';
 import { BOOK } from '../common/tables';
-import { BookBuilder } from '../builders/book.builder';
+import { BookModel } from '../models/book.model';
 import { AbstractRepository } from './abstract.repository';
 import { Utils } from '../common/utils';
 
@@ -26,7 +26,7 @@ export class BookRepository extends AbstractRepository<Knex> {
             .from(BOOK)
             .limit(options.limit)
             .offset(options.offset);
-        return results.map((result) => new BookBuilder(result).build());
+        return results.map((result) => new BookModel(result).toJson());
     }
 
     /**
@@ -41,7 +41,7 @@ export class BookRepository extends AbstractRepository<Knex> {
         log.debug('findBookById called with id=', id);
         const results = await this.db.select().from(BOOK).where('id', id);
         Utils.assertResults(results, id);
-        return (new BookBuilder(Utils.single(results))).build();
+        return (new BookModel(Utils.single(results))).toJson();
     }
 
     /**
@@ -55,7 +55,7 @@ export class BookRepository extends AbstractRepository<Knex> {
     public async findBookByAuthorId(id: number): Promise<models.book.Attributes> {
         log.debug('findBookByAuthorId called with id=', id);
         const results = await this.db.select().from(BOOK).where('author_id', id);
-        return results.map((result) => new BookBuilder(result).build());
+        return results.map((result) => new BookModel(result).toJson());
     }
 
     /**
@@ -70,7 +70,7 @@ export class BookRepository extends AbstractRepository<Knex> {
         log.debug('findBooksByIds called with ids=', ids);
         const results = await this.db.select().from(BOOK).whereIn('id', ids);
         Utils.assertResults(results, ids);
-        return results.map((result) => new BookBuilder(result).build());
+        return results.map((result) => new BookModel(result).toJson());
     }
 
 }

@@ -3,7 +3,7 @@ import { GraphQLFieldDefinition } from 'graphql';
 import { Context } from '../../context';
 import { AbstractField, IGraphQLField } from '../abstract.field';
 import { AuthorType } from '../author/author.type';
-import { Book } from '../../builders/book.builder';
+import { Book } from '../../models/book.model';
 
 import { Logger } from '../../core/logger';
 const log = Logger('app:schemas:author:AuthorField');

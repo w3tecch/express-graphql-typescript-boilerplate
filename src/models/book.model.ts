@@ -1,9 +1,9 @@
 import { models } from 'models';
 
-import { AbstactBuilder } from './abstact.builder';
+import { AbstactModel } from './abstact.model';
 
 
-export class BookBuilder implements AbstactBuilder<models.book.Attributes, models.book.RawAttributes> {
+export class BookModel implements AbstactModel<models.book.Attributes, models.book.RawAttributes> {
 
     private id?: number;
     private title?: string;
@@ -17,9 +17,9 @@ export class BookBuilder implements AbstactBuilder<models.book.Attributes, model
     constructor(attributes?: models.book.Attributes | models.book.RawAttributes, isRaw = true) {
         if (attributes) {
             if (isRaw) {
-                this.mapRaw(attributes);
+                this.mapDatabaseObject(attributes);
             } else {
-                this.map(attributes);
+                this.mapJson(attributes);
             }
         }
     }
@@ -56,47 +56,47 @@ export class BookBuilder implements AbstactBuilder<models.book.Attributes, model
         return this.createdAt;
     };
 
-    public setId(id: number): BookBuilder {
+    public setId(id: number): BookModel {
         this.id = id;
         return this;
     };
 
-    public setTitle(title: string): BookBuilder {
+    public setTitle(title: string): BookModel {
         this.title = title;
         return this;
     };
 
-    public setDescription(description: string): BookBuilder {
+    public setDescription(description: string): BookModel {
         this.description = description;
         return this;
     };
 
-    public setPrice(price: number): BookBuilder {
+    public setPrice(price: number): BookModel {
         this.price = price;
         return this;
     };
 
-    public setAuthorId(authorId: number): BookBuilder {
+    public setAuthorId(authorId: number): BookModel {
         this.authorId = authorId;
         return this;
     };
 
-    public setPublishedAt(publishedAt: Date): BookBuilder {
+    public setPublishedAt(publishedAt: Date): BookModel {
         this.publishedAt = publishedAt;
         return this;
     };
 
-    public setUpdatedAt(updatedAt: Date): BookBuilder {
+    public setUpdatedAt(updatedAt: Date): BookModel {
         this.updatedAt = updatedAt;
         return this;
     };
 
-    public setCreatedAt(createdAt: Date): BookBuilder {
+    public setCreatedAt(createdAt: Date): BookModel {
         this.createdAt = createdAt;
         return this;
     };
 
-    public map(attributes: models.book.Attributes): BookBuilder {
+    public mapJson(attributes: models.book.Attributes): BookModel {
         if (attributes !== undefined) {
             this.setId(attributes.id);
             this.setTitle(attributes.title);
@@ -110,7 +110,7 @@ export class BookBuilder implements AbstactBuilder<models.book.Attributes, model
         return this;
     }
 
-    public mapRaw(attributes: models.book.RawAttributes): BookBuilder {
+    public mapDatabaseObject(attributes: models.book.RawAttributes): BookModel {
         if (attributes !== undefined) {
             this.setId(attributes.id);
             this.setTitle(attributes.title);
@@ -128,11 +128,11 @@ export class BookBuilder implements AbstactBuilder<models.book.Attributes, model
         // TODO Check id all required attributes ar given
     }
 
-    public build() {
+    public toJson() {
         return new Book(this);
     }
 
-    public buildRaw() {
+    public toDatabaseObject() {
         return new RawBook(this);
     }
 
@@ -148,7 +148,7 @@ export class Book implements models.book.Attributes {
     public updatedAt?: Date;
     public createdAt?: Date;
 
-    constructor(builder: BookBuilder) {
+    constructor(builder: BookModel) {
         this.id = builder.Id;
         this.title = builder.Title;
         this.description = builder.Description;
@@ -170,7 +170,7 @@ export class RawBook implements models.book.RawAttributes {
     public updated_at?: Date;
     public created_at?: Date;
 
-    constructor(builder: BookBuilder) {
+    constructor(builder: BookModel) {
         this.id = builder.Id;
         this.title = builder.Title;
         this.description = builder.Description;

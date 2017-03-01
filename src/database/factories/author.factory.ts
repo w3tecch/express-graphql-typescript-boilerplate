@@ -1,10 +1,10 @@
 import { name } from 'faker';
 
-import { AuthorBuilder } from '../../builders/author.builder';
+import { AuthorModel } from '../../models/author.model';
 
 
-export const makeAuthor = (): AuthorBuilder => {
-    return (new AuthorBuilder())
+export const makeAuthor = (): AuthorModel => {
+    return (new AuthorModel())
         .setFirstName(name.firstName())
         .setLastName(name.lastName());
 };

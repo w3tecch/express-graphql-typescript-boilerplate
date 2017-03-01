@@ -1,9 +1,9 @@
 import { models } from 'models';
 
-import { AbstactBuilder } from './abstact.builder';
+import { AbstactModel } from './abstact.model';
 
 
-export class AuthorBuilder implements AbstactBuilder<models.author.Attributes, models.author.RawAttributes> {
+export class AuthorModel implements AbstactModel<models.author.Attributes, models.author.RawAttributes> {
 
     private id?: number;
     private firstName: string;
@@ -14,9 +14,9 @@ export class AuthorBuilder implements AbstactBuilder<models.author.Attributes, m
     constructor(attributes?: models.author.Attributes | models.author.RawAttributes, isRaw = true) {
         if (attributes) {
             if (isRaw) {
-                this.mapRaw(attributes);
+                this.mapDatabaseObject(attributes);
             } else {
-                this.map(attributes);
+                this.mapJson(attributes);
             }
         }
     }
@@ -41,31 +41,31 @@ export class AuthorBuilder implements AbstactBuilder<models.author.Attributes, m
         return this.createdAt;
     };
 
-    public setId(id: number): AuthorBuilder {
+    public setId(id: number): AuthorModel {
         this.id = id;
         return this;
     };
 
-    public setFirstName(firstName: string): AuthorBuilder {
+    public setFirstName(firstName: string): AuthorModel {
         this.firstName = firstName;
         return this;
     };
-    public setLastName(lastName: string): AuthorBuilder {
+    public setLastName(lastName: string): AuthorModel {
         this.lastName = lastName;
         return this;
     };
 
-    public setUpdatedAt(updatedAt: Date): AuthorBuilder {
+    public setUpdatedAt(updatedAt: Date): AuthorModel {
         this.updatedAt = updatedAt;
         return this;
     };
 
-    public setCreatedAt(createdAt: Date): AuthorBuilder {
+    public setCreatedAt(createdAt: Date): AuthorModel {
         this.createdAt = createdAt;
         return this;
     };
 
-    public map(attributes: models.author.Attributes): AuthorBuilder {
+    public mapJson(attributes: models.author.Attributes): AuthorModel {
         if (attributes !== undefined) {
             this.setId(attributes.id);
             this.setFirstName(attributes.firstName);
@@ -76,7 +76,7 @@ export class AuthorBuilder implements AbstactBuilder<models.author.Attributes, m
         return this;
     }
 
-    public mapRaw(attributes: models.author.RawAttributes): AuthorBuilder {
+    public mapDatabaseObject(attributes: models.author.RawAttributes): AuthorModel {
         if (attributes !== undefined) {
             this.setId(attributes.id);
             this.setFirstName(attributes.first_name);
@@ -91,11 +91,11 @@ export class AuthorBuilder implements AbstactBuilder<models.author.Attributes, m
         return !!this.firstName && !!this.lastName;
     }
 
-    public build(): Author {
+    public toJson(): Author {
         return new Author(this);
     }
 
-    public buildRaw(): RawAuthor {
+    public toDatabaseObject(): RawAuthor {
         return new RawAuthor(this);
     }
 
@@ -108,7 +108,7 @@ export class Author implements models.author.Attributes {
     public updatedAt?: Date;
     public createdAt?: Date;
 
-    constructor(builder: AuthorBuilder) {
+    constructor(builder: AuthorModel) {
         this.id = builder.Id;
         this.firstName = builder.FirstName;
         this.lastName = builder.LastName;
@@ -124,7 +124,7 @@ export class RawAuthor implements models.author.RawAttributes {
     public updated_at?: Date;
     public created_at?: Date;
 
-    constructor(builder: AuthorBuilder) {
+    constructor(builder: AuthorModel) {
         this.id = builder.Id;
         this.first_name = builder.FirstName;
         this.last_name = builder.LastName;
