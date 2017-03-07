@@ -1,4 +1,4 @@
-import { Context } from '../context';
+import { Context } from '../context/context';
 
 
 export interface IGraphQLQuery {
@@ -84,7 +84,7 @@ export class AbstractQuery {
     public resolve = async (root, args, context: Context): Promise<any> => {
         //first check roles
         if (!context.hasUserRoles(this.allow)) {
-            return context.repsonse.send(401);
+            return context.Response.send(401);
         }
 
         //go throw before

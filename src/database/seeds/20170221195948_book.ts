@@ -13,7 +13,7 @@ exports.seed = async (db: Knex) => {
 
     let entries = [];
     _.forEach(authorIds, (authorId: number) => {
-        entries = _.concat(entries, _.times(10, () => makeBook(authorId).buildRaw()));
+        entries = _.concat(entries, _.times(10, () => makeBook(authorId).toDatabaseObject()));
     });
 
     // Inserts seed entries

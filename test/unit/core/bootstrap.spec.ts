@@ -1,4 +1,4 @@
-import { init, run } from '../../src/core/bootstrap';
+import { init, run } from '../../../src/core/bootstrap';
 
 describe('Core:Bootstrap', () => {
     describe('init', () => {

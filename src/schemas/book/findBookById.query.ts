@@ -1,6 +1,6 @@
 import { GraphQLID, GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
 
-import { Context } from '../../context';
+import { Context } from '../../context/context';
 import { BookType } from './book.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
 
@@ -31,7 +31,7 @@ export class FindBookByIdQuery extends AbstractQuery implements GraphQLFieldConf
 
     public execute(root, args: arguments.ID, context: Context) {
         log.debug('resolve findBookById(%s)', args.id);
-        return context.repos.book.findBookById(args.id);
+        return context.Repositories.BookRepository.findBookById(args.id);
     }
 
 }

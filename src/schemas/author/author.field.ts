@@ -1,6 +1,6 @@
 import { GraphQLFieldDefinition } from 'graphql';
 
-import { Context } from '../../context';
+import { Context } from '../../context/context';
 import { AbstractField, IGraphQLField } from '../abstract.field';
 import { AuthorType } from '../author/author.type';
 import { Book } from '../../models/book.model';
@@ -21,10 +21,10 @@ export class AuthorField extends AbstractField implements GraphQLFieldDefinition
         log.debug('Resolve auhtor %s of the book ' + source.id, source.authorId);
 
         // Repo way
-        // return context.repos.author.findAuthorById(source.authorId);
+        // return context.getRepositories().getAuthorRepository().findAuthorById(source.authorId);
 
         // DataLoader
-        return context.loaders.author.load(source.authorId);
+        return context.DataLoaders.AuthorDataLoader.load(source.authorId);
 
         // Benchmark with 1000 Authors and per Author 10 Books
         // With Loaders => ca. 2s

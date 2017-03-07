@@ -29,12 +29,12 @@ gulp.task('test:pretty', (callback) => {
 });
 
 gulp.task('test:run', () =>
-    gulp.src(['test/lib/setup.ts', path.join(path.join(paths.test, '**/*.spec.js'))], { read: true })
+    gulp.src([path.join(path.join(paths.test, '**/*.spec.js'))], { read: true })
         .pipe($.jasmine())
 );
 
 gulp.task('test:pretty:run', () =>
-    gulp.src(['test/lib/setup.ts', path.join(path.join(paths.test, '**/*.spec.js'))], { read: true })
+    gulp.src([path.join(path.join(paths.test, '**/*.spec.js'))], { read: true })
         .pipe($.jasmine({
             reporter: new SpecReporter()
         }))

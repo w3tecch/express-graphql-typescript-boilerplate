@@ -1,6 +1,6 @@
 import { GraphQLList, GraphQLFieldConfig } from 'graphql';
 
-import { Context } from '../../context';
+import { Context } from '../../context/context';
 import { AuthorType } from './author.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
 import { LimitArgument, OffsetArgument } from '../common/arguments';
@@ -35,7 +35,7 @@ export class FindAllAuthorsQuery extends AbstractQuery implements GraphQLFieldCo
 
     public execute(root, args: common.PageinationArguments, context: Context) {
         log.debug('resolve findAllAuthors()');
-        return context.repos.author.findAllAuthors({
+        return context.Repositories.AuthorRepository.findAllAuthors({
             limit: args.limit,
             offset: args.offset
         });

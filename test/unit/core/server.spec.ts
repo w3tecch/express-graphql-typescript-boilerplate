@@ -1,5 +1,5 @@
-import { listenTo, onListening, onError } from '../../src/core/server';
-import * as Server from '../../src/core/server';
+import { listenTo, onListening, onError } from '../../../src/core/server';
+import * as Server from '../../../src/core/server';
 
 describe('Core:Server', () => {
     describe('listenTo', () => {

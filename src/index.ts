@@ -33,31 +33,39 @@ app.use(morgan('dev', debugStream));
 app.use(morgan('combined', winstonStream));
 
 
+// Requests to /graphql redirect to /
+app.all('/graphql', (req, res) => res.redirect('/'));
+
+
 // Add GraphQL API to our express app
 import { db } from './core/database';
 import { schema } from './schemas';
 import { RootValue } from './root-value';
-import { Context } from './context';
+import { Context } from './context/context';
+import { RepositoriesContext } from './context/repositories-context';
+import { DataLoadersContext } from './context/dataloaders-context';
 
 import { AuthorRepository } from './repositories/author.repository';
 import { BookRepository } from './repositories/book.repository';
 
-// Requests to /graphql redirect to /
-app.all('/graphql', (req, res) => res.redirect('/'));
+
+const repositoriesContext = new RepositoriesContext()
+    .setAuthorRepository(new AuthorRepository(db))
+    .setBookRepository(new BookRepository(db));
+
+const dataLoadersContext = new DataLoadersContext()
+    .setAuthorDataLoader(repositoriesContext.AuthorRepository)
+    .setBookDataLoader(repositoriesContext.BookRepository);
+
 
 app.use('/', (req: express.Request, res: express.Response) => {
     log.debug('Setup GraphQLHTTP');
-
-    // Set all needed repositories and config a data loader within the setter
-    const context = new Context(req, res)
-        .setAuthorRepository(new AuthorRepository(db))
-        .setBookRepository(new BookRepository(db));
 
     // Creates a GraphQLHTTP per request
     GraphQLHTTP({
         schema: schema,
         rootValue: new RootValue(),
-        context: context,
+        context: new Context(req, res, repositoriesContext, dataLoadersContext),
         graphiql: environment.server.graphiql
     })(req, res);
 

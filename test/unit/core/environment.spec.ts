@@ -1,4 +1,4 @@
-import { configuration } from './../../src/core/environment';
+import { configuration } from '../../../src/core/environment';
 
 describe('Core:Config', () => {
     describe('configuration', () => {

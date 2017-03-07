@@ -8,7 +8,7 @@ import { makeAuthor } from '../factories/author.factory';
 exports.seed = (db: Knex) => {
 
     // generate fake authors
-    let entries = _.times(1000, () => makeAuthor().buildRaw());
+    let entries = _.times(1000, () => makeAuthor().toDatabaseObject);
 
     // Inserts seed entries
     return db(TABLE.AUTHOR).insert(entries);

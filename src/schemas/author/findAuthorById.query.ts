@@ -5,7 +5,7 @@ import {
     GraphQLNonNull
 } from 'graphql';
 
-import { Context } from '../../context';
+import { Context } from '../../context/context';
 import { AuthorType } from './author.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
 
@@ -36,7 +36,7 @@ export class FindAuthorByIdQuery extends AbstractQuery implements GraphQLFieldCo
 
     public execute(root, args: arguments.ID, context: Context) {
         log.debug('resolve findAuthorById(%s)', args.id);
-        return context.repos.author.findAuthorById(args.id);
+        return context.Repositories.AuthorRepository.findAuthorById(args.id);
     }
 
 }

@@ -1,6 +1,6 @@
 import { GraphQLList, GraphQLFieldConfig } from 'graphql';
 
-import { Context } from '../../context';
+import { Context } from '../../context/context';
 import { BookType } from './book.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
 import { LimitArgument, OffsetArgument } from '../common/arguments';
@@ -35,7 +35,7 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
 
     public execute(root, args: common.PageinationArguments, context: Context) {
         log.debug('resolve findAllBooks()');
-        return context.repos.book.findAllBooks({
+        return context.Repositories.BookRepository.findAllBooks({
             limit: args.limit,
             offset: args.offset
         });

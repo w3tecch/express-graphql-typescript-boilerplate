@@ -16,8 +16,8 @@
         "graphql": "registry:npm/graphql#0.5.0+20160602041655",
         "helmet": "registry:dt/helmet#0.0.0+20161005184000",
         "knex": "registry:dt/knex#0.0.0+20170202190133",
-        "lodash": "registry:npm/lodash#4.0.0+20161015015725",
         "mime": "registry:npm/mime#1.3.0+20160723033700",
+        "lodash": "registry:npm/lodash#4.0.0+20161015015725",
         "request": "registry:dt/request#0.0.0+20170215005641",
         "serve-static": "registry:npm/serve-static#1.11.1+20161113104247"
     }
