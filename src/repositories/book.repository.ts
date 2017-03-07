@@ -73,4 +73,21 @@ export class BookRepository extends AbstractRepository<Knex> {
         return results.map((result) => new BookModel(result).toJson());
     }
 
+    /**
+     *
+     *
+     * @returns {Promise<models.book.Attributes[]>}
+     *
+     * @memberOf BookRepository
+     */
+    public async searchBooks(text: string): Promise<models.book.Attributes[]> {
+        const results = await this.db
+            .select()
+            .from(BOOK)
+            .where('title', 'like', `%${text}%`)
+            .orderBy('updated_at', 'DESC');
+        log.debug('searchBooks found %s results', results.length);
+        return results.map((result) => new BookModel(result).toJson());
+    }
+
 }

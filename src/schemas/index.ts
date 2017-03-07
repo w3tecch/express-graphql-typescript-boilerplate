@@ -6,6 +6,7 @@ import { handlingErrors } from '../core/graphql-error-handling';
 /**
  * Queries
  */
+import { SearchQuery } from '../schemas/search/search.query';
 import { FindAllBooksQuery } from '../schemas/book/findAllBooks.query';
 import { FindBookByIdQuery } from '../schemas/book/findBookById.query';
 import { FindAllAuthorsQuery } from '../schemas/author/findAllAuthors.query';
@@ -20,6 +21,7 @@ import { FindAuthorByIdQuery } from '../schemas/author/findAuthorById.query';
 const RootQuery: GraphQLObjectType = new GraphQLObjectType({
     name: 'Query',
     fields: {
+        search: new SearchQuery(),
         findAllAuthors: new FindAllAuthorsQuery(),
         findAuthorById: new FindAuthorByIdQuery(),
         findAllBooks: new FindAllBooksQuery(),

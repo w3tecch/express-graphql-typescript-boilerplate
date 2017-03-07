@@ -5,7 +5,9 @@ import {
     TitleField,
     DescriptionField,
     PriceField,
-    PublishedAtField
+    PublishedAtField,
+    UpdatedAtField,
+    CreatedAtField
 } from '../common/fields';
 import { AuthorField } from '../author/author.field';
 
@@ -19,6 +21,8 @@ export const BookType = new GraphQLObjectType({
         description: new DescriptionField(),
         price: new PriceField(),
         autor: new AuthorField(),
-        publishedAt: new PublishedAtField()
+        publishedAt: new PublishedAtField(),
+        updatedAt: new UpdatedAtField(),
+        createdAt: new CreatedAtField()
     })
 });

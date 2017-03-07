@@ -1,3 +1,5 @@
+import { GraphQLResolveInfo } from 'graphql';
+
 import { Context } from '../context/context';
 
 
@@ -5,7 +7,7 @@ export interface IGraphQLQuery {
     allow: string[];
     before<A, S>(context: Context, args: A, source?: S): Promise<A>;
     after<R, A, S>(result: R, context: Context, args: A, source?: S): Promise<R>;
-    execute<R>(root, args, context: Context): Promise<R>;
+    execute<R>(root, args, context: Context, info: GraphQLResolveInfo): Promise<R>;
 }
 
 
@@ -69,7 +71,7 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public execute<R>(root, args, context: Context): Promise<R> {
+    public execute<R>(root, args, context: Context, info: GraphQLResolveInfo): Promise<R> {
         return undefined;
     }
 
@@ -81,7 +83,7 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public resolve = async (root, args, context: Context): Promise<any> => {
+    public resolve = async (root, args, context: Context, info: GraphQLResolveInfo): Promise<any> => {
         //first check roles
         if (!context.hasUserRoles(this.allow)) {
             return context.Response.send(401);
@@ -91,7 +93,7 @@ export class AbstractQuery {
         args = await this.before(context, args);
 
         //run execute
-        let result = await this.execute(root, args, context);
+        let result = await this.execute(root, args, context, info);
 
         //call after
         await this.after(result, context, args);

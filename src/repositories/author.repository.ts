@@ -59,4 +59,21 @@ export class AuthorRepository extends AbstractRepository<Knex> {
         return results.map((result) => new AuthorModel(result).toJson());
     }
 
+    /**
+     *
+     *
+     * @returns {Promise<models.author.Attributes[]>}
+     *
+     * @memberOf AuthorRepository
+     */
+    public async searchAuthors(text: string): Promise<models.author.Attributes[]> {
+        const results = await this.db
+            .select()
+            .from(AUTHOR)
+            .where('last_name', 'like', `%${text}%`)
+            .orderBy('updated_at', 'DESC');
+        log.debug('searchAuthors found %s results', results.length);
+        return results.map((result) => new AuthorModel(result).toJson());
+    }
+
 }
