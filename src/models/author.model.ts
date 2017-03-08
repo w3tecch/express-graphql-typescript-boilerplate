@@ -99,6 +99,12 @@ export class AuthorModel implements AbstactModel<models.author.Attributes, model
         return new RawAuthor(this);
     }
 
+    public merge(model: AuthorModel): AuthorModel {
+        this.setFirstName(model.FirstName || this.FirstName);
+        this.setLastName(model.LastName || this.LastName);
+        return this;
+    }
+
 }
 
 export class Author implements models.author.Attributes {

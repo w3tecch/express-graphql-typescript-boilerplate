@@ -1,83 +1,48 @@
-// // import {
-// //     GraphQLID,
-// //     GraphQLString,
-// //     GraphQLNonNull,
-// //     GraphQLFieldConfig
-// // } from 'graphql';
-// // import { models } from 'models';
+import { GraphQLFieldConfig, GraphQLNonNull, GraphQLString } from 'graphql';
 
-// // import { Logger } from '../../core/logger';
-// // const log = Logger('app:schemas:author:mutation');
+import { Context } from '../../context/context';
+import { AuthorType } from './author.type';
+import { AbstractMutation, IGraphQLMutation } from '../abstract.mutation';
+import { AuthorModel } from '../../models/author.model';
 
-// // import { AuthorType } from './author.type';
-// // import { createAuthor } from '../../repositories/author/author.create';
+import { Logger } from '../../core/logger';
+const log = Logger('app:schemas:author:CreateAuthorMutation');
 
 
-// // export const createAuthorMutation = (): GraphQLFieldConfig => ({
-// //     type: AuthorType,
-// //     args: {
-// //         firstName: { type: new GraphQLNonNull(GraphQLString) },
-// //         lastName: { type: new GraphQLNonNull(GraphQLString) }
-// //     },
-// //     resolve: (root, args: models.author.Attributes) => {
-// //         log.debug('resolve createAuthor()', args);
-// //         return createAuthor(args);
-// //     }
-// // });
+export interface ICreateAuthorMutationArguments {
+    firstName: string;
+    lastName: string;
+}
 
-// import { GraphQLFieldConfig, GraphQLNonNull, GraphQLString } from 'graphql';
+export class CreateAuthorMutation extends AbstractMutation implements GraphQLFieldConfig, IGraphQLMutation {
 
-// import { Context } from '../../context';
-// import { AuthorType } from './author.type';
-// import { AbstractMutation, IGraphQLMutation } from '../abstract.mutation';
-// import { AuthorModel } from '../../models/author.model';
+    public type = AuthorType;
 
-// import { Logger } from '../../core/logger';
-// const log = Logger('app:schemas:author:CreateAuthorMutation');
+    public allow = ['admin'];
 
+    public args = {
+        firstName: { type: new GraphQLNonNull(GraphQLString) },
+        lastName: { type: new GraphQLNonNull(GraphQLString) }
+    };
 
-// export interface ICreateAuthorMutationArguments {
-//     firstName: string;
-//     lastName: string;
-// }
+    public before(context: Context, args: ICreateAuthorMutationArguments) {
+        log.debug('hook before args', args);
+        const authorModel = new AuthorModel()
+            .setFirstName(args.firstName)
+            .setLastName(args.lastName);
 
-// export class CreateAuthorMutation extends AbstractMutation implements GraphQLFieldConfig, IGraphQLMutation {
+        if (authorModel.validate()) {
+            return Promise.resolve(args);
+        } else {
 
-//     public type = AuthorType;
+        }
+    }
 
-//     public allow = ['admin'];
-
-//     public args = {
-//         firstName: { type: new GraphQLNonNull(GraphQLString) },
-//         lastName: { type: new GraphQLNonNull(GraphQLString) }
-//     };
-
-//     public before(context: Context, args: ICreateAuthorMutationArguments) {
-//         log.debug('hook before args', args);
-//         const author = new AuthorModel()
-//             .setFirstName(args.firstName)
-//             .setLastName(args.lastName);
-
-//         if (author.validate()) {
-//             return Promise.resolve(args);
-//         } else {
-
-//         }
-
-
-//     }
-
-//     public after(result: any, context: Context, args: any, source?: any) {
-//         log.debug('hook after args', args);
-//         log.debug('hook after source', source);
-//         return Promise.resolve(result);
-//     }
-
-//     public execute(root, args: common.PageinationArguments, context: Context) {
-//         log.debug('resolve findAllAuthors()');
-//         return context.repos.author.findAllAuthors({
-//             limit: args.limit,
-//             offset: args.offset
-//         });
-//     }
-// }
+    public execute(root, args: ICreateAuthorMutationArguments, context: Context) {
+        log.debug('resolve createAuthor()');
+        const authorModel = new AuthorModel()
+            .setFirstName(args.firstName)
+            .setLastName(args.lastName);
+        return context.Repositories.AuthorRepository.createAuthor(authorModel);
+    }
+}

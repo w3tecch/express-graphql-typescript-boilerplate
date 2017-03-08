@@ -30,30 +30,34 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
 });
 
 
-// /**
-//  * Mutations
-//  */
-// import { createAuthorMutation } from './author/author.mutation';
+/**
+ * Mutations
+ */
+import { CreateAuthorMutation } from './author/createAuthor.mutation';
+import { UpdateAuthorMutation } from './author/updateAuthor.mutation';
+import { DeleteAuthorMutation } from './author/deleteAuthor.mutation';
 
-// /**
-//  * RootMutation
-//  *
-//  * This will be published to the clients
-//  */
-// const RootMutation: GraphQLObjectType = new GraphQLObjectType({
-//     name: 'Mutation',
-//     fields: {
-//         createAuthor: createAuthorMutation()
-//     }
-// });
+/**
+ * RootMutation
+ *
+ * This will be published to the clients
+ */
+const RootMutation: GraphQLObjectType = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        createAuthor: new CreateAuthorMutation(),
+        updateAuthor: new UpdateAuthorMutation(),
+        deleteAuthor: new DeleteAuthorMutation()
+    }
+});
 
 
 /**
  * Export schema with all queries and mutations
  */
 export const schema = new GraphQLSchema({
-    query: RootQuery
-    // mutation: RootMutation
+    query: RootQuery,
+    mutation: RootMutation
 });
 
 // Handles internal erros and prints the stack to the console
