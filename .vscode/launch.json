@@ -7,11 +7,25 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch App",
             "stopOnEntry": true,
             "program": "${workspaceRoot}/src/index.ts",
             "cwd": "${workspaceRoot}",
             "sourceMaps": true,
+            "preLaunchTask": "build",
+            "env": {
+                "NODE_ENV": "development"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Seeder",
+            "stopOnEntry": true,
+            "program": "${workspaceRoot}/src/seed/index.ts",
+            "cwd": "${workspaceRoot}",
+            "sourceMaps": true,
+            "preLaunchTask": "build",
             "env": {
                 "NODE_ENV": "development"
             }

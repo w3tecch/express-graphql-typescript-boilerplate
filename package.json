@@ -1,6 +1,6 @@
 {
   "name": "express-graphql-typescript-boilerplate",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "A Node.Js boilerplate written in TypeScript with express and GraphQL",
   "main": "src/index.ts",
   "scripts": {
@@ -18,14 +18,18 @@
     "docs": "npm run docs:generate && npm run docs:server",
     "docs:generate": "./node_modules/.bin/gulp docs",
     "docs:server": "./node_modules/.bin/http-server ./docs --cors",
-    "start": "node src/index.js"
+    "db:migrate": "./node_modules/.bin/knex migrate:latest",
+    "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
+    "db:seed": "./node_modules/.bin/knex seed:run",
+    "prestart": "npm run db:migrate",
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://w3tecch@github.com/w3tecch/express-graphql-typescript-boilerplate.git"
   },
   "engines": {
-    "node": "6.9.2"
+    "node": "^6.9.2"
   },
   "keywords": [
     "NodeJS",
@@ -58,13 +62,19 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
+    "dataloader": "^1.3.0",
     "debug": "^2.6.0",
     "express": "^4.14.0",
     "express-graphql": "^0.6.1",
+    "faker": "^3.1.0",
     "graphql": "^0.8.2",
     "helmet": "^3.4.0",
+    "knex": "^0.12.7",
     "lodash": "^4.17.4",
     "morgan": "^1.7.0",
+    "mysql": "^2.13.0",
+    "ts-node": "^2.0.0",
+    "uuid": "^3.0.1",
     "winston": "^2.3.0"
   },
   "devDependencies": {
@@ -87,13 +97,15 @@
     "http-server": "^0.9.0",
     "jasmine": "^2.5.2",
     "jasmine-spec-reporter": "^3.0.0",
+    "nodemon": "^1.11.0",
     "path": "^0.12.7",
+    "request": "^2.79.0",
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2",
-    "ts-node": "^2.0.0",
+    "sqlite3": "^3.1.8",
     "tslint": "^4.3.1",
     "typedoc": "^0.5.5",
-    "typescript": "^2.1.4",
+    "typescript": "^2.2.1",
     "typings": "^2.1.0"
   }
 }

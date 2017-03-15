@@ -1,14 +1,10 @@
 //See: https://medium.com/the-graphqlhub/your-first-graphql-server-3c766ab4f0a2#.giyyd9tzx
 
-import * as express from 'express';
-import * as morgan from 'morgan';
-import * as cors from 'cors';
 import * as http from 'http';
 
-import * as Debug from 'debug';
-const debug = Debug('app:utils:server');
+import { Logger } from './logger';
+const log = Logger('app:core:server');
 
-import { logger } from './logger';
 
 const bind = (addr) => {
     return typeof addr === 'string'
@@ -17,7 +13,7 @@ const bind = (addr) => {
 };
 
 export const onListening = (server: http.Server) => {
-    logger.info(`[Server] Listening on ${bind(server.address())}`);
+    log.debug(`Listening on ${bind(server.address())}`);
 };
 
 export const onError = (server: http.Server, error: Error) => {
@@ -28,11 +24,11 @@ export const onError = (server: http.Server, error: Error) => {
     // handle specific listen errors with friendly messages
     switch (error['code']) {
         case 'EACCES':
-            logger.error(`[Server] ${bind(addr)} requires elevated privileges`);
+            log.error(`${bind(addr)} requires elevated privileges`);
             process.exit(1);
             break;
         case 'EADDRINUSE':
-            logger.error(`[Server] ${bind(addr)} is already in use`);
+            log.error(`${bind(addr)} is already in use`);
             process.exit(1);
             break;
         default:

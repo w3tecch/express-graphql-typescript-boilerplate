@@ -3,7 +3,9 @@
         "module": "commonjs",
         "target": "es6",
         "moduleResolution": "node",
-        "sourceMap": true
+        "sourceMap": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false
     },
     "filesGlob": [
         "typings/**/*.d.ts",
