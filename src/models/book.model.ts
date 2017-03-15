@@ -1,5 +1,4 @@
 import { models } from 'models';
-
 import { AbstactModel } from './abstact.model';
 
 
