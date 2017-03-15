@@ -74,9 +74,17 @@ express-graphql-typescript-boilerplate
  |-- src/                                       * our source files that will be compiled to javascript
  |    |-- common/                               * common helpers
  |    |    |-- exceptions.ts                    * our common exceptions like "NotFound"
+ |    |    |-- tables.ts                        * our database table names
+ |    |    |-- utils.ts                         * our collection of util functions
+ |    |
+ |    |-- context/                              * graphql context
+ |    |    |-- context.ts                       * our graphql context class
+ |    |    |-- dataloaders-context.ts           * our collection of all dataloaders
+ |    |    |-- repositories-context.ts          * our collection of all repositories
  |    |
  |    |-- core/                                 * our core functionalities
  |    |    |-- bootstrap.ts                     * our express helper functions to init and run the server
+ |    |    |-- config.ts                        * has our configuration for our different environments
  |    |    |-- database.ts                      * our database setup
  |    |    |-- environment.ts                   * gets us the configuration for the given environment
  |    |    |-- graphql-error-handling.ts        * our error handling
@@ -93,25 +101,21 @@ express-graphql-typescript-boilerplate
  |    |-- models/                               * our database models (/*.model.ts)
  |    |
  |    |-- repositories/                         * use a repository to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model
- |    |    |-- **/*.read.ts                     * use a single file for every query action.
- |    |    |-- **/*.create.ts
- |    |    |-- **/*.update.ts
- |    |    |-- **/*.delete.ts
+ |    |    |-- **/*.repository.ts
  |    |
  |    |-- schemas/                              * our graphql schema definitions
  |    |    |-- **/*.type.spec                   * our graphql type files
- |    |    |-- **/*.query.spec                  * our graphql query files
- |    |    |-- **/*.mutation.spec               * our graphql mutation files
+ |    |    |-- **/*.query.spec                  * our graphql query files (use a single file for every query action)
+ |    |    |-- **/*.mutation.spec               * our graphql mutation files (use a single file for every mutation action)
  |    |
  |    |-- index.ts                              * main entry point for our application
  |
  |-- test/                                      * our test files that will test our application
  |    |-- mocks                                 * we use this to simulate other functions, classes or objects
- |    |-- **/*.spec.ts                          * our test cases
+ |    |-- unit/**/*.spec.ts                     * our unit test cases
  |
  |-- typings_custom/                            * our local type definitions
  |
- |-- config.ts                                  * has our configuration for our different environments
  |-- knexfile.ts                                * this has our database configuration from the config.ts
  |-- gulpfile.js                                * entry point for our gulp tasks
  |-- nodemon.json                               * nodemon setup, so that it uses typescript and runs tslint
