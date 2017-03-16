@@ -73,7 +73,6 @@ express-graphql-typescript-boilerplate
  |
  |-- src/                                       * our source files that will be compiled to javascript
  |    |-- common/                               * common helpers
- |    |    |-- exceptions.ts                    * our common exceptions like "NotFound"
  |    |    |-- tables.ts                        * our database table names
  |    |    |-- utils.ts                         * our collection of util functions
  |    |
@@ -95,6 +94,10 @@ express-graphql-typescript-boilerplate
  |    |    |-- factories                        * our factories to create simple fake data
  |    |    |-- migrations                       * our database migration tasks
  |    |    |-- seeds                            * our database seeder tasks
+ |    |
+ |    |-- errors/                               * our errors to throw to the user
+ |    |    |-- user.error.ts                    * our basic user error all other errors should inherit from this one
+ |    |    |-- not-found.error.ts               * a basic not found error
  |    |
  |    |-- middlewares/                          * our express custom middlewares (/*.middleware.ts)
  |    |
@@ -125,7 +128,6 @@ express-graphql-typescript-boilerplate
  |-- tsconfig.json                              * typescript config
  |-- wallaby.js                                 * our wallaby configuration
 ```
-
 
 ## License
  [MIT](/LICENSE)
