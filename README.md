@@ -5,6 +5,7 @@
 A [GrapQL](http://graphql.org/) starter kit for building amazing API's in [TypeScript](https://www.typescriptlang.org/) and with [Express.js](http://expressjs.com/) framework.
 
 This seed repository has a complete GraphQL starter kit written in TypeSciprt. For building our API we use varous gulp-tasks. We use jasmine and Wallaby for our unit-testing.
+
     - Ready to build system with gulp
     - A simple hook system
     - A simple permisson example
@@ -28,6 +29,7 @@ This seed repository has a complete GraphQL starter kit written in TypeSciprt. F
 ## Getting Started
 ### Prerequisites
 Install [Node.js](http://nodejs.org)
+
 	- on OSX use [homebrew](http://brew.sh) `brew install node`
 	- on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
