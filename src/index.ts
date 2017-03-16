@@ -24,6 +24,11 @@ const app = init();
 
 // Helmet helps you secure your Express apps by setting various HTTP headers
 app.use(helmet());
+app.use(helmet.noCache());
+app.use(helmet.hsts({
+    maxAge: 31536000,
+    includeSubdomains: true
+}));
 
 // Enable cors for all routes and origins
 app.use(cors());
