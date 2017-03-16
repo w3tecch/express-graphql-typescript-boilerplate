@@ -8,9 +8,9 @@ import {
     defaultHandler,
     handlingErrors,
     Processed,
-    setDefaultHandler,
-    UserError
+    setDefaultHandler
 } from '../../../src/core/graphql-error-handling';
+import { UserError } from '../../../src/errors/user.error';
 
 describe('app:core', () => {
 
@@ -72,7 +72,7 @@ describe('app:core', () => {
             it('should not replace the message for UserErrors', function () {
                 const err = new UserError('error-1');
                 const masked = defaultHandler(err);
-                expect(masked.message).toEqual('error-1');
+                expect(masked.message).toEqual('000: error-1');
             });
         });
 
