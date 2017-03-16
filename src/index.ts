@@ -39,6 +39,7 @@ app.all('/graphql', (req, res) => res.redirect('/'));
 
 // Add GraphQL API to our express app
 import { db } from './core/database';
+import { UserError } from './errors/user.error';
 import { schema } from './schemas';
 import { RootValue } from './root-value';
 import { Context } from './context/context';
@@ -66,7 +67,12 @@ app.use('/', (req: express.Request, res: express.Response) => {
         schema: schema,
         rootValue: new RootValue(),
         context: new Context(req, res, repositoriesContext, dataLoadersContext),
-        graphiql: environment.server.graphiql
+        graphiql: environment.server.graphiql,
+        formatError: error => ({
+            code: UserError.getErrorCode(error.message),
+            message: UserError.getErrorMessage(error.message),
+            path: error.path
+        })
     })(req, res);
 
 });

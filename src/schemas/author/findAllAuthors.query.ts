@@ -22,8 +22,8 @@ export class FindAllAuthorsQuery extends AbstractQuery implements GraphQLFieldCo
 
     public before(context: Context, args: common.PageinationArguments) {
         log.debug('hook before args', args);
-        LimitArgument.verify(args.limit);
-        OffsetArgument.verify(args.limit);
+        LimitArgument.validate(args.limit);
+        OffsetArgument.validate(args.limit);
         return Promise.resolve(args);
     }
 

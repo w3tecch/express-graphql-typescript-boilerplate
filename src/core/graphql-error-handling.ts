@@ -2,29 +2,16 @@ import * as uuid from 'uuid';
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
 import { isTest } from './environment';
+import { IsUserError } from '../errors/user.error';
 
 
 // Mark field/type/schema
 export const Processed = Symbol();
 
-// Used to identify UserErrors
-export const IsUserError = Symbol();
-
-// UserErrors will be sent to the user
-export class UserError extends Error {
-    constructor(...args) {
-        super(args[0]);
-        this.name = 'Error';
-        this.message = args[0];
-        this[IsUserError] = true;
-        Error.captureStackTrace(this);
-    }
-}
-
 // Modifies errors before sending to the user
 export let defaultHandler = (err?) => {
     if (err[IsUserError]) {
-        return err;
+        return new Error(err.toString());
     }
     const errId = uuid.v4();
     err.message = `${err.message}: ${errId}`;

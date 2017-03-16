@@ -37,7 +37,7 @@ export class SearchQuery extends AbstractQuery implements GraphQLFieldConfig, IG
     };
 
     public before(context: Context, args: ITextArgument) {
-        TextArgument.verify(args.text);
+        TextArgument.validate(args.text);
         return Promise.resolve(args);
     }
 
