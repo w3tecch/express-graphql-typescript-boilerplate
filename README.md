@@ -2,7 +2,28 @@
 
 [![Build Status](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)
 
-This is a boilerplate for Node.js app written in [TypeScript](https://www.typescriptlang.org/). We used the framework [Express.js](http://expressjs.com/) as a basic layer and on that we setup the awesome [GrapQL](http://graphql.org/) library.
+A [GrapQL](http://graphql.org/) starter kit for building amazing API's in [TypeScript](https://www.typescriptlang.org/) and with [Express.js](http://expressjs.com/) framework.
+
+This seed repository has a complete GraphQL starter kit written in TypeSciprt. For building our API we use varous gulp-tasks. We use jasmine and Wallaby for our unit-testing.
+    - Ready to build system with gulp
+    - A simple hook system
+    - A simple permisson example
+    - Fully integrated with express
+    - Improved error handling
+    - Complete knex integration with:
+        - Seeders
+        - Migrations
+    - Testing examples
+    - Basic securty configuration
+    - Basic cors configuration
+    - Basic logger configuration
+    - Multiple environemnt configurations
+    - Coverage with wallaby.js
+    - Varoius examples
+        - Queries and mutations
+        - Data-Loaders
+        - Basic search query
+        - Pagination
 
 ## Getting Started
 ### Prerequisites
@@ -15,7 +36,7 @@ Install [Node.js](http://nodejs.org)
 * `clone` your fork
 * `npm install` to install all dependencies
 * `npm run install:typings` to install all typings
-* Create new database. You will find the name in the `config.ts` file.
+* Create new database. You will find the name in the `src/core/config.ts` file.
 * `npm run db:migrate` to create the schema
 * `npm run db:seed` to insert some test data
 * `npm run serve` to start the dev server in another tab
@@ -54,7 +75,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * Run `npm run docs` to generate all doc files and serve it on `http://0.0.0.0:8080`
 
 ### Seed
-* Run `npm run sdb:eed` to seed some data into the database
+* Run `npm run db:seed` to seed some data into the database
 
 ### Migration
 * Run `npm run migrate` to migration the new schema to the database
