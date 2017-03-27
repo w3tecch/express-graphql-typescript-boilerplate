@@ -1,5 +1,7 @@
 import { GraphQLFieldConfig, GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql';
 
+import { models } from 'models';
+import { RootValue } from '../../root-value';
 import { Context } from '../../context/context';
 import { AuthorType } from './author.type';
 import { AbstractMutation, IGraphQLMutation } from '../abstract.mutation';
@@ -18,16 +20,14 @@ export interface IUpdateAuthorMutationArguments {
 export class UpdateAuthorMutation extends AbstractMutation implements GraphQLFieldConfig, IGraphQLMutation {
 
     public type = AuthorType;
-
     public allow = ['admin'];
-
     public args = {
         id: { type: new GraphQLNonNull(GraphQLID) },
         firstName: { type: new GraphQLNonNull(GraphQLString) },
         lastName: { type: new GraphQLNonNull(GraphQLString) }
     };
 
-    public execute(root, args: IUpdateAuthorMutationArguments, context: Context) {
+    public execute(root: RootValue, args: IUpdateAuthorMutationArguments, context: Context): Promise<models.author.Attributes> {
         log.debug('resolve updateAuthor(%s)', args.id);
         const authorModel = new AuthorModel()
             .setId(args.id)

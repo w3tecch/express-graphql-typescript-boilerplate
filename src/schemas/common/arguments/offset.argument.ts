@@ -10,7 +10,7 @@ export class OffsetArgument implements GraphQLArgumentConfig {
     public description = 'To do';
     public defaultValue = 0;
 
-    static validate(offset: number) {
+    static validate(offset: number): void {
         if (!Utils.isPositve(offset)) {
             throw new ValidationError('Offset must be positive');
         }

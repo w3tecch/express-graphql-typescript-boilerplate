@@ -16,7 +16,7 @@ export class Utils {
         }
     }
 
-    static assertResults<T>(list: T[], idOrKey: number | string | number[]) {
+    static assertResults<T>(list: T[], idOrKey: number | string | number[]): void {
         if (!Utils.hasResults(list)) {
             throw new NotFoundError(`${idOrKey}`);
         }

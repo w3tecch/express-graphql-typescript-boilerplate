@@ -5,7 +5,7 @@ export interface IGraphQLField {
     allow: string[];
     before<A, S>(context: Context, args: A, source: S): Promise<A>;
     after<R, A, S>(result: R, context: Context, args: A, source: S): Promise<R>;
-    execute<R>(source, args, context: Context): Promise<R>;
+    execute<R, A, S>(source: S, args: A, context: Context): Promise<R>;
 }
 
 
@@ -69,7 +69,7 @@ export class AbstractField {
      *
      * @memberOf AbstractQuery
      */
-    public execute<R>(source, args, context: Context): Promise<R> {
+    public execute<R, A, S>(source: S, args: A, context: Context): Promise<R> {
         return undefined;
     }
 

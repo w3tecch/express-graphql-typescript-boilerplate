@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 
+import { RootValue } from '../root-value';
 import { Context } from '../context/context';
 
 
@@ -7,7 +8,7 @@ export interface IGraphQLQuery {
     allow: string[];
     before<A, S>(context: Context, args: A, source?: S): Promise<A>;
     after<R, A, S>(result: R, context: Context, args: A, source?: S): Promise<R>;
-    execute<R>(root, args, context: Context, info: GraphQLResolveInfo): Promise<R>;
+    execute<R, A>(root: RootValue, args: A, context: Context, info: GraphQLResolveInfo): Promise<R>;
 }
 
 
@@ -71,7 +72,7 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public execute<R>(root, args, context: Context, info: GraphQLResolveInfo): Promise<R> {
+    public execute<R, A>(root: RootValue, args: A, context: Context, info: GraphQLResolveInfo): Promise<R> {
         return undefined;
     }
 

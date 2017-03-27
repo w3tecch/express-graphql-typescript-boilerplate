@@ -13,23 +13,23 @@ export class Context {
         private dataLoaders: DataLoadersContext
     ) { }
 
-    public get Response() {
+    public get Response(): Express.Response {
         return this.repsonse;
     }
 
-    public get Request() {
+    public get Request(): Express.Request {
         return this.request;
     }
 
-    public get Repositories() {
+    public get Repositories(): RepositoriesContext {
         return this.repositories;
     }
 
-    public get DataLoaders() {
+    public get DataLoaders(): DataLoadersContext {
         return this.dataLoaders;
     }
 
-    public getLanguage() {
+    public getLanguage(): string[] {
         return this.request.acceptsLanguages();
     }
 

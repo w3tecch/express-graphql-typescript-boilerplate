@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
-import { handlingErrors } from '../core/graphql-error-handling';
+import { GraphQLErrorHandling } from '../core/graphql-error-handling';
 
 
 /**
@@ -11,6 +11,7 @@ import { FindAllBooksQuery } from '../schemas/book/findAllBooks.query';
 import { FindBookByIdQuery } from '../schemas/book/findBookById.query';
 import { FindAllAuthorsQuery } from '../schemas/author/findAllAuthors.query';
 import { FindAuthorByIdQuery } from '../schemas/author/findAuthorById.query';
+import { ThrowErrorQuery } from './throw-error.query';
 
 
 /**
@@ -25,7 +26,8 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
         findAllAuthors: new FindAllAuthorsQuery(),
         findAuthorById: new FindAuthorByIdQuery(),
         findAllBooks: new FindAllBooksQuery(),
-        findBookById: new FindBookByIdQuery()
+        findBookById: new FindBookByIdQuery(),
+        throwError: new ThrowErrorQuery()
     }
 });
 
@@ -61,4 +63,4 @@ export const schema = new GraphQLSchema({
 });
 
 // Handles internal erros and prints the stack to the console
-handlingErrors(schema);
+GraphQLErrorHandling.watch(schema);

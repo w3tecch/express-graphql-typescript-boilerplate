@@ -10,11 +10,11 @@ export class RepositoriesContext {
     private authorRepository: AuthorRepository;
     private bookRepository: BookRepository;
 
-    public get AuthorRepository() {
+    public get AuthorRepository(): AuthorRepository {
         return this.authorRepository;
     }
 
-    public get BookRepository() {
+    public get BookRepository(): BookRepository {
         return this.bookRepository;
     }
 

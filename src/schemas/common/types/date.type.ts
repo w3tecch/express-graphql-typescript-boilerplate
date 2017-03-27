@@ -41,7 +41,7 @@ export const DateType = new GraphQLScalarType({
     description: 'Represents a Date object',
     serialize: serializeDate,
     parseValue: parseValue,
-    parseLiteral(ast: StringValue | any) {
+    parseLiteral(ast: StringValue | any): Date {
         if (ast.kind !== Kind.STRING) {
             throw new GraphQLError(GRAPHQL_ERROR_NO_STRING(ast), [ast]);
         }

@@ -17,21 +17,21 @@ export class UserError extends Error {
         return reg.test(message);
     }
 
-    static getErrorCode(message: string) {
+    static getErrorCode(message: string): string {
         if (UserError.hasErrorCode(message)) {
             return message.substring(0, 3);
         }
         return '000';
     }
 
-    static getErrorMessage(message: string) {
+    static getErrorMessage(message: string): string {
         if (UserError.hasErrorCode(message)) {
             return message.substring(5);
         }
         return message;
     }
 
-    constructor(...args) {
+    constructor(...args: any[]) {
         super(args[0]);
         this.name = 'Error';
         this.code = '000';

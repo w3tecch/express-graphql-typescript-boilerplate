@@ -4,12 +4,7 @@ import {
     GraphQLString
 } from 'graphql';
 
-import {
-    defaultHandler,
-    handlingErrors,
-    Processed,
-    setDefaultHandler
-} from '../../../src/core/graphql-error-handling';
+import { GraphQLErrorHandling, Processed } from '../../../src/core/graphql-error-handling';
 import { UserError } from '../../../src/errors/user.error';
 
 describe('app:core', () => {
@@ -23,24 +18,24 @@ describe('app:core', () => {
                 fields: {
                     throwError: {
                         type: GraphQLString,
-                        resolve() { throw new Error('secret error'); }
+                        resolve(): void { throw new Error('secret error'); }
                     },
                     throwInPromise: {
                         type: GraphQLString,
-                        resolve() {
-                            return new Promise(function () {
+                        resolve(): Promise<any> {
+                            return new Promise(() => {
                                 throw new Error('secret error');
                             });
                         }
                     },
                     throwUserError: {
                         type: GraphQLString,
-                        resolve() { throw new UserError('custom error'); }
+                        resolve(): void { throw new UserError('custom error'); }
                     },
                     rejectPromise: {
                         type: GraphQLString,
-                        resolve() {
-                            return new Promise(function (resolve, reject) {
+                        resolve(): Promise<any> {
+                            return new Promise((resolve, reject) => {
                                 reject(new Error('secret error'));
                             });
                         }
@@ -50,8 +45,8 @@ describe('app:core', () => {
         });
     });
 
-    describe('User Error', function () {
-        it('should extend Error type', function () {
+    describe('User Error', () => {
+        it('should extend Error type', () => {
             const msg = 'hello world';
             const err = new UserError(msg);
             expect(err instanceof Error);
@@ -60,53 +55,25 @@ describe('app:core', () => {
         });
     });
 
+    describe('handlingErrors', () => {
+        it('should mask errors in fields', async (done) => {
+            GraphQLErrorHandling.watch(schema);
 
-    describe('Error Handler', function () {
-        describe('defaultHandler', function () {
-            it('should replace the message for normal errors', function () {
-                const err = new Error('error-1');
-                const masked = defaultHandler(err);
-                expect(masked.message).toContain('Internal Error: ');
-            });
-
-            it('should not replace the message for UserErrors', function () {
-                const err = new UserError('error-1');
-                const masked = defaultHandler(err);
-                expect(masked.message).toEqual('000: error-1');
-            });
-        });
-
-        describe('setDefaultHandler', function () {
-            const dh = defaultHandler;
-            afterEach(() => setDefaultHandler(dh));
-
-            it('should replace the default handler', function () {
-                const fn = () => 'err';
-                setDefaultHandler(fn);
-                const res = defaultHandler();
-                expect(res).toEqual('err');
-            });
-        });
-    });
-
-    describe('handlingErrors', function () {
-        it('should mask errors in fields', async function () {
             const field = schema.getTypeMap().RootQueryType.getFields().throwError;
-            handlingErrors(field);
             expect(field[Processed]).toEqual(true);
-            let resolveErr = null;
+
             try {
                 await field.resolve();
+                fail('Should throw a normal error');
             } catch (e) {
-                resolveErr = e;
+                expect(e.message.substring(0, 20)).toBe('500: Internal Error:');
             }
-            expect(resolveErr.message).toContain('Internal Error: ');
+            done();
         });
 
-        it('should mask errors in types', async function () {
-            const type = schema.getTypeMap().RootQueryType;
+        it('should mask errors in types', async (done) => {
+            GraphQLErrorHandling.watch(schema);
             const fields = schema.getTypeMap().RootQueryType.getFields();
-            handlingErrors(type);
 
             for (const fieldName in fields) {
                 if (!fields.hasOwnProperty(fieldName)) {
@@ -124,16 +91,19 @@ describe('app:core', () => {
                 }
 
                 if (fieldName === 'throwUserError') {
-                    expect(resolveErr.message).toEqual('custom error');
+                    expect(resolveErr.message).toContain('000');
+                    expect(resolveErr.message).toContain('custom error');
                 } else {
-                    expect(resolveErr.message).toContain('Internal Error: ');
+                    expect(resolveErr.message).toContain('500');
+                    expect(resolveErr.message).toContain('Internal Error:');
                 }
             }
+            done();
         });
 
-        it('should mask errors in schema', async function () {
+        it('should mask errors in schema', async (done) => {
+            GraphQLErrorHandling.watch(schema);
             const fields = schema.getTypeMap().RootQueryType.getFields();
-            handlingErrors(schema);
 
             for (const fieldName in fields) {
                 if (!fields.hasOwnProperty(fieldName)) {
@@ -151,11 +121,14 @@ describe('app:core', () => {
                 }
 
                 if (fieldName === 'throwUserError') {
-                    expect(resolveErr.message).toEqual('custom error');
+                    expect(resolveErr.message).toContain('000');
+                    expect(resolveErr.message).toContain('custom error');
                 } else {
-                    expect(resolveErr.message).toContain('Internal Error: ');
+                    expect(resolveErr.message).toContain('500');
+                    expect(resolveErr.message).toContain('Internal Error:');
                 }
             }
+            done();
         });
     });
 

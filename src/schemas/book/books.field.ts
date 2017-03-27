@@ -1,5 +1,6 @@
 import { GraphQLFieldDefinition, GraphQLList } from 'graphql';
 
+import { models } from 'models';
 import { Context } from '../../context/context';
 import { AbstractField, IGraphQLField } from '../abstract.field';
 import { BookType } from '../book/book.type';
@@ -16,8 +17,8 @@ export class BooksField extends AbstractField implements GraphQLFieldDefinition,
     public description = 'The books of an author';
     public args;
 
-    public execute(source: Author, args, context: Context)
-    public execute(source: any, args, context: Context) {
+    public execute(source: Author, args: any, context: Context): Promise<models.book.Attributes>
+    public execute(source: any, args: any, context: Context): Promise<models.book.Attributes> {
         log.debug('Resolve books of auhtor %s ' + source.id);
         return context.Repositories.BookRepository.findBookByAuthorId(source.id);
     }
