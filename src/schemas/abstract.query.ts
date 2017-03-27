@@ -6,9 +6,9 @@ import { Context } from '../context/context';
 
 export interface IGraphQLQuery {
     allow: string[];
-    before<A, S>(context: Context, args: A, source?: S): Promise<A>;
-    after<R, A, S>(result: R, context: Context, args: A, source?: S): Promise<R>;
-    execute<R, A>(root: RootValue, args: A, context: Context, info: GraphQLResolveInfo): Promise<R>;
+    before<A, S>(context: Context<A>, args: A, source?: S): Promise<A>;
+    after<R, A, S>(result: R, context: Context<A>, args: A, source?: S): Promise<R>;
+    execute<R, A>(root: RootValue, args: A, context: Context<A>, info: GraphQLResolveInfo): Promise<R>;
 }
 
 
@@ -38,7 +38,7 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public before<A, S>(context: Context, args: A, source?: S): Promise<A> {
+    public before<A, S>(context: Context<A>, args: A, source?: S): Promise<A> {
         return Promise.resolve(args);
     }
 
@@ -57,7 +57,7 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public after<R, A, S>(result: R, context: Context, args?: A, source?: S): Promise<R> {
+    public after<R, A, S>(result: R, context: Context<A>, args?: A, source?: S): Promise<R> {
         return Promise.resolve(result);
     }
 
@@ -72,7 +72,7 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public execute<R, A>(root: RootValue, args: A, context: Context, info: GraphQLResolveInfo): Promise<R> {
+    public execute<R, A>(root: RootValue, args: A, context: Context<A>, info: GraphQLResolveInfo): Promise<R> {
         return undefined;
     }
 
@@ -84,17 +84,21 @@ export class AbstractQuery {
      *
      * @memberOf AbstractQuery
      */
-    public resolve = async (root, args, context: Context, info: GraphQLResolveInfo): Promise<any> => {
+    public resolve = async <R, A>(root: RootValue, args: A, context: Context<A>, info: GraphQLResolveInfo): Promise<R> => {
+        //store the root query arguments
+        context.setResolveArgument(args);
+
         //first check roles
         if (!context.hasUserRoles(this.allow)) {
-            return context.Response.send(401);
+            context.Response.send(401);
+            return Promise.reject('401 Unauthorized');
         }
 
         //go throw before
         args = await this.before(context, args);
 
         //run execute
-        let result = await this.execute(root, args, context, info);
+        let result = await this.execute<R, A>(root, args, context, info);
 
         //call after
         await this.after(result, context, args);

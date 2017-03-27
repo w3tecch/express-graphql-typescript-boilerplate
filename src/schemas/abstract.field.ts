@@ -3,9 +3,9 @@ import { Context } from '../context/context';
 
 export interface IGraphQLField {
     allow: string[];
-    before<A, S>(context: Context, args: A, source: S): Promise<A>;
-    after<R, A, S>(result: R, context: Context, args: A, source: S): Promise<R>;
-    execute<R, A, S>(source: S, args: A, context: Context): Promise<R>;
+    before<A, S>(context: Context<A>, args: A, source: S): Promise<A>;
+    after<R, A, S>(result: R, context: Context<A>, args: A, source: S): Promise<R>;
+    execute<R, A, S>(source: S, args: A, context: Context<A>): Promise<R>;
 }
 
 
@@ -35,7 +35,7 @@ export class AbstractField {
      *
      * @memberOf AbstractQuery
      */
-    public before<A, S>(context: Context, args: A, source: S): Promise<A> {
+    public before<A, S>(context: Context<A>, args: A, source: S): Promise<A> {
         return Promise.resolve(args);
     }
 
@@ -54,7 +54,7 @@ export class AbstractField {
      *
      * @memberOf AbstractQuery
      */
-    public after<R, A, S>(result: R, context: Context, args: A, source: S): Promise<R> {
+    public after<R, A, S>(result: R, context: Context<A>, args: A, source: S): Promise<R> {
         return Promise.resolve(result);
     }
 
@@ -69,7 +69,7 @@ export class AbstractField {
      *
      * @memberOf AbstractQuery
      */
-    public execute<R, A, S>(source: S, args: A, context: Context): Promise<R> {
+    public execute<R, A, S>(source: S, args: A, context: Context<A>): Promise<R> {
         return undefined;
     }
 
@@ -81,17 +81,18 @@ export class AbstractField {
      *
      * @memberOf AbstractQuery
      */
-    public resolve = async (source, args, context: Context): Promise<any> => {
+    public resolve = async <R, A, S>(source: S, args: A, context: Context<A>): Promise<R> => {
         //first check roles
         if (!context.hasUserRoles(this.allow)) {
-            return context.Response.send(401);
+            context.Response.send(401);
+            return Promise.reject('401 Unauthorized');
         }
 
         //go throw before
         args = await this.before(context, args, source);
 
         //run execute
-        let result = await this.execute(source, args, context);
+        let result = await this.execute<R, A, S>(source, args, context);
 
         //call after
         await this.after(result, context, args, source);
