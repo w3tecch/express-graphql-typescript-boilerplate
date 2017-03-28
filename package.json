@@ -21,7 +21,6 @@
     "db:migrate": "./node_modules/.bin/knex migrate:latest",
     "db:migrate:rollback": "./node_modules/.bin/knex migrate:rollback",
     "db:seed": "./node_modules/.bin/knex seed:run",
-    "prestart": "npm run db:migrate",
     "start": "node ./src/index.js"
   },
   "repository": {
