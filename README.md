@@ -130,10 +130,12 @@ express-graphql-typescript-boilerplate
  |    |-- repositories/                         * use a repository to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model
  |    |    |-- **/*.repository.ts
  |    |
- |    |-- schemas/                              * our graphql schema definitions
- |    |    |-- **/*.type.spec                   * our graphql type files
- |    |    |-- **/*.query.spec                  * our graphql query files (use a single file for every query action)
- |    |    |-- **/*.mutation.spec               * our graphql mutation files (use a single file for every mutation action)
+ |    |-- schemas/                              * our graphql schema definitions (use a single file for every graphql object action)
+ |    |    |-- arguments/                       * our graphql argument files
+ |    |    |-- fields/                          * our graphql field files
+ |    |    |-- mutations/                       * our graphql mutation files
+ |    |    |-- queries/                         * our graphql query files
+ |    |    |-- types/                           * our graphql type files
  |    |
  |    |-- index.ts                              * main entry point for our application
  |
@@ -194,7 +196,7 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
 ## Related Projects
 * [GraphQL.js](http://graphql.org/) — The JavaScript reference implementation for GraphQL
 * [DataLoader](https://github.com/facebook/dataloader) — Batching and caching for GraphQL data access layer
-* [aurelia](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
+* [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
 
 ## License
  [MIT](/LICENSE)
