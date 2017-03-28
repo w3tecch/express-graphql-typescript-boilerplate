@@ -13,7 +13,7 @@ This seed repository has a complete GraphQL starter kit written in TypeSciprt. F
 * Basic logger configuration
 * Advanced GraphQL-Context logic, so we can use repos, dataloader and other stuff in each resolver
 * Complete [Knex.js](http://knexjs.org/) integration with seeders and migration
-* Dataloaders
+* [DataLoaders](https://github.com/facebook/dataloader)
 * Extended GraphQL-Query and GraphQL-Field with a lite [Hook-System](###Hook-System)
 * A lot of examples like:
     * Pagination
@@ -191,5 +191,13 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
 }
 ```
 
+##Related Projects
+* [GraphQL.js](http://graphql.org/) — The JavaScript reference implementation for GraphQL
+* [DataLoader](https://github.com/facebook/dataloader) — Batching and caching for GraphQL data access layer
+* [aurelia](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
+
 ## License
  [MIT](/LICENSE)
+
+---
+Made with ♥ by Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1) and [contributors](https://github.com/w3tecch/express-graphql-typescript-boilerplate/graphs/contributors)
