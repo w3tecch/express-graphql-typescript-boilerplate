@@ -2,6 +2,7 @@ import { Logger, debugStream, winstonStream } from '../../../src/core/logger';
 
 const log = Logger('test');
 
+
 describe('Core:Logger', () => {
     describe('debugStream', () => {
         it('Should has a write property', () => {

@@ -1,9 +1,10 @@
-import { configuration } from '../../../src/core/environment';
+import { Environment } from '../../../src/core/environment';
 
-describe('Core:Config', () => {
-    describe('configuration', () => {
+
+describe('Core:Environment', () => {
+    describe('getConfig', () => {
         it('Should return a config object', () => {
-            expect(configuration()).toBeDefined();
+            expect(Environment.getConfig()).toBeDefined();
         });
     });
 });

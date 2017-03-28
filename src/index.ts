@@ -9,5 +9,5 @@
  *
  */
 
-import { app } from './app';
-app.main();
+import { App } from './app';
+App.getInstance().main();

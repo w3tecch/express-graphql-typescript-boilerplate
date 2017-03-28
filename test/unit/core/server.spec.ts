@@ -1,5 +1,5 @@
-import { listenTo, onListening, onError } from '../../../src/core/server';
-import * as Server from '../../../src/core/server';
+import { Server } from '../../../src/core';
+
 
 describe('Core:Server', () => {
     describe('listenTo', () => {
@@ -21,29 +21,41 @@ describe('Core:Server', () => {
             };
         });
         describe('listening', () => {
+            let app;
+            beforeEach(() => {
+                app = {
+                    listen: () => serverMock
+                };
+            });
             it('Should register a subscriber for the listening channel', () => {
                 const spy = spyOn(serverMock, 'on');
-                listenTo(serverMock);
+                Server.run(<any>app, undefined);
                 expect(spy).toHaveBeenCalled();
                 expect(spy.calls.allArgs()[0][0]).toBe('listening');
             });
             it('Should call the onListening function', () => {
                 const spy = spyOn(Server, 'onListening');
-                listenTo(serverMock);
+                Server.run(<any>app, undefined);
                 serverMock.listening();
                 expect(spy).toHaveBeenCalled();
             });
         });
         describe('error', () => {
+            let app;
+            beforeEach(() => {
+                app = {
+                    listen: () => serverMock
+                };
+            });
             it('Should register a subscriber for the error channel', () => {
                 const spy = spyOn(serverMock, 'on');
-                listenTo(serverMock);
+                Server.run(<any>app, undefined);
                 expect(spy).toHaveBeenCalled();
                 expect(spy.calls.allArgs()[1][0]).toBe('error');
             });
             it('Should call the onError function', () => {
                 const spy = spyOn(Server, 'onError');
-                listenTo(serverMock);
+                Server.run(<any>app, undefined);
                 serverMock.error(new Error('Test'));
                 expect(spy).toHaveBeenCalled();
             });
@@ -58,12 +70,12 @@ describe('Core:Server', () => {
         });
         it('Should call the listening subscriber with the address as a string', () => {
             const spy = spyOn(serverMock, 'address').and.returnValue('address');
-            onListening(serverMock);
+            Server.onListening(serverMock);
             expect(spy).toHaveBeenCalled();
         });
         it('Should call the listening subscriber with the address as a Object', () => {
             const spy = spyOn(serverMock, 'address').and.returnValue({ port: 3000 });
-            onListening(serverMock);
+            Server.onListening(serverMock);
             expect(spy).toHaveBeenCalled();
         });
     });
@@ -77,7 +89,7 @@ describe('Core:Server', () => {
         it('Should throw a normal error', () => {
             const msg = 'test';
             try {
-                onError(serverMock, new Error(msg));
+                Server.onError(serverMock, new Error(msg));
                 fail('Should have thrown an error');
             } catch (error) {
                 expect(error.message).toBe(msg);
@@ -89,7 +101,7 @@ describe('Core:Server', () => {
             error['syscall'] = 'listen';
             error['code'] = 'OTHER';
             try {
-                onError(serverMock, error);
+                Server.onError(serverMock, error);
                 fail('Should have thrown an error');
             } catch (error) {
                 expect(error.message).toBe(msg);
@@ -101,7 +113,7 @@ describe('Core:Server', () => {
             error['syscall'] = 'listen';
             error['code'] = 'EACCES';
             const spy = spyOn(process, 'exit');
-            onError(serverMock, error);
+            Server.onError(serverMock, error);
             expect(spy).toHaveBeenCalledWith(1);
         });
         it('Should throw a normal error even if syscall property is defined with "listen"', () => {
@@ -110,7 +122,7 @@ describe('Core:Server', () => {
             error['syscall'] = 'listen';
             error['code'] = 'EADDRINUSE';
             const spy = spyOn(process, 'exit');
-            onError(serverMock, error);
+            Server.onError(serverMock, error);
             expect(spy).toHaveBeenCalledWith(1);
         });
     });

@@ -7,7 +7,8 @@ import {
 import { GraphQLErrorHandling, Processed } from '../../../src/core/graphql-error-handling';
 import { UserError } from '../../../src/errors/user.error';
 
-describe('app:core', () => {
+
+describe('Core:GraphQLErrorHandling', () => {
 
     let schema;
     beforeEach(() => {
