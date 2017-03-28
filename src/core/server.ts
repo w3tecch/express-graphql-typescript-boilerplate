@@ -1,42 +1,62 @@
-//See: https://medium.com/the-graphqlhub/your-first-graphql-server-3c766ab4f0a2#.giyyd9tzx
-
+import * as express from 'express';
 import * as http from 'http';
 
 import { Logger } from './logger';
 const log = Logger('app:core:server');
 
 
-const bind = (addr) => {
-    return typeof addr === 'string'
-        ? `pipe ${addr}`
-        : `port ${addr.port}`;
-};
+export class Server {
 
-export const onListening = (server: http.Server) => {
-    log.debug(`Listening on ${bind(server.address())}`);
-};
-
-export const onError = (server: http.Server, error: Error) => {
-    if (error['syscall'] !== 'listen') {
-        throw error;
+    static init(): express.Application {
+        return express();
     }
-    const addr = server.address();
-    // handle specific listen errors with friendly messages
-    switch (error['code']) {
-        case 'EACCES':
-            log.error(`${bind(addr)} requires elevated privileges`);
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            log.error(`${bind(addr)} is already in use`);
-            process.exit(1);
-            break;
-        default:
+
+    static run(app: express.Application, port: string): http.Server {
+        const server = app.listen(this.normalizePort(port));
+        server.on('listening', () => this.onListening(server));
+        server.on('error', (error) => this.onError(server, error));
+        return server;
+    }
+
+    static normalizePort(port: string): number | string | boolean {
+        const parsedPort = parseInt(port, 10);
+        if (isNaN(parsedPort)) { // named pipe
+            return port;
+        }
+        if (parsedPort >= 0) { // port number
+            return parsedPort;
+        }
+        return false;
+    }
+
+    static onListening(server: http.Server): void {
+        log.debug(`Listening on ${this.bind(server.address())}`);
+    }
+
+    static onError(server: http.Server, error: Error): void {
+        if (error['syscall'] !== 'listen') {
             throw error;
+        }
+        const addr = server.address();
+        // handle specific listen errors with friendly messages
+        switch (error['code']) {
+            case 'EACCES':
+                log.error(`${this.bind(addr)} requires elevated privileges`);
+                process.exit(1);
+                break;
+            case 'EADDRINUSE':
+                log.error(`${this.bind(addr)} is already in use`);
+                process.exit(1);
+                break;
+            default:
+                throw error;
+        }
     }
-};
 
-export const listenTo = (server: http.Server) => {
-    server.on('listening', () => onListening(server));
-    server.on('error', (error) => onError(server, error));
-};
+    private static bind(addr: string | any): string {
+        return typeof addr === 'string'
+            ? `pipe ${addr}`
+            : `port ${addr.port}`;
+    }
+
+}

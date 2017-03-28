@@ -1,7 +1,6 @@
 import * as winston from 'winston';
 
-import { configuration, isProduction } from './environment';
-const environment = configuration();
+import { Environment } from './';
 
 
 /**
@@ -10,11 +9,11 @@ const environment = configuration();
 const logger = new winston.Logger({
     transports: [
         new winston.transports.Console({
-            level: environment.logger.console.level,
-            timestamp: isProduction(),
-            handleExceptions: isProduction(),
-            json: isProduction(),
-            colorize: !isProduction()
+            level: Environment.getConfig().logger.console.level,
+            timestamp: Environment.isProduction(),
+            handleExceptions: Environment.isProduction(),
+            json: Environment.isProduction(),
+            colorize: !Environment.isProduction()
         })
     ],
     exitOnError: false
@@ -34,7 +33,7 @@ const write = (writeFunction) => ({
 export const winstonStream = stream(write(logger.info));
 
 // Configure the debug module
-process.env.DEBUG = environment.logger.debug;
+process.env.DEBUG = Environment.getConfig().logger.debug;
 // imports debug moduel
 import * as Debug from 'debug';
 const debug = Debug('app:response');
@@ -55,7 +54,7 @@ export const Logger = (scope: string) => {
     const scopeDebug = Debug(scope);
     return {
         debug: (message: string, ...args: any[]) => {
-            if (isProduction()) {
+            if (Environment.isProduction()) {
                 logger.debug(format(scope, message), parse(args));
             }
             scopeDebug(message, parse(args));

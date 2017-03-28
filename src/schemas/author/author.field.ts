@@ -1,16 +1,17 @@
 import { GraphQLFieldDefinition } from 'graphql';
 
 import { models } from 'models';
-import { Context } from '../../context/context';
+import { Logger } from '../../core';
+import { Context } from '../../context';
+import { Book } from '../../models';
+
 import { AbstractField, IGraphQLField } from '../abstract.field';
 import { AuthorType } from '../author/author.type';
-import { Book } from '../../models/book.model';
-
-import { Logger } from '../../core/logger';
-const log = Logger('app:schemas:author:AuthorField');
 
 
 export class AuthorField extends AbstractField implements GraphQLFieldDefinition, IGraphQLField {
+
+    public log = Logger('app:schemas:author:AuthorField');
 
     public type = AuthorType;
     public name = 'author';
@@ -19,7 +20,7 @@ export class AuthorField extends AbstractField implements GraphQLFieldDefinition
 
     public execute(source: Book, args: any, context: Context<any>): Promise<models.author.Attributes>
     public execute(source: any, args: any, context: Context<any>): Promise<models.author.Attributes> {
-        log.debug('Resolve auhtor %s of the book ' + source.id, source.authorId);
+        this.log.debug('Resolve auhtor %s of the book ' + source.id, source.authorId);
 
         // Repo way
         // return context.getRepositories().getAuthorRepository().findAuthorById(source.authorId);

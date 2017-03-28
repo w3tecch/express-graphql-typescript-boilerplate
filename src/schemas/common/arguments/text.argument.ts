@@ -1,6 +1,6 @@
 import { GraphQLArgumentConfig, GraphQLString, GraphQLNonNull } from 'graphql';
 
-import { ValidationError } from '../../../errors/validation.error';
+import { ValidationError } from '../../../errors';
 
 
 export interface ITextArgument {

@@ -2,14 +2,13 @@ import { GraphQLFieldConfig, GraphQLNonNull, GraphQLString } from 'graphql';
 
 import { models } from 'models';
 import { RootValue } from '../../root-value';
-import { Context } from '../../context/context';
-import { UserError } from '../../errors/user.error';
+import { Logger } from '../../core';
+import { Context } from '../../context';
+import { UserError } from '../../errors';
+
 import { AuthorType } from './author.type';
 import { AbstractMutation, IGraphQLMutation } from '../abstract.mutation';
 import { AuthorModel } from '../../models/author.model';
-
-import { Logger } from '../../core/logger';
-const log = Logger('app:schemas:author:CreateAuthorMutation');
 
 
 export interface ICreateAuthorMutationArguments {
@@ -19,6 +18,8 @@ export interface ICreateAuthorMutationArguments {
 
 export class CreateAuthorMutation extends AbstractMutation implements GraphQLFieldConfig, IGraphQLMutation {
 
+    public log = Logger('app:schemas:author:CreateAuthorMutation');
+
     public type = AuthorType;
     public allow = ['admin'];
     public args = {
@@ -27,7 +28,7 @@ export class CreateAuthorMutation extends AbstractMutation implements GraphQLFie
     };
 
     public before(context: Context<ICreateAuthorMutationArguments>, args: ICreateAuthorMutationArguments): Promise<ICreateAuthorMutationArguments> {
-        log.debug('hook before args', args);
+        this.log.debug('hook before args', args);
         const authorModel = new AuthorModel()
             .setFirstName(args.firstName)
             .setLastName(args.lastName);
@@ -40,7 +41,7 @@ export class CreateAuthorMutation extends AbstractMutation implements GraphQLFie
     }
 
     public execute(root: RootValue, args: ICreateAuthorMutationArguments, context: Context<ICreateAuthorMutationArguments>): Promise<models.author.Attributes> {
-        log.debug('resolve createAuthor()');
+        this.log.debug('resolve createAuthor()');
         const authorModel = new AuthorModel()
             .setFirstName(args.firstName)
             .setLastName(args.lastName);

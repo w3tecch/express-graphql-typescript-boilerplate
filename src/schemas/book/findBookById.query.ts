@@ -1,16 +1,16 @@
 import { GraphQLID, GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
 
 import { models } from 'models';
+import { Logger } from '../../core';
 import { RootValue } from '../../root-value';
-import { Context } from '../../context/context';
+import { Context } from '../../context';
 import { BookType } from './book.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
 
-import { Logger } from '../../core/logger';
-const log = Logger('app:schemas:book:FindBookByIdQuery');
-
 
 export class FindBookByIdQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
+
+    public log = Logger('app:schemas:book:FindBookByIdQuery');
 
     public type = BookType;
     public allow = ['admin'];
@@ -19,17 +19,17 @@ export class FindBookByIdQuery extends AbstractQuery implements GraphQLFieldConf
     };
 
     public before(context: Context<arguments.ID>, args: arguments.ID): Promise<arguments.ID> {
-        log.debug('hook before args', args);
+        this.log.debug('hook before args', args);
         return Promise.resolve(args);
     }
 
     public execute(root: RootValue, args: arguments.ID, context: Context<arguments.ID>): Promise<models.book.Attributes> {
-        log.debug('resolve findBookById(%s)', args.id);
+        this.log.debug('resolve findBookById(%s)', args.id);
         return context.Repositories.BookRepository.findBookById(args.id);
     }
 
     public after(result: models.book.Attributes, context: Context<arguments.ID>, args: arguments.ID): Promise<models.book.Attributes> {
-        log.debug('hook after args', args);
+        this.log.debug('hook after args', args);
         return Promise.resolve(result);
     }
 

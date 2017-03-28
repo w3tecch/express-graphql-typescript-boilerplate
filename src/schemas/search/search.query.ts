@@ -2,13 +2,11 @@ import { GraphQLList, GraphQLFieldConfig, GraphQLResolveInfo } from 'graphql';
 import * as _ from 'lodash';
 
 import { RootValue } from '../../root-value';
-import { Context } from '../../context/context';
+import { Logger } from '../../core';
+import { Context } from '../../context';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
 import { SearchType } from './search.type';
 import { TextArgument, ITextArgument } from '../common/arguments/text.argument';
-
-import { Logger } from '../../core/logger';
-const log = Logger('app:schemas:search:SearchQuery');
 
 
 /**
@@ -29,6 +27,8 @@ const log = Logger('app:schemas:search:SearchQuery');
  */
 export class SearchQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
 
+    public log = Logger('app:schemas:search:SearchQuery');
+
     public type = new GraphQLList(SearchType);
     public allow = ['admin'];
     public args = {
@@ -41,7 +41,7 @@ export class SearchQuery extends AbstractQuery implements GraphQLFieldConfig, IG
     }
 
     public async execute<T>(root: RootValue, args: ITextArgument, context: Context<ITextArgument>, info: GraphQLResolveInfo): Promise<T[]> {
-        log.debug('resolve search()', args.text);
+        this.log.debug('resolve search()', args.text);
         const [authors, books] = await Promise.all([
             context.Repositories.AuthorRepository.searchAuthors(args.text),
             context.Repositories.BookRepository.searchBooks(args.text)

@@ -1,7 +1,7 @@
 import { GraphQLArgumentConfig, GraphQLInt } from 'graphql';
 
 import { Utils } from '../../../common/utils';
-import { ValidationError } from '../../../errors/validation.error';
+import { ValidationError } from '../../../errors';
 
 
 export class OffsetArgument implements GraphQLArgumentConfig {

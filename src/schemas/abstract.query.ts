@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
 
 import { RootValue } from '../root-value';
-import { Context } from '../context/context';
+import { Context } from '../context';
 
 
 export interface IGraphQLQuery {
@@ -103,7 +103,7 @@ export class AbstractQuery {
         //call after
         await this.after(result, context, args);
 
-        //return
+        //return the resolved result
         return result;
     }
 

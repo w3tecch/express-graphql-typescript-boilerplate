@@ -1,11 +1,26 @@
-const config = require('./config');
+const config = require('../config');
 
-export const name = (): string => process.env.NODE_ENV || 'development';
 
-export const isTest = () => name() === 'test';
+export class Environment {
 
-export const isDevelopment = () => name() === 'development';
+    static getName(): string {
+        return process.env.NODE_ENV || 'development';
+    }
 
-export const isProduction = () => name() === 'production';
+    static isTest(): boolean {
+        return this.getName() === 'test';
+    }
 
-export const configuration = (): config.Configuration => config[name()];
+    static isDevelopment(): boolean {
+        return this.getName() === 'development';
+    }
+
+    static isProduction(): boolean {
+        return this.getName() === 'production';
+    }
+
+    static getConfig(): config.Configuration {
+        return config[this.getName()];
+    }
+
+}

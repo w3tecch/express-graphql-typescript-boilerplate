@@ -1,4 +1,4 @@
-import { Context } from '../context/context';
+import { Context } from '../context';
 
 
 export interface IGraphQLField {
@@ -97,7 +97,7 @@ export class AbstractField {
         //call after
         await this.after(result, context, args, source);
 
-        //return
+        //return the resolved result
         return result;
     }
 

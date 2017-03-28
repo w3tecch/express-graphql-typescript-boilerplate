@@ -11,7 +11,6 @@ import { FindAllBooksQuery } from '../schemas/book/findAllBooks.query';
 import { FindBookByIdQuery } from '../schemas/book/findBookById.query';
 import { FindAllAuthorsQuery } from '../schemas/author/findAllAuthors.query';
 import { FindAuthorByIdQuery } from '../schemas/author/findAuthorById.query';
-import { ThrowErrorQuery } from './throw-error.query';
 
 
 /**
@@ -26,8 +25,7 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
         findAllAuthors: new FindAllAuthorsQuery(),
         findAuthorById: new FindAuthorByIdQuery(),
         findAllBooks: new FindAllBooksQuery(),
-        findBookById: new FindBookByIdQuery(),
-        throwError: new ThrowErrorQuery()
+        findBookById: new FindBookByIdQuery()
     }
 });
 

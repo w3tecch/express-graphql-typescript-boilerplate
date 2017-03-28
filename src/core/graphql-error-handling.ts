@@ -9,12 +9,12 @@ import {
     GraphQLFieldResolveFn
 } from 'graphql';
 
-import { isTest } from './environment';
-import { IsUserError } from '../errors/user.error';
+import { Environment } from './';
+import { IsUserError } from '../errors';
+
 
 // Mark field/type/schema
 export const Processed = Symbol();
-
 
 export class GraphQLErrorHandling {
 
@@ -70,7 +70,7 @@ export class GraphQLErrorHandling {
         }
         const errId = uuid.v4();
         error.message = `${error.message}: ${errId}`;
-        if (!isTest()) {
+        if (!Environment.isTest()) {
             console.error(error && error.stack || error);
         }
         error.message = `500: Internal Error: ${errId}`;
