@@ -1,5 +1,6 @@
 import { GraphQLFieldConfig, GraphQLNonNull, GraphQLID } from 'graphql';
 
+import { RootValue } from '../../root-value';
 import { Context } from '../../context/context';
 import { AuthorType } from './author.type';
 import { AbstractMutation, IGraphQLMutation } from '../abstract.mutation';
@@ -15,14 +16,12 @@ export interface IDeleteAuthorMutationArguments {
 export class DeleteAuthorMutation extends AbstractMutation implements GraphQLFieldConfig, IGraphQLMutation {
 
     public type = AuthorType;
-
     public allow = ['admin'];
-
     public args = {
         id: { type: new GraphQLNonNull(GraphQLID) }
     };
 
-    public execute(root, args: IDeleteAuthorMutationArguments, context: Context) {
+    public execute(root: RootValue, args: IDeleteAuthorMutationArguments, context: Context<IDeleteAuthorMutationArguments>): Promise<void> {
         log.debug('resolve deleteAuthor(%s)', args.id);
         return context.Repositories.AuthorRepository.deleteAuthor(args.id);
     }

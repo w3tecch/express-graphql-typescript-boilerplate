@@ -1,5 +1,6 @@
 import { GraphQLFieldDefinition } from 'graphql';
 
+import { models } from 'models';
 import { Context } from '../../context/context';
 import { AbstractField, IGraphQLField } from '../abstract.field';
 import { AuthorType } from '../author/author.type';
@@ -16,8 +17,8 @@ export class AuthorField extends AbstractField implements GraphQLFieldDefinition
     public description = 'The author of this book';
     public args;
 
-    public execute(source: Book, args, context: Context)
-    public execute(source: any, args, context: Context) {
+    public execute(source: Book, args: any, context: Context<any>): Promise<models.author.Attributes>
+    public execute(source: any, args: any, context: Context<any>): Promise<models.author.Attributes> {
         log.debug('Resolve auhtor %s of the book ' + source.id, source.authorId);
 
         // Repo way

@@ -1,6 +1,6 @@
 export class RootValue {
 
-    public hello() {
+    public hello(): string {
         return 'Hello world!';
     }
 

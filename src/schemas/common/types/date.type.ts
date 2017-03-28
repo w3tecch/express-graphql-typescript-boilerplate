@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 import { Kind } from 'graphql/language';
 
-import { UserError } from '../../../core/graphql-error-handling';
+import { FieldError } from '../../../errors/field.error';
 
 export const FIELD_ERROR_NO_DATE = 'Field error: value is not an instance of Date';
 export const FIELD_ERROR_INVALID_DATE = 'Field error: value is an invalid Date';
@@ -17,21 +17,21 @@ export const GRAPHQL_ERROR_INVALID_FORMAT = 'Query error: Invalid date format, o
 
 const serializeDate = (value: Date | any) => {
     if (!(value instanceof Date)) {
-        throw new UserError(FIELD_ERROR_NO_DATE);
+        throw new FieldError(FIELD_ERROR_NO_DATE);
     }
     if (isNaN(value.getTime())) {
-        throw new UserError(FIELD_ERROR_INVALID_DATE);
+        throw new FieldError(FIELD_ERROR_INVALID_DATE);
     }
     return value.toJSON();
 };
 
 const parseValue = (value: string) => {
     if (typeof value !== 'string') {
-        throw new UserError(FIELD_ERROR_NO_DATE);
+        throw new FieldError(FIELD_ERROR_NO_DATE);
     }
     const date = new Date(value);
     if (isNaN(date.getTime())) {
-        throw new UserError(FIELD_ERROR_INVALID_DATE);
+        throw new FieldError(FIELD_ERROR_INVALID_DATE);
     }
     return date;
 };
@@ -41,7 +41,7 @@ export const DateType = new GraphQLScalarType({
     description: 'Represents a Date object',
     serialize: serializeDate,
     parseValue: parseValue,
-    parseLiteral(ast: StringValue | any) {
+    parseLiteral(ast: StringValue | any): Date {
         if (ast.kind !== Kind.STRING) {
             throw new GraphQLError(GRAPHQL_ERROR_NO_STRING(ast), [ast]);
         }

@@ -12,11 +12,11 @@ export class DataLoadersContext {
     private authorDataLaoder: DataLoader<number, any>;
     private bookDataLaoder: DataLoader<number, any>;
 
-    public get AuthorDataLoader() {
+    public get AuthorDataLoader(): DataLoader<number, any> {
         return this.authorDataLaoder;
     }
 
-    public get BookDataLoader() {
+    public get BookDataLoader(): DataLoader<number, any> {
         return this.bookDataLaoder;
     }
 

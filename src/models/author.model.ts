@@ -10,7 +10,7 @@ export class AuthorModel implements AbstactModel<models.author.Attributes, model
     private updatedAt?: Date;
     private createdAt?: Date;
 
-    constructor(attributes?: models.author.Attributes | models.author.RawAttributes, isRaw = true) {
+    constructor(attributes?: models.author.Attributes | models.author.RawAttributes, isRaw: boolean = true) {
         if (attributes) {
             if (isRaw) {
                 this.mapDatabaseObject(attributes);
@@ -20,23 +20,23 @@ export class AuthorModel implements AbstactModel<models.author.Attributes, model
         }
     }
 
-    public get Id() {
+    public get Id(): number {
         return this.id;
     };
 
-    public get FirstName() {
+    public get FirstName(): string {
         return this.firstName;
     };
 
-    public get LastName() {
+    public get LastName(): string  {
         return this.lastName;
     };
 
-    public get UpdatedAt() {
+    public get UpdatedAt(): Date {
         return this.updatedAt;
     };
 
-    public get CreatedAt() {
+    public get CreatedAt(): Date {
         return this.createdAt;
     };
 

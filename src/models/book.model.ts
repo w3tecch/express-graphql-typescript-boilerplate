@@ -13,7 +13,7 @@ export class BookModel implements AbstactModel<models.book.Attributes, models.bo
     private updatedAt?: Date;
     private createdAt?: Date;
 
-    constructor(attributes?: models.book.Attributes | models.book.RawAttributes, isRaw = true) {
+    constructor(attributes?: models.book.Attributes | models.book.RawAttributes, isRaw: boolean = true) {
         if (attributes) {
             if (isRaw) {
                 this.mapDatabaseObject(attributes);
@@ -23,35 +23,35 @@ export class BookModel implements AbstactModel<models.book.Attributes, models.bo
         }
     }
 
-    public get Id() {
+    public get Id(): number {
         return this.id;
     };
 
-    public get Title() {
+    public get Title(): string {
         return this.title;
     };
 
-    public get Description() {
+    public get Description(): string {
         return this.description;
     };
 
-    public get Price() {
+    public get Price(): number {
         return this.price;
     };
 
-    public get PublishedAt() {
+    public get PublishedAt(): Date {
         return this.publishedAt;
     };
 
-    public get AuthorId() {
+    public get AuthorId(): number {
         return this.authorId;
     };
 
-    public get UpdatedAt() {
+    public get UpdatedAt(): Date {
         return this.updatedAt;
     };
 
-    public get CreatedAt() {
+    public get CreatedAt(): Date {
         return this.createdAt;
     };
 
@@ -123,15 +123,15 @@ export class BookModel implements AbstactModel<models.book.Attributes, models.bo
         return this;
     }
 
-    public validate() {
+    public validate(): void {
         // TODO Check id all required attributes ar given
     }
 
-    public toJson() {
+    public toJson(): Book {
         return new Book(this);
     }
 
-    public toDatabaseObject() {
+    public toDatabaseObject(): RawBook {
         return new RawBook(this);
     }
 

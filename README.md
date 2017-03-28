@@ -2,20 +2,40 @@
 
 [![Build Status](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)
 
-This is a boilerplate for Node.js app written in [TypeScript](https://www.typescriptlang.org/). We used the framework [Express.js](http://expressjs.com/) as a basic layer and on that we setup the awesome [GrapQL](http://graphql.org/) library.
+A [GraphQL](http://graphql.org/) starter kit for building amazing API's in [TypeScript](https://www.typescriptlang.org/) and with [Express.js](http://expressjs.com/) framework.
+
+This seed repository has a complete GraphQL starter kit written in TypeSciprt. For building our API we use various gulp-tasks. We use jasmine and Wallaby for our unit-testing. And there are a lot more awesome features like
+* VSCode tasks and launch configuration
+* Improved GraphQL Error Handling, so that the error stack will be shown in the console
+* Multiple environemnt configurations
+* Basic securty configuration
+* Basic cors configuration
+* Basic logger configuration
+* Advanced GraphQL-Context logic, so we can use repos, dataloader and other stuff in each resolver
+* Complete [Knex.js](http://knexjs.org/) integration with seeders and migration
+* [DataLoaders](https://github.com/facebook/dataloader)
+* Extended GraphQL-Query and GraphQL-Field with a lite [Hook-System](###Hook-System)
+* A lot of examples like:
+    * Pagination
+    * Search query with filter
+    * Custom GraphQL-Types like a date type
+    * Migtation and seeders
+    * Models
+    * Testing examples
+    * and many more, just have a look
 
 ## Getting Started
 ### Prerequisites
 Install [Node.js](http://nodejs.org)
-	- on OSX use [homebrew](http://brew.sh) `brew install node`
-	- on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
+* on OSX use [homebrew](http://brew.sh) `brew install node`
+* on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
 ## Installing
 * `fork` this repo
 * `clone` your fork
 * `npm install` to install all dependencies
 * `npm run install:typings` to install all typings
-* Create new database. You will find the name in the `config.ts` file.
+* Create new database. You will find the name in the `src/core/config.ts` file.
 * `npm run db:migrate` to create the schema
 * `npm run db:seed` to insert some test data
 * `npm run serve` to start the dev server in another tab
@@ -34,9 +54,11 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 
 ### Linting
 * Run code analysis using `npm run lint`. This runs tshint.
+* There is also a vscode task for this called lint.
 
 ### Tests
 * Run the unit tests using `npm test` or `npm run test:pretty` for more detailed reporting.
+* There is also a vscode task for this called test.
 
 ### Running in dev mode
 * Run `npm run serve` to start nodemon with ts-node, which will serve your app.
@@ -45,8 +67,9 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ### Cleaning the project
 * Run `npm run clean` to remove all generated JavaScript files.
 
-### Building the project
+### Building the project and run it
 * Run `npm run build` to generated all JavaScript files from your TypeScript sources. After this step you can deploy the app on any server.
+* There is also a vscode task for this called build.
 * To start the builded app use `npm start`.
 * With `npm run zip` it will generate the JavaScript source and pack them into to a deployable zip file into the dist folder.
 
@@ -54,7 +77,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * Run `npm run docs` to generate all doc files and serve it on `http://0.0.0.0:8080`
 
 ### Seed
-* Run `npm run sdb:eed` to seed some data into the database
+* Run `npm run db:seed` to seed some data into the database
 
 ### Migration
 * Run `npm run migrate` to migration the new schema to the database
@@ -64,6 +87,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ### Structure
 ```
 express-graphql-typescript-boilerplate
+ |-- .vscode/                                   * our vscode tasks, launch configuration and some settings
  |-- build/                                     * our task runner configurations and tasks
  |    |-- tasks/                                * gulp tasks
  |    |-- paths.js                              * project path setup for our gulp tasks
@@ -73,7 +97,6 @@ express-graphql-typescript-boilerplate
  |
  |-- src/                                       * our source files that will be compiled to javascript
  |    |-- common/                               * common helpers
- |    |    |-- exceptions.ts                    * our common exceptions like "NotFound"
  |    |    |-- tables.ts                        * our database table names
  |    |    |-- utils.ts                         * our collection of util functions
  |    |
@@ -95,6 +118,10 @@ express-graphql-typescript-boilerplate
  |    |    |-- factories                        * our factories to create simple fake data
  |    |    |-- migrations                       * our database migration tasks
  |    |    |-- seeds                            * our database seeder tasks
+ |    |
+ |    |-- errors/                               * our errors to throw to the user
+ |    |    |-- user.error.ts                    * our basic user error all other errors should inherit from this one
+ |    |    |-- not-found.error.ts               * a basic not found error
  |    |
  |    |-- middlewares/                          * our express custom middlewares (/*.middleware.ts)
  |    |
@@ -126,6 +153,51 @@ express-graphql-typescript-boilerplate
  |-- wallaby.js                                 * our wallaby configuration
 ```
 
+### Hook-System
+```typescript
+// We extend the AbstractQuery with the hook system. This
+// gives us the 3 new methods called before, run and after.
+export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConfig {
+
+    public type = new GraphQLList(BookType);
+    public allow = ['admin'];
+    public args = {
+        limit: new LimitArgument(),
+        offset: new OffsetArgument()
+    };
+
+    // This will be called after the allow checking
+    public before(context: Context, args: common.PageinationArguments): Promise<common.PageinationArguments> {
+        log.debug('hook before args', args);
+        LimitArgument.validate(args.limit);
+        OffsetArgument.validate(args.limit);
+        return Promise.resolve(args);
+    }
+
+    // As long as the before function was okay this will be called afterwards
+    public execute(root: RootValue, args: common.PageinationArguments, context: Context): Promise<models.book.Attributes> {
+        log.debug('resolve findAllBooks()');
+        return context.Repositories.BookRepository.findAllBooks({
+            limit: args.limit,
+            offset: args.offset
+        });
+    }
+
+    // And at least before the results go back to our client it will pass this after function
+    public after(result: models.book.Attributes, context: Context, args: common.PageinationArguments): Promise<models.book.Attributes> {
+        log.debug('hook after args', args);
+        return Promise.resolve(result);
+    }
+}
+```
+
+##Related Projects
+* [GraphQL.js](http://graphql.org/) — The JavaScript reference implementation for GraphQL
+* [DataLoader](https://github.com/facebook/dataloader) — Batching and caching for GraphQL data access layer
+* [aurelia](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
 
 ## License
  [MIT](/LICENSE)
+
+---
+Made with ♥ by Gery Hirschfeld ([@GeryHirschfeld1](https://twitter.com/GeryHirschfeld1) and [contributors](https://github.com/w3tecch/express-graphql-typescript-boilerplate/graphs/contributors)

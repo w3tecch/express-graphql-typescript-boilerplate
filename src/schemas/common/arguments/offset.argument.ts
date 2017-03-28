@@ -1,7 +1,7 @@
 import { GraphQLArgumentConfig, GraphQLInt } from 'graphql';
 
 import { Utils } from '../../../common/utils';
-import { UserError } from '../../../core/graphql-error-handling';
+import { ValidationError } from '../../../errors/validation.error';
 
 
 export class OffsetArgument implements GraphQLArgumentConfig {
@@ -10,9 +10,9 @@ export class OffsetArgument implements GraphQLArgumentConfig {
     public description = 'To do';
     public defaultValue = 0;
 
-    static verify(offset: number) {
-        if (!Utils.isPosiitve(offset)) {
-            throw new UserError('Offset must be positive');
+    static validate(offset: number): void {
+        if (!Utils.isPositve(offset)) {
+            throw new ValidationError('Offset must be positive');
         }
     }
 

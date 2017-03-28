@@ -1,10 +1,11 @@
-
 import {
     GraphQLID,
     GraphQLFieldConfig,
     GraphQLNonNull
 } from 'graphql';
 
+import { models } from 'models';
+import { RootValue } from '../../root-value';
 import { Context } from '../../context/context';
 import { AuthorType } from './author.type';
 import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
@@ -16,25 +17,17 @@ const log = Logger('app:schemas:author:FindAuthorByIdQuery');
 export class FindAuthorByIdQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
 
     public type = AuthorType;
-
     public allow = ['admin'];
-
     public args = {
         id: { type: new GraphQLNonNull(GraphQLID) }
     };
 
-    public before(context: Context, args: arguments.ID) {
+    public before(context: Context<arguments.ID>, args: arguments.ID): Promise<arguments.ID> {
         log.debug('hook before args', args);
         return Promise.resolve(args);
     }
 
-    public after(result: any, context: Context, args: any, source?: any) {
-        log.debug('hook after args', args);
-        log.debug('hook after source', source);
-        return Promise.resolve(result);
-    }
-
-    public execute(root, args: arguments.ID, context: Context) {
+    public execute(root: RootValue, args: arguments.ID, context: Context<arguments.ID>): Promise<models.author.Attributes> {
         log.debug('resolve findAuthorById(%s)', args.id);
         return context.Repositories.AuthorRepository.findAuthorById(args.id);
     }
