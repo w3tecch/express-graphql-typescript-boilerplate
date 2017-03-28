@@ -16,7 +16,7 @@ import * as cors from 'cors';
 import * as GraphQLHTTP from 'express-graphql';
 
 import { UserError } from './errors';
-import { schema } from './schemas';
+import { Schema } from './schemas';
 import { RootValue } from './root-value';
 import { Context, RepositoriesContext, DataLoadersContext } from './context';
 import { AuthorRepository, BookRepository } from './repositories';
@@ -69,7 +69,7 @@ export class App {
             this.log.debug('Setup GraphQLHTTP');
             // Creates a GraphQLHTTP per request
             GraphQLHTTP({
-                schema: schema,
+                schema: Schema.getInstance().get(),
                 rootValue: new RootValue(),
                 context: new Context(req, res, this.repositoriesContext, this.dataLoadersContext),
                 graphiql: Environment.getConfig().server.graphiql,

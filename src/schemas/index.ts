@@ -1,11 +1,6 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
 import { GraphQLErrorHandling } from '../core';
-
-
-/**
- * Queries
- */
 import {
     FindAllAuthorsQuery,
     FindAuthorByIdQuery,
@@ -13,55 +8,53 @@ import {
     FindBookByIdQuery,
     SearchQuery
 } from './queries';
-
-/**
- * RootQuery
- *
- * This will be published to the clients
- */
-const RootQuery: GraphQLObjectType = new GraphQLObjectType({
-    name: 'Query',
-    fields: {
-        search: new SearchQuery(),
-        findAllAuthors: new FindAllAuthorsQuery(),
-        findAuthorById: new FindAuthorByIdQuery(),
-        findAllBooks: new FindAllBooksQuery(),
-        findBookById: new FindBookByIdQuery()
-    }
-});
-
-
-/**
- * Mutations
- */
 import {
     CreateAuthorMutation,
     DeleteAuthorMutation,
     UpdateAuthorMutation
 } from './mutations';
 
-/**
- * RootMutation
- *
- * This will be published to the clients
- */
-const RootMutation: GraphQLObjectType = new GraphQLObjectType({
-    name: 'Mutation',
-    fields: {
-        createAuthor: new CreateAuthorMutation(),
-        updateAuthor: new UpdateAuthorMutation(),
-        deleteAuthor: new DeleteAuthorMutation()
+export class Schema {
+
+    private static instance: Schema;
+
+    private rootQuery: GraphQLObjectType = new GraphQLObjectType({
+        name: 'Query',
+        fields: {
+            search: new SearchQuery(),
+            findAllAuthors: new FindAllAuthorsQuery(),
+            findAuthorById: new FindAuthorByIdQuery(),
+            findAllBooks: new FindAllBooksQuery(),
+            findBookById: new FindBookByIdQuery()
+        }
+    });
+
+    private rootMutation: GraphQLObjectType = new GraphQLObjectType({
+        name: 'Mutation',
+        fields: {
+            createAuthor: new CreateAuthorMutation(),
+            updateAuthor: new UpdateAuthorMutation(),
+            deleteAuthor: new DeleteAuthorMutation()
+        }
+    });
+
+    private schema: GraphQLSchema = new GraphQLSchema({
+        query: this.rootQuery,
+        mutation: this.rootMutation
+    });
+
+    static getInstance(): Schema {
+        if (!Schema.instance) {
+            Schema.instance = new Schema();
+        }
+        return Schema.instance;
     }
-});
 
+    public get(): GraphQLSchema {
+        // Handles internal erros and prints the stack to the console
+        GraphQLErrorHandling.watch(this.schema);
 
-/**
- * Export schema with all queries and mutations
- */
-export const schema = new GraphQLSchema({
-    query: RootQuery,
-    mutation: RootMutation
-});
+        return this.schema;
+    }
 
-// Handles internal erros and prints the stack to the console
-GraphQLErrorHandling.watch(schema);
+}
