@@ -154,7 +154,7 @@ express-graphql-typescript-boilerplate
 ```
 
 ### Hook-System
-```
+```typescript
 // We extend the AbstractQuery with the hook system. This
 // gives us the 3 new methods called before, run and after.
 export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConfig {
