@@ -1,4 +1,4 @@
-import { AbstractQuery, IGraphQLQuery } from './abstract.query';
+import { AbstractQuery, IGraphQLQuery } from '../queries/abstract.query';
 
 export interface IGraphQLMutation extends IGraphQLQuery {
 }

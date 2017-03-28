@@ -5,10 +5,9 @@ import { RootValue } from '../../root-value';
 import { Logger } from '../../core';
 import { Context } from '../../context';
 import { UserError } from '../../errors';
-
-import { AuthorType } from './author.type';
-import { AbstractMutation, IGraphQLMutation } from '../abstract.mutation';
-import { AuthorModel } from '../../models/author.model';
+import { AuthorType } from '../types';
+import { AuthorModel } from '../../models';
+import { AbstractMutation, IGraphQLMutation } from './abstract.mutation';
 
 
 export interface ICreateAuthorMutationArguments {

@@ -1,7 +1,7 @@
 import { GraphQLResolveInfo } from 'graphql';
 
-import { RootValue } from '../root-value';
-import { Context } from '../context';
+import { RootValue } from '../../root-value';
+import { Context } from '../../context';
 
 
 export interface IGraphQLQuery {

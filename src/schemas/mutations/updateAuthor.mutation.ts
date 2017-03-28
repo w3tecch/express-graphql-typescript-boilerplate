@@ -4,9 +4,9 @@ import { models } from 'models';
 import { Logger } from '../../core';
 import { RootValue } from '../../root-value';
 import { Context } from '../../context';
-import { AuthorType } from './author.type';
-import { AbstractMutation, IGraphQLMutation } from '../abstract.mutation';
-import { AuthorModel } from '../../models/author.model';
+import { AuthorModel } from '../../models';
+import { AuthorType } from '../types';
+import { AbstractMutation, IGraphQLMutation } from './abstract.mutation';
 
 
 export interface IUpdateAuthorMutationArguments {

@@ -1,9 +1,7 @@
 import { GraphQLUnionType } from 'graphql';
 
-import { Author } from '../../models/author.model';
-import { Book } from '../../models/book.model';
-import { BookType } from '../book/book.type';
-import { AuthorType } from '../author/author.type';
+import { Book, Author } from '../../models';
+import { BookType, AuthorType } from '../types';
 
 
 export const SearchType = new GraphQLUnionType({

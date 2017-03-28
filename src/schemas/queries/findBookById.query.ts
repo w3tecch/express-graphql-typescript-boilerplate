@@ -4,8 +4,8 @@ import { models } from 'models';
 import { Logger } from '../../core';
 import { RootValue } from '../../root-value';
 import { Context } from '../../context';
-import { BookType } from './book.type';
-import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
+import { BookType } from '../types';
+import { AbstractQuery, IGraphQLQuery } from './abstract.query';
 
 
 export class FindBookByIdQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {

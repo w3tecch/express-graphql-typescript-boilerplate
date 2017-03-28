@@ -5,8 +5,8 @@ import { Logger } from '../../core';
 import { Context } from '../../context';
 import { Book } from '../../models';
 
-import { AbstractField, IGraphQLField } from '../abstract.field';
-import { AuthorType } from '../author/author.type';
+import { AbstractField, IGraphQLField } from './abstract.field';
+import { AuthorType } from '../types';
 
 
 export class AuthorField extends AbstractField implements GraphQLFieldDefinition, IGraphQLField {

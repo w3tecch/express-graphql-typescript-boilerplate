@@ -7,7 +7,7 @@ import {
     UpdatedAtField,
     CreatedAtField
 } from '../common/fields';
-import { BooksField } from '../book/books.field';
+import { BooksField } from '../fields';
 
 
 export const AuthorType = new GraphQLObjectType({

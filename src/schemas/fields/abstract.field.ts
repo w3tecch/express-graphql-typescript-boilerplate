@@ -1,4 +1,4 @@
-import { Context } from '../context';
+import { Context } from '../../context';
 
 
 export interface IGraphQLField {

@@ -3,9 +3,8 @@ import { GraphQLFieldConfig, GraphQLNonNull, GraphQLID } from 'graphql';
 import { Logger } from '../../core';
 import { RootValue } from '../../root-value';
 import { Context } from '../../context';
-
-import { AuthorType } from './author.type';
-import { AbstractMutation, IGraphQLMutation } from '../abstract.mutation';
+import { AuthorType } from '../types';
+import { AbstractMutation, IGraphQLMutation } from './abstract.mutation';
 
 
 export interface IDeleteAuthorMutationArguments {

@@ -8,9 +8,8 @@ import { models } from 'models';
 import { Logger } from '../../core';
 import { RootValue } from '../../root-value';
 import { Context } from '../../context';
-
-import { AuthorType } from './author.type';
-import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
+import { AuthorType } from '../types';
+import { AbstractQuery, IGraphQLQuery } from './abstract.query';
 
 
 export class FindAuthorByIdQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {

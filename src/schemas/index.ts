@@ -6,11 +6,11 @@ import { GraphQLErrorHandling } from '../core/graphql-error-handling';
 /**
  * Queries
  */
-import { SearchQuery } from '../schemas/search/search.query';
-import { FindAllBooksQuery } from '../schemas/book/findAllBooks.query';
-import { FindBookByIdQuery } from '../schemas/book/findBookById.query';
-import { FindAllAuthorsQuery } from '../schemas/author/findAllAuthors.query';
-import { FindAuthorByIdQuery } from '../schemas/author/findAuthorById.query';
+// import { SearchQuery } from '../schemas/search/search.query';
+// import { FindAllBooksQuery } from '../schemas/book/findAllBooks.query';
+// import { FindBookByIdQuery } from '../schemas/book/findBookById.query';
+// import { FindAllAuthorsQuery } from '../schemas/author/findAllAuthors.query';
+// import { FindAuthorByIdQuery } from '../schemas/author/findAuthorById.query';
 
 
 /**
@@ -21,11 +21,11 @@ import { FindAuthorByIdQuery } from '../schemas/author/findAuthorById.query';
 const RootQuery: GraphQLObjectType = new GraphQLObjectType({
     name: 'Query',
     fields: {
-        search: new SearchQuery(),
-        findAllAuthors: new FindAllAuthorsQuery(),
-        findAuthorById: new FindAuthorByIdQuery(),
-        findAllBooks: new FindAllBooksQuery(),
-        findBookById: new FindBookByIdQuery()
+        // search: new SearchQuery(),
+        // findAllAuthors: new FindAllAuthorsQuery(),
+        // findAuthorById: new FindAuthorByIdQuery(),
+        // findAllBooks: new FindAllBooksQuery(),
+        // findBookById: new FindBookByIdQuery()
     }
 });
 
@@ -33,9 +33,9 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
 /**
  * Mutations
  */
-import { CreateAuthorMutation } from './author/createAuthor.mutation';
-import { UpdateAuthorMutation } from './author/updateAuthor.mutation';
-import { DeleteAuthorMutation } from './author/deleteAuthor.mutation';
+// import { CreateAuthorMutation } from './author/createAuthor.mutation';
+// import { UpdateAuthorMutation } from './author/updateAuthor.mutation';
+// import { DeleteAuthorMutation } from './author/deleteAuthor.mutation';
 
 /**
  * RootMutation
@@ -45,9 +45,9 @@ import { DeleteAuthorMutation } from './author/deleteAuthor.mutation';
 const RootMutation: GraphQLObjectType = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
-        createAuthor: new CreateAuthorMutation(),
-        updateAuthor: new UpdateAuthorMutation(),
-        deleteAuthor: new DeleteAuthorMutation()
+        // createAuthor: new CreateAuthorMutation(),
+        // updateAuthor: new UpdateAuthorMutation(),
+        // deleteAuthor: new DeleteAuthorMutation()
     }
 });
 

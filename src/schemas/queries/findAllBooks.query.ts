@@ -4,17 +4,16 @@ import { models } from 'models';
 import { Logger } from '../../core';
 import { RootValue } from '../../root-value';
 import { Context } from '../../context';
-
-import { AuthorType } from './author.type';
-import { AbstractQuery, IGraphQLQuery } from '../abstract.query';
+import { BookType } from '../types';
+import { AbstractQuery, IGraphQLQuery } from './abstract.query';
 import { LimitArgument, OffsetArgument } from '../common/arguments';
 
 
-export class FindAllAuthorsQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
+export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
 
-    public log = Logger('app:schemas:author:FindAllAuthorsQuery');
+    public log = Logger('app:schemas:book:FindAllBooksQuery');
 
-    public type = new GraphQLList(AuthorType);
+    public type = new GraphQLList(BookType);
     public allow = ['admin'];
     public args = {
         limit: new LimitArgument(),
@@ -28,12 +27,16 @@ export class FindAllAuthorsQuery extends AbstractQuery implements GraphQLFieldCo
         return Promise.resolve(args);
     }
 
-    public execute(root: RootValue, args: common.PageinationArguments, context: Context<common.PageinationArguments>): Promise<models.author.Attributes> {
-        this.log.debug('resolve findAllAuthors()');
-        return context.Repositories.AuthorRepository.findAllAuthors({
+    public execute(root: RootValue, args: common.PageinationArguments, context: Context<common.PageinationArguments>): Promise<models.book.Attributes> {
+        this.log.debug('resolve findAllBooks()');
+        return context.Repositories.BookRepository.findAllBooks({
             limit: args.limit,
             offset: args.offset
         });
     }
 
+    public after(result: models.book.Attributes, context: Context<common.PageinationArguments>): Promise<models.book.Attributes> {
+        this.log.debug('hook after args', context.Args);
+        return Promise.resolve(result);
+    }
 }
