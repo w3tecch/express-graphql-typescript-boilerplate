@@ -20,14 +20,14 @@ export class FindAllAuthorsQuery extends AbstractQuery implements GraphQLFieldCo
         offset: new OffsetArgument()
     };
 
-    public before(context: Context, args: common.PageinationArguments): Promise<common.PageinationArguments> {
+    public before(context: Context<common.PageinationArguments>, args: common.PageinationArguments): Promise<common.PageinationArguments> {
         log.debug('hook before args', args);
         LimitArgument.validate(args.limit);
         OffsetArgument.validate(args.limit);
         return Promise.resolve(args);
     }
 
-    public execute(root: RootValue, args: common.PageinationArguments, context: Context): Promise<models.author.Attributes> {
+    public execute(root: RootValue, args: common.PageinationArguments, context: Context<common.PageinationArguments>): Promise<models.author.Attributes> {
         log.debug('resolve findAllAuthors()');
         return context.Repositories.AuthorRepository.findAllAuthors({
             limit: args.limit,

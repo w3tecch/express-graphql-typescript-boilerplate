@@ -17,8 +17,8 @@ export class AuthorField extends AbstractField implements GraphQLFieldDefinition
     public description = 'The author of this book';
     public args;
 
-    public execute(source: Book, args: any, context: Context): Promise<models.author.Attributes>
-    public execute(source: any, args: any, context: Context): Promise<models.author.Attributes> {
+    public execute(source: Book, args: any, context: Context<any>): Promise<models.author.Attributes>
+    public execute(source: any, args: any, context: Context<any>): Promise<models.author.Attributes> {
         log.debug('Resolve auhtor %s of the book ' + source.id, source.authorId);
 
         // Repo way

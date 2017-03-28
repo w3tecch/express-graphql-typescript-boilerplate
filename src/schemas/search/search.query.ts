@@ -35,12 +35,12 @@ export class SearchQuery extends AbstractQuery implements GraphQLFieldConfig, IG
         text: new TextArgument()
     };
 
-    public before(context: Context, args: ITextArgument): Promise<ITextArgument> {
+    public before(context: Context<ITextArgument>, args: ITextArgument): Promise<ITextArgument> {
         TextArgument.validate(args.text);
         return Promise.resolve(args);
     }
 
-    public async execute<T>(root: RootValue, args: ITextArgument, context: Context, info: GraphQLResolveInfo): Promise<T[]> {
+    public async execute<T>(root: RootValue, args: ITextArgument, context: Context<ITextArgument>, info: GraphQLResolveInfo): Promise<T[]> {
         log.debug('resolve search()', args.text);
         const [authors, books] = await Promise.all([
             context.Repositories.AuthorRepository.searchAuthors(args.text),

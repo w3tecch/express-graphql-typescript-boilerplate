@@ -22,12 +22,12 @@ export class FindAuthorByIdQuery extends AbstractQuery implements GraphQLFieldCo
         id: { type: new GraphQLNonNull(GraphQLID) }
     };
 
-    public before(context: Context, args: arguments.ID): Promise<arguments.ID> {
+    public before(context: Context<arguments.ID>, args: arguments.ID): Promise<arguments.ID> {
         log.debug('hook before args', args);
         return Promise.resolve(args);
     }
 
-    public execute(root: RootValue, args: arguments.ID, context: Context): Promise<models.author.Attributes> {
+    public execute(root: RootValue, args: arguments.ID, context: Context<arguments.ID>): Promise<models.author.Attributes> {
         log.debug('resolve findAuthorById(%s)', args.id);
         return context.Repositories.AuthorRepository.findAuthorById(args.id);
     }

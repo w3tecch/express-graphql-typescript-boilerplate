@@ -20,14 +20,14 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
         offset: new OffsetArgument()
     };
 
-    public before(context: Context, args: common.PageinationArguments): Promise<common.PageinationArguments> {
+    public before(context: Context<common.PageinationArguments>, args: common.PageinationArguments): Promise<common.PageinationArguments> {
         log.debug('hook before args', args);
         LimitArgument.validate(args.limit);
         OffsetArgument.validate(args.limit);
         return Promise.resolve(args);
     }
 
-    public execute(root: RootValue, args: common.PageinationArguments, context: Context): Promise<models.book.Attributes> {
+    public execute(root: RootValue, args: common.PageinationArguments, context: Context<common.PageinationArguments>): Promise<models.book.Attributes> {
         log.debug('resolve findAllBooks()');
         return context.Repositories.BookRepository.findAllBooks({
             limit: args.limit,
@@ -35,8 +35,8 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
         });
     }
 
-    public after(result: models.book.Attributes, context: Context, args: common.PageinationArguments): Promise<models.book.Attributes> {
-        log.debug('hook after args', args);
+    public after(result: models.book.Attributes, context: Context<common.PageinationArguments>): Promise<models.book.Attributes> {
+        log.debug('hook after args', context.Args);
         return Promise.resolve(result);
     }
 }

@@ -26,7 +26,7 @@ export class CreateAuthorMutation extends AbstractMutation implements GraphQLFie
         lastName: { type: new GraphQLNonNull(GraphQLString) }
     };
 
-    public before(context: Context, args: ICreateAuthorMutationArguments): Promise<ICreateAuthorMutationArguments> {
+    public before(context: Context<ICreateAuthorMutationArguments>, args: ICreateAuthorMutationArguments): Promise<ICreateAuthorMutationArguments> {
         log.debug('hook before args', args);
         const authorModel = new AuthorModel()
             .setFirstName(args.firstName)
@@ -39,7 +39,7 @@ export class CreateAuthorMutation extends AbstractMutation implements GraphQLFie
         }
     }
 
-    public execute(root: RootValue, args: ICreateAuthorMutationArguments, context: Context): Promise<models.author.Attributes> {
+    public execute(root: RootValue, args: ICreateAuthorMutationArguments, context: Context<ICreateAuthorMutationArguments>): Promise<models.author.Attributes> {
         log.debug('resolve createAuthor()');
         const authorModel = new AuthorModel()
             .setFirstName(args.firstName)

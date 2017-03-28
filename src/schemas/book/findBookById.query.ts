@@ -18,17 +18,17 @@ export class FindBookByIdQuery extends AbstractQuery implements GraphQLFieldConf
         id: { type: new GraphQLNonNull(GraphQLID) }
     };
 
-    public before(context: Context, args: arguments.ID): Promise<arguments.ID> {
+    public before(context: Context<arguments.ID>, args: arguments.ID): Promise<arguments.ID> {
         log.debug('hook before args', args);
         return Promise.resolve(args);
     }
 
-    public execute(root: RootValue, args: arguments.ID, context: Context): Promise<models.book.Attributes> {
+    public execute(root: RootValue, args: arguments.ID, context: Context<arguments.ID>): Promise<models.book.Attributes> {
         log.debug('resolve findBookById(%s)', args.id);
         return context.Repositories.BookRepository.findBookById(args.id);
     }
 
-    public after(result: models.book.Attributes, context: Context, args: arguments.ID): Promise<models.book.Attributes> {
+    public after(result: models.book.Attributes, context: Context<arguments.ID>, args: arguments.ID): Promise<models.book.Attributes> {
         log.debug('hook after args', args);
         return Promise.resolve(result);
     }

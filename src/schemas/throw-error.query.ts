@@ -16,7 +16,7 @@ export class ThrowErrorQuery extends AbstractQuery implements GraphQLFieldConfig
     public allow = [];
     public args = {};
 
-    public execute(root: RootValue, args: common.PageinationArguments, context: Context): Promise<models.author.Attributes> {
+    public execute(root: RootValue, args: any, context: Context<any>): Promise<models.author.Attributes> {
         log.debug('resolve throwError()');
         throw new Error('Internal Error - should only be in the console with the stack');
     }
