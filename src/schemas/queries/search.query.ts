@@ -4,9 +4,9 @@ import * as _ from 'lodash';
 import { RootValue } from '../../root-value';
 import { Logger } from '../../core';
 import { Context } from '../../context';
-import { AbstractQuery, IGraphQLQuery } from './abstract.query';
 import { SearchType } from '../types';
-import { TextArgument, ITextArgument } from '../common/arguments/text.argument';
+import { TextArgument, ITextArgument } from '../arguments';
+import { AbstractQuery, IGraphQLQuery } from './abstract.query';
 
 
 /**

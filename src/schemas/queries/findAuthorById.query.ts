@@ -1,8 +1,4 @@
-import {
-    GraphQLID,
-    GraphQLFieldConfig,
-    GraphQLNonNull
-} from 'graphql';
+import { GraphQLID, GraphQLFieldConfig, GraphQLNonNull } from 'graphql';
 
 import { models } from 'models';
 import { Logger } from '../../core';

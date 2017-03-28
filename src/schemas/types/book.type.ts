@@ -7,9 +7,9 @@ import {
     PriceField,
     PublishedAtField,
     UpdatedAtField,
-    CreatedAtField
-} from '../common/fields';
-import { AuthorField } from '../fields';
+    CreatedAtField,
+    AuthorField
+} from '../fields';
 
 
 export const BookType = new GraphQLObjectType({

@@ -5,9 +5,9 @@ import {
     FirstNameField,
     LastNameField,
     UpdatedAtField,
-    CreatedAtField
-} from '../common/fields';
-import { BooksField } from '../fields';
+    CreatedAtField,
+    BooksField
+} from '../fields';
 
 
 export const AuthorType = new GraphQLObjectType({

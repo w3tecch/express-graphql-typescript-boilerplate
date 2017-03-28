@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 import { Kind } from 'graphql/language';
 
-import { FieldError } from '../../../errors/field.error';
+import { FieldError } from '../../errors';
 
 export const FIELD_ERROR_NO_DATE = 'Field error: value is not an instance of Date';
 export const FIELD_ERROR_INVALID_DATE = 'Field error: value is an invalid Date';

@@ -1,7 +1,7 @@
 import { GraphQLArgumentConfig, GraphQLInt } from 'graphql';
 
-import { Utils } from '../../../common/utils';
-import { ValidationError } from '../../../errors';
+import { Utils } from '../../common/utils';
+import { ValidationError } from '../../errors';
 
 
 export class LimitArgument implements GraphQLArgumentConfig {

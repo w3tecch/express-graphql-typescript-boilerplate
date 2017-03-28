@@ -5,8 +5,8 @@ import { Logger } from '../../core';
 import { RootValue } from '../../root-value';
 import { Context } from '../../context';
 import { AuthorType } from '../types';
+import { LimitArgument, OffsetArgument } from '../arguments';
 import { AbstractQuery, IGraphQLQuery } from './abstract.query';
-import { LimitArgument, OffsetArgument } from '../common/arguments';
 
 
 export class FindAllAuthorsQuery extends AbstractQuery implements GraphQLFieldConfig, IGraphQLQuery {
