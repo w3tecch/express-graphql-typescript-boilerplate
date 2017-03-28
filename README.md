@@ -2,28 +2,27 @@
 
 [![Build Status](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)](https://travis-ci.org/w3tecch/express-graphql-typescript-boilerplate.svg?branch=master)
 
-A [GrapQL](http://graphql.org/) starter kit for building amazing API's in [TypeScript](https://www.typescriptlang.org/) and with [Express.js](http://expressjs.com/) framework.
+A [GraphQL](http://graphql.org/) starter kit for building amazing API's in [TypeScript](https://www.typescriptlang.org/) and with [Express.js](http://expressjs.com/) framework.
 
-This seed repository has a complete GraphQL starter kit written in TypeSciprt. For building our API we use varous gulp-tasks. We use jasmine and Wallaby for our unit-testing.
-*  Ready to build system with gulp
-*  A simple hook system
-*  A simple permisson example
-*  Fully integrated with express
-*  Improved error handling
-*  Complete knex integration with:
-    *  Seeders
-    *  Migrations
-*  Testing examples
-*  Basic securty configuration
-*  Basic cors configuration
-*  Basic logger configuration
-*  Multiple environemnt configurations
-*  Coverage with wallaby.js
-*  Varoius examples
-    *  Queries and mutations
-    *  Data-Loaders
-    *  Basic search query
-    *  Pagination
+This seed repository has a complete GraphQL starter kit written in TypeSciprt. For building our API we use various gulp-tasks. We use jasmine and Wallaby for our unit-testing. And there are a lot more awesome features like
+* VSCode tasks and launch configuration
+* Improved GraphQL Error Handling, so that the error stack will be shown in the console
+* Multiple environemnt configurations
+* Basic securty configuration
+* Basic cors configuration
+* Basic logger configuration
+* Advanced GraphQL-Context logic, so we can use repos, dataloader and other stuff in each resolver
+* Complete [Knex.js](http://knexjs.org/) integration with seeders and migration
+* Dataloaders
+* Extended GraphQL-Query and GraphQL-Field with a lite [Hook-System](###Hook-System)
+* A lot of examples like:
+    * Pagination
+    * Search query with filter
+    * Custom GraphQL-Types like a date type
+    * Migtation and seeders
+    * Models
+    * Testing examples
+    * and many more, just have a look
 
 ## Getting Started
 ### Prerequisites
@@ -55,9 +54,11 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 
 ### Linting
 * Run code analysis using `npm run lint`. This runs tshint.
+* There is also a vscode task for this called lint.
 
 ### Tests
 * Run the unit tests using `npm test` or `npm run test:pretty` for more detailed reporting.
+* There is also a vscode task for this called test.
 
 ### Running in dev mode
 * Run `npm run serve` to start nodemon with ts-node, which will serve your app.
@@ -66,8 +67,9 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ### Cleaning the project
 * Run `npm run clean` to remove all generated JavaScript files.
 
-### Building the project
+### Building the project and run it
 * Run `npm run build` to generated all JavaScript files from your TypeScript sources. After this step you can deploy the app on any server.
+* There is also a vscode task for this called build.
 * To start the builded app use `npm start`.
 * With `npm run zip` it will generate the JavaScript source and pack them into to a deployable zip file into the dist folder.
 
@@ -85,6 +87,7 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 ### Structure
 ```
 express-graphql-typescript-boilerplate
+ |-- .vscode/                                   * our vscode tasks, launch configuration and some settings
  |-- build/                                     * our task runner configurations and tasks
  |    |-- tasks/                                * gulp tasks
  |    |-- paths.js                              * project path setup for our gulp tasks
@@ -148,6 +151,44 @@ express-graphql-typescript-boilerplate
  |-- typedoc.json                               * typescript documentation generator
  |-- tsconfig.json                              * typescript config
  |-- wallaby.js                                 * our wallaby configuration
+```
+
+### Hook-System
+```
+// We extend the AbstractQuery with the hook system. This
+// gives us the 3 new methods called before, run and after.
+export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConfig {
+
+    public type = new GraphQLList(BookType);
+    public allow = ['admin'];
+    public args = {
+        limit: new LimitArgument(),
+        offset: new OffsetArgument()
+    };
+
+    // This will be called after the allow checking
+    public before(context: Context, args: common.PageinationArguments): Promise<common.PageinationArguments> {
+        log.debug('hook before args', args);
+        LimitArgument.validate(args.limit);
+        OffsetArgument.validate(args.limit);
+        return Promise.resolve(args);
+    }
+
+    // As long as the before function was okay this will be called afterwards
+    public execute(root: RootValue, args: common.PageinationArguments, context: Context): Promise<models.book.Attributes> {
+        log.debug('resolve findAllBooks()');
+        return context.Repositories.BookRepository.findAllBooks({
+            limit: args.limit,
+            offset: args.offset
+        });
+    }
+
+    // And at least before the results go back to our client it will pass this after function
+    public after(result: models.book.Attributes, context: Context, args: common.PageinationArguments): Promise<models.book.Attributes> {
+        log.debug('hook after args', args);
+        return Promise.resolve(result);
+    }
+}
 ```
 
 ## License
