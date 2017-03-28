@@ -20,6 +20,7 @@ import { Schema } from './schemas';
 import { RootValue } from './root-value';
 import { Context, RepositoriesContext, DataLoadersContext } from './context';
 import { AuthorRepository, BookRepository } from './repositories';
+import { oauth } from './middlewares';
 
 
 export class App {
@@ -60,6 +61,9 @@ export class App {
         // Adds winston logger to the express framework
         this.express.use(morgan('dev', debugStream));
         this.express.use(morgan('combined', winstonStream));
+
+        // Our custom oauth middleware
+        this.express.use(oauth({}));
 
         // Requests to /graphql redirect to /
         this.express.all('/graphql', (req, res) => res.redirect('/'));
