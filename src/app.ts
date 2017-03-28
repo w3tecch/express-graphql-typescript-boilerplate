@@ -23,12 +23,21 @@ import { Context, RepositoriesContext, DataLoadersContext } from './context';
 import { AuthorRepository, BookRepository } from './repositories';
 
 
-class App {
+export class App {
+
+    private static instance: App;
 
     private log = Logger('app:main');
     private express: express.Application;
     private repositoriesContext: RepositoriesContext;
     private dataLoadersContext: DataLoadersContext;
+
+    static getInstance(): App {
+        if (!App.instance) {
+            App.instance = new App();
+        }
+        return App.instance;
+    }
 
     constructor() {
         this.express = Server.init();
@@ -75,7 +84,7 @@ class App {
 
         // Starts the server and listens for common errors
         Server.run(this.express, Environment.getConfig().server.port);
-        this.log.debug('Server was started on environment %s', name());
+        this.log.debug('Server was started on environment %s', Environment.getName());
     }
 
     private buildRepositoriesContext(): void {
@@ -91,5 +100,3 @@ class App {
     }
 
 }
-
-export const app = new App();
