@@ -1,3 +1,3 @@
-export * from './limit.argument';
-export * from './offset.argument';
-export * from './text.argument';
+export * from './LimitArgument';
+export * from './OffsetArgument';
+export * from './TextArgument';

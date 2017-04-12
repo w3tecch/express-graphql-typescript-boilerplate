@@ -1,3 +1,3 @@
-export * from './createAuthor.mutation';
-export * from './deleteAuthor.mutation';
-export * from './updateAuthor.mutation';
+export * from './CreateAuthorMutation';
+export * from './DeleteAuthorMutation';
+export * from './UpdateAuthorMutation';

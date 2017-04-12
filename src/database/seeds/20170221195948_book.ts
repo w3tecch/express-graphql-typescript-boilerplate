@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 import * as _ from 'lodash';
 
 import * as TABLE from '../../common/tables';
-import { makeBook } from '../factories/book.factory';
+import { makeBook } from '../factories/BookFactory';
 
 
 exports.seed = async (db: Knex) => {

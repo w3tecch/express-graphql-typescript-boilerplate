@@ -1,4 +1,4 @@
-import { Context } from '../../../src/context/context';
+import { Context } from '../../../src/context/Context';
 
 
 describe('Context', () => {

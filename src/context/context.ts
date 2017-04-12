@@ -1,7 +1,7 @@
 import * as Express from 'express';
 
-import { RepositoriesContext } from './repositories-context';
-import { DataLoadersContext } from './dataloaders-context';
+import { RepositoriesContext } from './RepositoriesContext';
+import { DataLoadersContext } from './DataloadersContext';
 
 
 export class Context<A> {

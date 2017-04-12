@@ -1,3 +1,3 @@
-export * from './context';
-export * from './repositories-context';
-export * from './dataloaders-context';
+export * from './Context';
+export * from './RepositoriesContext';
+export * from './DataloadersContext';

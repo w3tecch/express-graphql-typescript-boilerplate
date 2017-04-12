@@ -1,6 +1,6 @@
 // Core elements to get the server started
 import {
-    db,
+    DB,
     Environment,
     Server,
     Logger,
@@ -15,9 +15,9 @@ import * as morgan from 'morgan';
 import * as cors from 'cors';
 import * as GraphQLHTTP from 'express-graphql';
 
-import { UserError } from './errors';
+import { UserException } from './exceptions';
 import { Schema } from './schemas';
-import { RootValue } from './root-value';
+import { RootValue } from './RootValue';
 import { Context, RepositoriesContext, DataLoadersContext } from './context';
 import { AuthorRepository, BookRepository } from './repositories';
 import { oauth } from './middlewares';
@@ -78,8 +78,8 @@ export class App {
                 context: new Context(req, res, this.repositoriesContext, this.dataLoadersContext),
                 graphiql: Environment.getConfig().server.graphiql,
                 formatError: error => ({
-                    code: UserError.getErrorCode(error.message),
-                    message: UserError.getErrorMessage(error.message),
+                    code: UserException.getErrorCode(error.message),
+                    message: UserException.getErrorMessage(error.message),
                     path: error.path
                 })
             })(req, res);
@@ -92,8 +92,8 @@ export class App {
 
     private buildRepositoriesContext(): void {
         this.repositoriesContext = new RepositoriesContext()
-            .setAuthorRepository(new AuthorRepository(db))
-            .setBookRepository(new BookRepository(db));
+            .setAuthorRepository(new AuthorRepository(DB))
+            .setBookRepository(new BookRepository(DB));
     }
 
     private buildDataLoadersContext(): void {
