@@ -1,6 +1,6 @@
 import { GraphQLArgumentConfig, GraphQLInt } from 'graphql';
 
-import { Utils } from '../../common/utils';
+import { Utils } from '../../core/Utils';
 import { ValidationException } from '../../exceptions';
 
 

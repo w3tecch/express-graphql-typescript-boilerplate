@@ -1,14 +1,14 @@
 import * as Knex from 'knex';
 import * as _ from 'lodash';
 
-import * as TABLE from '../../common/tables';
+import { Tables } from '../../core/Tables';
 import { makeBook } from '../factories/BookFactory';
 
 
 exports.seed = async (db: Knex) => {
 
     // Deletes ALL existing entries
-    const authors = await db.select('id').from(TABLE.AUTHOR);
+    const authors = await db.select('id').from(Tables.Authors);
     const authorIds = authors.map(author => author.id);
 
     let entries = [];
@@ -17,5 +17,5 @@ exports.seed = async (db: Knex) => {
     });
 
     // Inserts seed entries
-    return await db(TABLE.BOOK).insert(entries);
+    return await db(Tables.Books).insert(entries);
 };
