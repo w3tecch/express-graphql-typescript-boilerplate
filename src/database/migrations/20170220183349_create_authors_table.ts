@@ -3,7 +3,7 @@ import * as Knex from 'knex';
 
 exports.up = (db: Knex): Promise<any> => {
     return Promise.all([
-        db.schema.createTable('author', (table: Knex.CreateTableBuilder) => {
+        db.schema.createTable('authors', (table: Knex.CreateTableBuilder) => {
             table.increments('id').primary();
             table.string('first_name').notNullable();
             table.string('last_name').notNullable();
@@ -15,6 +15,6 @@ exports.up = (db: Knex): Promise<any> => {
 
 exports.down = (db: Knex): Promise<any> => {
     return Promise.all([
-        db.schema.dropTable('author')
+        db.schema.dropTable('authors')
     ]);
 };
