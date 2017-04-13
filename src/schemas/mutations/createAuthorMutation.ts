@@ -4,7 +4,7 @@ import { models } from 'models';
 import { RootValue } from '../../RootValue';
 import { Logger } from '../../core';
 import { Context } from '../../context';
-import { UserException } from '../../exceptions';
+import { Exception } from '../../exceptions';
 import { AuthorType } from '../types';
 import { AuthorModel } from '../../models';
 import { AbstractMutation, IGraphQLMutation } from './AbstractMutation';
@@ -35,7 +35,7 @@ export class CreateAuthorMutation extends AbstractMutation implements GraphQLFie
         if (authorModel.validate()) {
             return Promise.resolve(args);
         } else {
-            throw new UserException('Validation failed');
+            throw new Exception('Validation failed');
         }
     }
 

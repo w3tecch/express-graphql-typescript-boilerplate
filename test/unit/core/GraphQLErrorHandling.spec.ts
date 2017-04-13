@@ -5,7 +5,7 @@ import {
 } from 'graphql';
 
 import { GraphQLErrorHandling, Processed } from '../../../src/core/GraphQLErrorHandling';
-import { UserException } from '../../../src/exceptions';
+import { Exception } from '../../../src/exceptions';
 
 
 describe('Core:GraphQLErrorHandling', () => {
@@ -31,7 +31,7 @@ describe('Core:GraphQLErrorHandling', () => {
                     },
                     throwUserError: {
                         type: GraphQLString,
-                        resolve(): void { throw new UserException('custom error'); }
+                        resolve(): void { throw new Exception('custom error'); }
                     },
                     rejectPromise: {
                         type: GraphQLString,
@@ -49,9 +49,9 @@ describe('Core:GraphQLErrorHandling', () => {
     describe('User Error', () => {
         it('should extend Error type', () => {
             const msg = 'hello world';
-            const err = new UserException(msg);
+            const err = new Exception(msg);
             expect(err instanceof Error);
-            expect(err instanceof UserException);
+            expect(err instanceof Exception);
             expect(err.message).toBe(msg);
         });
     });
@@ -67,7 +67,8 @@ describe('Core:GraphQLErrorHandling', () => {
                 await field.resolve();
                 fail('Should throw a normal error');
             } catch (e) {
-                expect(e.message.substring(0, 20)).toBe('500: Internal Error:');
+                expect(e.message).toContain('InternalError:');
+                expect(e.message).toContain('e_internal');
             }
             done();
         });
@@ -92,11 +93,11 @@ describe('Core:GraphQLErrorHandling', () => {
                 }
 
                 if (fieldName === 'throwUserError') {
-                    expect(resolveErr.message).toContain('000');
+                    expect(resolveErr.message).toContain('UnkownException');
                     expect(resolveErr.message).toContain('custom error');
                 } else {
-                    expect(resolveErr.message).toContain('500');
-                    expect(resolveErr.message).toContain('Internal Error:');
+                    expect(resolveErr.message).toContain('InternalError:');
+                    expect(resolveErr.message).toContain('e_internal');
                 }
             }
             done();
@@ -122,11 +123,11 @@ describe('Core:GraphQLErrorHandling', () => {
                 }
 
                 if (fieldName === 'throwUserError') {
-                    expect(resolveErr.message).toContain('000');
+                    expect(resolveErr.message).toContain('UnkownException');
                     expect(resolveErr.message).toContain('custom error');
                 } else {
-                    expect(resolveErr.message).toContain('500');
-                    expect(resolveErr.message).toContain('Internal Error:');
+                    expect(resolveErr.message).toContain('InternalError:');
+                    expect(resolveErr.message).toContain('e_internal');
                 }
             }
             done();

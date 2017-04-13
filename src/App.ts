@@ -15,7 +15,7 @@ import * as morgan from 'morgan';
 import * as cors from 'cors';
 import * as GraphQLHTTP from 'express-graphql';
 
-import { UserException } from './exceptions';
+import { Exception } from './exceptions';
 import { Schema } from './schemas';
 import { RootValue } from './RootValue';
 import { Context, RepositoriesContext, DataLoadersContext } from './context';
@@ -77,10 +77,11 @@ export class App {
                 rootValue: new RootValue(),
                 context: new Context(req, res, this.repositoriesContext, this.dataLoadersContext),
                 graphiql: Environment.getConfig().server.graphiql,
-                formatError: error => ({
-                    code: UserException.getErrorCode(error.message),
-                    message: UserException.getErrorMessage(error.message),
-                    path: error.path
+                formatError: exception => ({
+                    key: Exception.getKey(exception.message),
+                    name: Exception.getName(exception.message),
+                    message: Exception.getMessage(exception.message),
+                    path: exception.path
                 })
             })(req, res);
         });

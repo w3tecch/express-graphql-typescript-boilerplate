@@ -10,7 +10,7 @@ import {
 } from 'graphql';
 
 import { Environment } from './';
-import { IsUserError } from '../exceptions';
+import { IsException } from '../exceptions';
 
 
 // Mark field/type/schema
@@ -65,7 +65,7 @@ export class GraphQLErrorHandling {
     }
 
     private static handler(error: any): Error {
-        if (error[IsUserError]) {
+        if (error[IsException]) {
             return new Error(error.toString());
         }
         const errId = uuid.v4();
@@ -73,7 +73,7 @@ export class GraphQLErrorHandling {
         if (!Environment.isTest()) {
             console.error(error && error.stack || error);
         }
-        error.message = `500: Internal Error: ${errId}`;
+        error.message = `InternalError:e_internal:${errId}`;
         return error;
     }
 

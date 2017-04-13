@@ -1,12 +1,12 @@
-import { UserException } from './UserException';
+import { Exception } from './Exception';
 
 
-export class FieldException extends UserException {
+export class FieldException extends Exception {
 
     constructor(message: string) {
         super(message);
         this.name = 'FieldException';
-        this.code = '801';
+        this.key = 'e_field';
     }
 
 }
