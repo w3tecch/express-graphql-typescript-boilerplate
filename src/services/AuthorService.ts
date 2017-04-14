@@ -51,8 +51,8 @@ export class AuthorService {
     }
 
     public async delete(id: number): Promise<void> {
-        this.log.debug('deleteAuthor called with id=', id);
-        return this.authorRepository.deleteAuthor(id);
+        this.log.debug('delete called with id=', id);
+        return this.authorRepository.delete(id);
     }
 
 }
