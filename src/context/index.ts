@@ -10,15 +10,6 @@ import {
 
 
 /**
- * Dataloaders
- */
-import { DataLoadersContext } from './DataloadersContext';
-DataLoadersContext.getInstance()
-    .setAuthorDataLoader(new AuthorRepository(DB))
-    .setBookDataLoader(new BookRepository(DB));
-
-
-/**
  * Services
  */
 import { ServicesContext } from './ServicesContext';
@@ -31,3 +22,12 @@ import {
 ServicesContext.getInstance()
     .setBookService(new BookService(new BookRepository(DB)))
     .setAuthorService(new AuthorService(new AuthorRepository(DB)));
+
+
+/**
+ * Dataloaders
+ */
+import { DataLoadersContext } from './DataloadersContext';
+DataLoadersContext.getInstance()
+    .setAuthorDataLoader(ServicesContext.getInstance().AuthorService)
+    .setBookDataLoader(ServicesContext.getInstance().BookService);

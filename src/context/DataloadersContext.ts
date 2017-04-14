@@ -1,6 +1,6 @@
 import * as DataLoader from 'dataloader';
 
-import { AuthorRepository, BookRepository } from '../repositories';
+import { AuthorService, BookService } from '../services';
 
 import { Logger } from '../core/logger';
 const log = Logger('app:context:DataLoadersContext');
@@ -28,14 +28,20 @@ export class DataLoadersContext {
         return this.bookDataLaoder;
     }
 
-    public setAuthorDataLoader(authorRepository: AuthorRepository): DataLoadersContext {
-        this.authorDataLaoder = new DataLoader((ids: number[]) => authorRepository.findByIds(ids));
+    public setAuthorDataLoader(authorService: AuthorService): DataLoadersContext {
+        this.authorDataLaoder = new DataLoader(async (ids: number[]) => {
+            const authors = await authorService.findByIds(ids);
+            return authors.map(a => a.toJson());
+        });
         log.debug('setAuthorDataLoader');
         return this;
     }
 
-    public setBookDataLoader(bookRepository: BookRepository): DataLoadersContext {
-        this.bookDataLaoder = new DataLoader((ids: number[]) => bookRepository.findByIds(ids));
+    public setBookDataLoader(bookService: BookService): DataLoadersContext {
+        this.bookDataLaoder = new DataLoader(async (ids: number[]) => {
+            const books = await bookService.findByIds(ids);
+            return books.map(b => b.toJson());
+        });
         log.debug('setBookDataLoader');
         return this;
     }
