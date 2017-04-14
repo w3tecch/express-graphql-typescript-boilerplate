@@ -96,39 +96,43 @@ express-graphql-typescript-boilerplate
  |-- docs/                                      * our generated doc files
  |
  |-- src/                                       * our source files that will be compiled to javascript
- |    |-- common/                               * common helpers
- |    |    |-- tables.ts                        * our database table names
- |    |    |-- utils.ts                         * our collection of util functions
  |    |
  |    |-- context/                              * graphql context
- |    |    |-- context.ts                       * our graphql context class
- |    |    |-- dataloaders-context.ts           * our collection of all dataloaders
- |    |    |-- repositories-context.ts          * our collection of all repositories
+ |    |    |-- Context.ts                       * our graphql context class
+ |    |    |-- DataloadersContext.ts            * our collection of all dataloaders
+ |    |    |-- ServicesContext.ts               * our collection of all repositories
  |    |
  |    |-- core/                                 * our core functionalities
- |    |    |-- bootstrap.ts                     * our express helper functions to init and run the server
- |    |    |-- config.ts                        * has our configuration for our different environments
- |    |    |-- database.ts                      * our database setup
- |    |    |-- environment.ts                   * gets us the configuration for the given environment
- |    |    |-- graphql-error-handling.ts        * our error handling
- |    |    |-- logger.ts                        * our logger configurations
- |    |    |-- server.ts                        * our server error handling
+ |    |    |-- Bootstrap.ts                     * our express helper functions to init and run the server
+ |    |    |-- Database.ts                      * our database setup
+ |    |    |-- Environment.ts                   * gets us the configuration for the given environment
+ |    |    |-- GraphQLErrorHandling.ts          * our error handling
+ |    |    |-- Logger.ts                        * our logger configurations
+ |    |    |-- Server.ts                        * our server error handling
+ |    |    |-- Tables.ts                        * our database table names
+ |    |    |-- Utils.ts                         * our collection of util functions
  |    |
  |    |-- database/                             * our database tasks
  |    |    |-- factories                        * our factories to create simple fake data
  |    |    |-- migrations                       * our database migration tasks
  |    |    |-- seeds                            * our database seeder tasks
  |    |
- |    |-- errors/                               * our errors to throw to the user
- |    |    |-- user.error.ts                    * our basic user error all other errors should inherit from this one
- |    |    |-- not-found.error.ts               * a basic not found error
+ |    |-- exceptions/                           * our errors to throw to the user
+ |    |    |-- Exception.ts                     * our basic user error all other errors should inherit from this one
+ |    |    |-- NotFoundException.ts             * a basic not found error
  |    |
  |    |-- middlewares/                          * our express custom middlewares (/*.middleware.ts)
  |    |
  |    |-- models/                               * our database models (/*.model.ts)
  |    |
- |    |-- repositories/                         * use a repository to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model
- |    |    |-- **/*.repository.ts
+ |    |-- repositories/                         * use a repository to fetch the date of the database
+ |    |    |-- **/*Repository.ts
+ |    |
+ |    |-- services/                             * use a services to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model
+ |    |    |-- **/*Services.ts
+ |    |
+ |    |-- routes/                               * defines our application routes
+ |    |    |-- **/*Routes.ts
  |    |
  |    |-- schemas/                              * our graphql schema definitions (use a single file for every graphql object action)
  |    |    |-- arguments/                       * our graphql argument files
@@ -138,6 +142,8 @@ express-graphql-typescript-boilerplate
  |    |    |-- types/                           * our graphql type files
  |    |
  |    |-- index.ts                              * main entry point for our application
+ |    |-- RootValue.ts                          * RootValue with some functions for all the queries and mutations
+ |    |-- config.ts                             * has our configuration for our different environments
  |
  |-- test/                                      * our test files that will test our application
  |    |-- mocks                                 * we use this to simulate other functions, classes or objects
