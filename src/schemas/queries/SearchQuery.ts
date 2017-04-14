@@ -43,10 +43,13 @@ export class SearchQuery extends AbstractQuery implements GraphQLFieldConfig, IG
     public async execute<T>(root: RootValue, args: ITextArgument, context: Context<ITextArgument>, info: GraphQLResolveInfo): Promise<T[]> {
         this.log.debug('resolve search()', args.text);
         const [authors, books] = await Promise.all([
-            context.Repositories.AuthorRepository.searchAuthors(args.text),
-            context.Repositories.BookRepository.searchBooks(args.text)
+            context.Services.AuthorService.search(args.text),
+            context.Services.BookService.search(args.text)
         ]);
-        const results = _.union<any>(authors, books);
+        const results = _.union<any>(
+            authors.map(author => author.toJson()),
+            books.map(book => book.toJson())
+        );
         return _.sortBy(results, 'updatedAt').reverse();
     }
 }

@@ -16,17 +16,17 @@ describe('Context', () => {
             expect(context.Request).toBe(1);
         });
     });
-    describe('Repositories', () => {
+    describe('Services', () => {
         it('should return the repositories object', () => {
-            const repositories: any = 1;
-            const context = new Context(undefined, undefined, repositories, undefined);
-            expect(context.Repositories).toBe(1);
+            const services: any = 1;
+            const context = new Context(undefined, undefined, undefined, services);
+            expect(context.Services).toBe(1);
         });
     });
     describe('DataLoaders', () => {
         it('should return the dataLoaders object', () => {
             const dataLoaders: any = 1;
-            const context = new Context(undefined, undefined, undefined, dataLoaders);
+            const context = new Context(undefined, undefined, dataLoaders, undefined);
             expect(context.DataLoaders).toBe(1);
         });
     });

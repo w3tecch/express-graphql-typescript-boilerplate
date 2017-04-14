@@ -4,7 +4,7 @@ import { models } from 'models';
 import { RootValue } from '../../RootValue';
 import { Logger } from '../../core';
 import { Context } from '../../context';
-import { Exception } from '../../exceptions';
+import { ValidationException } from '../../exceptions';
 import { AuthorType } from '../types';
 import { AuthorModel } from '../../models';
 import { AbstractMutation, IGraphQLMutation } from './AbstractMutation';
@@ -35,15 +35,20 @@ export class CreateAuthorMutation extends AbstractMutation implements GraphQLFie
         if (authorModel.validate()) {
             return Promise.resolve(args);
         } else {
-            throw new Exception('Validation failed');
+            throw new ValidationException('Invalid author');
         }
     }
 
-    public execute(root: RootValue, args: ICreateAuthorMutationArguments, context: Context<ICreateAuthorMutationArguments>): Promise<models.author.Attributes> {
+    public async execute(
+        root: RootValue,
+        args: ICreateAuthorMutationArguments,
+        context: Context<ICreateAuthorMutationArguments>
+    ): Promise<models.author.Attributes> {
         this.log.debug('resolve createAuthor()');
         const authorModel = new AuthorModel()
             .setFirstName(args.firstName)
             .setLastName(args.lastName);
-        return context.Repositories.AuthorRepository.createAuthor(authorModel);
+        const author = await context.Services.AuthorService.create(authorModel);
+        return author.toJson();
     }
 }

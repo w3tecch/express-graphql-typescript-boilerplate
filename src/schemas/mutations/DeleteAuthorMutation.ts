@@ -23,6 +23,6 @@ export class DeleteAuthorMutation extends AbstractMutation implements GraphQLFie
 
     public execute(root: RootValue, args: IDeleteAuthorMutationArguments, context: Context<IDeleteAuthorMutationArguments>): Promise<void> {
         this.log.debug('resolve deleteAuthor(%s)', args.id);
-        return context.Repositories.AuthorRepository.deleteAuthor(args.id);
+        return context.Services.AuthorService.delete(args.id);
     }
 }

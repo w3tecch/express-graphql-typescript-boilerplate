@@ -27,12 +27,13 @@ export class FindAllAuthorsQuery extends AbstractQuery implements GraphQLFieldCo
         return Promise.resolve(args);
     }
 
-    public execute(root: RootValue, args: common.PageinationArguments, context: Context<common.PageinationArguments>): Promise<models.author.Attributes> {
+    public async execute(root: RootValue, args: common.PageinationArguments, context: Context<common.PageinationArguments>): Promise<models.author.Attributes> {
         this.log.debug('resolve findAllAuthors()');
-        return context.Repositories.AuthorRepository.findAllAuthors({
+        const authors = await context.Services.AuthorService.findAll({
             limit: args.limit,
             offset: args.offset
         });
+        return authors.map(author => author.toJson());
     }
 
 }

@@ -27,12 +27,13 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
         return Promise.resolve(args);
     }
 
-    public execute(root: RootValue, args: common.PageinationArguments, context: Context<common.PageinationArguments>): Promise<models.book.Attributes> {
+    public async execute(root: RootValue, args: common.PageinationArguments, context: Context<common.PageinationArguments>): Promise<models.book.Attributes> {
         this.log.debug('resolve findAllBooks()');
-        return context.Repositories.BookRepository.findAllBooks({
+        const books = await context.Services.BookService.findAll({
             limit: args.limit,
             offset: args.offset
         });
+        return books.map(book => book.toJson());
     }
 
     public after(result: models.book.Attributes, context: Context<common.PageinationArguments>): Promise<models.book.Attributes> {

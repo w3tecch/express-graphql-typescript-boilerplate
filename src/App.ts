@@ -1,6 +1,5 @@
 // Core elements to get the server started
 import {
-    DB,
     Environment,
     Server,
     Logger,
@@ -18,8 +17,11 @@ import * as GraphQLHTTP from 'express-graphql';
 import { Exception } from './exceptions';
 import { Schema } from './schemas';
 import { RootValue } from './RootValue';
-import { Context, RepositoriesContext, DataLoadersContext } from './context';
-import { AuthorRepository, BookRepository } from './repositories';
+import {
+    Context,
+    DataLoadersContext,
+    ServicesContext
+} from './context';
 import { oauth } from './middlewares';
 
 
@@ -29,8 +31,6 @@ export class App {
 
     private log = Logger('app:main');
     private express: express.Application;
-    private repositoriesContext: RepositoriesContext;
-    private dataLoadersContext: DataLoadersContext;
 
     static getInstance(): App {
         if (!App.instance) {
@@ -41,8 +41,6 @@ export class App {
 
     constructor() {
         this.express = Server.init();
-        this.buildRepositoriesContext();
-        this.buildDataLoadersContext();
     }
 
     public main(): void {
@@ -73,9 +71,13 @@ export class App {
             this.log.debug('Setup GraphQLHTTP');
             // Creates a GraphQLHTTP per request
             GraphQLHTTP({
-                schema: Schema.getInstance().get(),
+                schema: Schema.getInstance(),
                 rootValue: new RootValue(),
-                context: new Context(req, res, this.repositoriesContext, this.dataLoadersContext),
+                context: new Context(
+                    req, res,
+                    DataLoadersContext.getInstance(),
+                    ServicesContext.getInstance()
+                ),
                 graphiql: Environment.getConfig().server.graphiql,
                 formatError: exception => ({
                     key: Exception.getKey(exception.message),
@@ -89,18 +91,6 @@ export class App {
         // Starts the server and listens for common errors
         Server.run(this.express, Environment.getConfig().server.port);
         this.log.debug('Server was started on environment %s', Environment.getName());
-    }
-
-    private buildRepositoriesContext(): void {
-        this.repositoriesContext = new RepositoriesContext()
-            .setAuthorRepository(new AuthorRepository(DB))
-            .setBookRepository(new BookRepository(DB));
-    }
-
-    private buildDataLoadersContext(): void {
-        this.dataLoadersContext = new DataLoadersContext()
-            .setAuthorDataLoader(this.repositoriesContext.AuthorRepository)
-            .setBookDataLoader(this.repositoriesContext.BookRepository);
     }
 
 }

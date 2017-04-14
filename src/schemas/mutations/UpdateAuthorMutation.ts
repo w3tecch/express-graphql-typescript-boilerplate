@@ -27,12 +27,17 @@ export class UpdateAuthorMutation extends AbstractMutation implements GraphQLFie
         lastName: { type: new GraphQLNonNull(GraphQLString) }
     };
 
-    public execute(root: RootValue, args: IUpdateAuthorMutationArguments, context: Context<IUpdateAuthorMutationArguments>): Promise<models.author.Attributes> {
+    public async execute(
+        root: RootValue,
+        args: IUpdateAuthorMutationArguments,
+        context: Context<IUpdateAuthorMutationArguments>
+    ): Promise<models.author.Attributes> {
         this.log.debug('resolve updateAuthor(%s)', args.id);
         const authorModel = new AuthorModel()
             .setId(args.id)
             .setFirstName(args.firstName)
             .setLastName(args.lastName);
-        return context.Repositories.AuthorRepository.updateAuthor(authorModel);
+        const author = await context.Services.AuthorService.update(authorModel);
+        return author.toJson();
     }
 }

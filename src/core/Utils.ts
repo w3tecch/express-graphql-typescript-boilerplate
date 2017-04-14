@@ -3,6 +3,10 @@ import { NotFoundException } from '../exceptions';
 
 export class Utils {
 
+    static isEmpty<T>(list: T[]): boolean {
+        return !Utils.hasResults(list);
+    };
+
     static hasResults<T>(list: T[]): boolean {
         return (typeof list === 'object' && !!list && list.length) ? list.length > 0 : false;
     };

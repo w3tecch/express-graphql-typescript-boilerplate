@@ -23,9 +23,10 @@ export class FindBookByIdQuery extends AbstractQuery implements GraphQLFieldConf
         return Promise.resolve(args);
     }
 
-    public execute(root: RootValue, args: arguments.ID, context: Context<arguments.ID>): Promise<models.book.Attributes> {
+    public async execute(root: RootValue, args: arguments.ID, context: Context<arguments.ID>): Promise<models.book.Attributes> {
         this.log.debug('resolve findBookById(%s)', args.id);
-        return context.Repositories.BookRepository.findBookById(args.id);
+        const book = await context.Services.BookService.findById(args.id);
+        return book.toJson();
     }
 
     public after(result: models.book.Attributes, context: Context<arguments.ID>, args: arguments.ID): Promise<models.book.Attributes> {

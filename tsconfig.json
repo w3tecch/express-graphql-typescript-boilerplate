@@ -5,7 +5,8 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "noUnusedLocals": true,
-        "noUnusedParameters": false
+        "noUnusedParameters": false,
+        "experimentalDecorators": true
     },
     "filesGlob": [
         "typings/**/*.d.ts",

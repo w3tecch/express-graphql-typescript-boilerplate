@@ -1,7 +1,7 @@
 import * as Express from 'express';
 
-import { RepositoriesContext } from './RepositoriesContext';
 import { DataLoadersContext } from './DataloadersContext';
+import { ServicesContext } from './ServicesContext';
 
 
 export class Context<A> {
@@ -16,8 +16,8 @@ export class Context<A> {
     constructor(
         private request: Express.Request,
         private repsonse: Express.Response,
-        private repositories: RepositoriesContext,
-        private dataLoaders: DataLoadersContext
+        private dataLoaders: DataLoadersContext,
+        private services: ServicesContext
     ) { }
 
     public get Args(): A {
@@ -32,12 +32,12 @@ export class Context<A> {
         return this.request;
     }
 
-    public get Repositories(): RepositoriesContext {
-        return this.repositories;
-    }
-
     public get DataLoaders(): DataLoadersContext {
         return this.dataLoaders;
+    }
+
+    public get Services(): ServicesContext {
+        return this.services;
     }
 
     public getLanguage(): string[] {
