@@ -35,7 +35,7 @@ Install [Node.js](http://nodejs.org)
 * `clone` your fork
 * `npm install` to install all dependencies
 * `npm run install:typings` to install all typings
-* Create new database. You will find the name in the `src/core/config.ts` file.
+* Create new database. You will find the name in the `src/config.ts` file.
 * `npm run db:migrate` to create the schema
 * `npm run db:seed` to insert some test data
 * `npm run serve` to start the dev server in another tab
@@ -80,8 +80,8 @@ The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv
 * Run `npm run db:seed` to seed some data into the database
 
 ### Migration
-* Run `npm run migrate` to migration the new schema to the database
-* Run `npm run migrate:rollback` to rollback one version
+* Run `npm run db:migrate` to migration the new schema to the database
+* Run `npm run db:migrate:rollback` to rollback one version
 
 ## Exploring the boilerplate
 ### Structure
