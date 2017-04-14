@@ -5,8 +5,6 @@ export class FieldException extends Exception {
 
     constructor(message: string) {
         super(message);
-        this.name = 'FieldException';
-        this.key = 'e_field';
     }
 
 }

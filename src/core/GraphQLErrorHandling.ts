@@ -73,7 +73,7 @@ export class GraphQLErrorHandling {
         if (!Environment.isTest()) {
             console.error(error && error.stack || error);
         }
-        error.message = `InternalError:e_internal:${errId}`;
+        error.message = `InternalError:${errId}`;
         return error;
     }
 

@@ -71,7 +71,7 @@ export class App {
             this.log.debug('Setup GraphQLHTTP');
             // Creates a GraphQLHTTP per request
             GraphQLHTTP({
-                schema: Schema.getInstance(),
+                schema: Schema.get(),
                 rootValue: new RootValue(),
                 context: new Context(
                     req, res,
@@ -80,7 +80,6 @@ export class App {
                 ),
                 graphiql: Environment.getConfig().server.graphiql,
                 formatError: exception => ({
-                    key: Exception.getKey(exception.message),
                     name: Exception.getName(exception.message),
                     message: Exception.getMessage(exception.message),
                     path: exception.path

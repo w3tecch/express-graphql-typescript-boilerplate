@@ -13,31 +13,35 @@ export class BookService {
 
     public async findAll(options: common.PageinationArguments): Promise<BookModel[]> {
         this.log.debug('findAll called');
-        return this.bookRepository.findAll(options);
+        const results = await this.bookRepository.findAll(options);
+        return results.map((result) => new BookModel(result));
     }
 
     public async findByIds(ids: number[]): Promise<BookModel[]> {
         this.log.debug('findByIds called with ids=', ids);
-        return this.bookRepository.findByIds(ids);
+        const results = await this.bookRepository.findByIds(ids);
+        return results.map((result) => new BookModel(result));
     }
 
     public async findById(id: number): Promise<BookModel> {
         this.log.debug('findById called with id=', id);
-        const author = await this.bookRepository.findById(id);
-        if (author === null) {
+        const result = await this.bookRepository.findById(id);
+        if (result === null) {
             throw new NotFoundException(id);
         }
-        return author;
+        return new BookModel(result);
     }
 
-    public async findByAuthorId(id: number): Promise<BookModel[]> {
-        this.log.debug('findByAuthorId called with id=', id);
-        return this.bookRepository.findByAuthorId(id);
+    public async findByAuthorId(authorId: number): Promise<BookModel[]> {
+        this.log.debug('findByAuthorId called with authorId=', authorId);
+        const results = await this.bookRepository.findByAuthorId(authorId);
+        return results.map((result) => new BookModel(result));
     }
 
     public async search(text: string): Promise<BookModel[]> {
         this.log.debug('search called with text=', text);
-        return this.bookRepository.search(text);
+        const results = await this.bookRepository.search(text);
+        return results.map((result) => new BookModel(result));
     }
 
 }

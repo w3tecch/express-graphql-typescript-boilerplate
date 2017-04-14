@@ -12,38 +12,42 @@ export class AuthorService {
 
     public async findAll(options: common.PageinationArguments): Promise<AuthorModel[]> {
         this.log.debug('findAll called');
-        return this.authorRepository.findAll(options);
+        const results = await this.authorRepository.findAll(options);
+        return results.map((result) => new AuthorModel(result));
     }
 
     public async findByIds(ids: number[]): Promise<AuthorModel[]> {
         this.log.debug('findByIds called with ids=', ids);
-        return this.authorRepository.findByIds(ids);
+        const results = await this.authorRepository.findByIds(ids);
+        return results.map((result) => new AuthorModel(result));
     }
 
     public async findById(id: number): Promise<AuthorModel> {
         this.log.debug('findById called with id=', id);
-        const author = await this.authorRepository.findById(id);
-        if (author === null) {
+        const result = await this.authorRepository.findById(id);
+        if (result === null) {
             throw new NotFoundException(id);
         }
-        return author;
+        return new AuthorModel(result);
     }
 
     public async search(text: string): Promise<AuthorModel[]> {
         this.log.debug('search called with text=', text);
-        return this.authorRepository.search(text);
+        const results = await this.authorRepository.search(text);
+        return results.map((result) => new AuthorModel(result));
     }
 
     public async create(authorModel: AuthorModel): Promise<AuthorModel> {
         this.log.debug('create called with =', authorModel);
-        const id = await this.authorRepository.create(authorModel);
-        return await this.authorRepository.findById(id);
+        const id = await this.authorRepository.create(authorModel.toDatabaseObject());
+        return this.findById(id);
     }
 
     public async update(newAuthorModel: AuthorModel): Promise<AuthorModel> {
-        this.log.debug('update called with =', newAuthorModel);
-        await this.authorRepository.update(newAuthorModel);
-        return await this.authorRepository.findById(newAuthorModel.Id);
+        const authorModel = await this.findById(newAuthorModel.Id);
+        authorModel.merge(newAuthorModel);
+        await this.authorRepository.update(authorModel.toDatabaseObject());
+        return this.findById(newAuthorModel.Id);
     }
 
     public async delete(id: number): Promise<void> {

@@ -68,7 +68,6 @@ describe('Core:GraphQLErrorHandling', () => {
                 fail('Should throw a normal error');
             } catch (e) {
                 expect(e.message).toContain('InternalError:');
-                expect(e.message).toContain('e_internal');
             }
             done();
         });
@@ -93,11 +92,10 @@ describe('Core:GraphQLErrorHandling', () => {
                 }
 
                 if (fieldName === 'throwUserError') {
-                    expect(resolveErr.message).toContain('UnkownException');
+                    expect(resolveErr.message).toContain('Exception');
                     expect(resolveErr.message).toContain('custom error');
                 } else {
                     expect(resolveErr.message).toContain('InternalError:');
-                    expect(resolveErr.message).toContain('e_internal');
                 }
             }
             done();
@@ -123,11 +121,10 @@ describe('Core:GraphQLErrorHandling', () => {
                 }
 
                 if (fieldName === 'throwUserError') {
-                    expect(resolveErr.message).toContain('UnkownException');
+                    expect(resolveErr.message).toContain('Exception');
                     expect(resolveErr.message).toContain('custom error');
                 } else {
                     expect(resolveErr.message).toContain('InternalError:');
-                    expect(resolveErr.message).toContain('e_internal');
                 }
             }
             done();
