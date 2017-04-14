@@ -1,7 +1,8 @@
 import * as express from 'express';
 import * as http from 'http';
 
-import { Logger } from './logger';
+import { Environment, Logger } from './';
+
 const log = Logger('app:core:server');
 
 
@@ -15,6 +16,7 @@ export class Server {
         const server = app.listen(this.normalizePort(port));
         server.on('listening', () => this.onListening(server));
         server.on('error', (error) => this.onError(server, error));
+        log.debug('Server was started on environment %s', Environment.getName());
         return server;
     }
 

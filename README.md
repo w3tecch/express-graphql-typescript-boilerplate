@@ -131,6 +131,9 @@ express-graphql-typescript-boilerplate
  |    |-- services/                             * use a services to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model
  |    |    |-- **/*Services.ts
  |    |
+ |    |-- routes/                               * defines our application routes
+ |    |    |-- **/*Routes.ts
+ |    |
  |    |-- schemas/                              * our graphql schema definitions (use a single file for every graphql object action)
  |    |    |-- arguments/                       * our graphql argument files
  |    |    |-- fields/                          * our graphql field files
@@ -139,7 +142,6 @@ express-graphql-typescript-boilerplate
  |    |    |-- types/                           * our graphql type files
  |    |
  |    |-- index.ts                              * main entry point for our application
- |    |-- App.ts                                * our application
  |    |-- RootValue.ts                          * RootValue with some functions for all the queries and mutations
  |    |-- config.ts                             * has our configuration for our different environments
  |
