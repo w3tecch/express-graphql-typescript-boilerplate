@@ -43,18 +43,12 @@ export class Schema {
         mutation: this.rootMutation
     });
 
-    static getInstance(): Schema {
+    static get(): GraphQLSchema {
         if (!Schema.instance) {
             Schema.instance = new Schema();
+            GraphQLErrorHandling.watch(Schema.instance.schema);
         }
-        return Schema.instance;
-    }
-
-    public get(): GraphQLSchema {
-        // Handles internal erros and prints the stack to the console
-        GraphQLErrorHandling.watch(this.schema);
-
-        return this.schema;
+        return Schema.instance.schema;
     }
 
 }

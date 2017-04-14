@@ -1,4 +1,4 @@
-import { Logger, debugStream, winstonStream } from '../../../src/core/logger';
+import { Logger, debugStream, winstonStream } from '../../../src/core/Logger';
 
 const log = Logger('test');
 
