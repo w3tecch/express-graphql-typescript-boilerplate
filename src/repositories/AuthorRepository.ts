@@ -53,7 +53,7 @@ export class AuthorRepository extends AbstractRepository<Knex> {
             .where('id', author.id);
     }
 
-    public async deleteAuthor(id: number): Promise<void> {
+    public async delete(id: number): Promise<void> {
         await this.db
             .delete()
             .from(Tables.Authors)
