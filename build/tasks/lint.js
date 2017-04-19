@@ -8,14 +8,9 @@ const $ = require('gulp-load-plugins')({
     lazy: true
 });
 
-gulp.task('lint', () => {
+function lint(files) {
     return gulp
-        .src([
-            './typings/index.d.ts',
-            './typings_custom/**/*.d.ts',
-            path.join(paths.src, '/**/*.ts'),
-            path.join(paths.test, '/**/*.ts')
-        ])
+        .src(files)
         .pipe($.tslint({
             emitError: false,
             formatter: 'verbose'
@@ -24,4 +19,11 @@ gulp.task('lint', () => {
         .on('error', function () {
             util.notify('TSLINT failed!');
         });
-});
+}
+
+gulp.task('lint', () => lint([
+    './typings/index.d.ts',
+    './typings_custom/**/*.d.ts',
+    path.join(paths.src, '/**/*.ts'),
+    path.join(paths.test, '/**/*.ts')
+]));

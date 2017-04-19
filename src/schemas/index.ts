@@ -1,44 +1,54 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
-import { handlingErrors } from '../core/graphql-error-handling';
+import { GraphQLErrorHandling } from '../core';
+import {
+    FindAllAuthorsQuery,
+    FindAuthorByIdQuery,
+    FindAllBooksQuery,
+    FindBookByIdQuery,
+    SearchQuery
+} from './queries';
+import {
+    CreateAuthorMutation,
+    DeleteAuthorMutation,
+    UpdateAuthorMutation
+} from './mutations';
 
+export class Schema {
 
-/**
- * Queries
- */
-import { helloQuery } from './hello/hello.query';
-import { getAuthorQuery, getAuthorsQuery } from './author/author.query';
+    private static instance: Schema;
 
-const RootQuery: GraphQLObjectType = new GraphQLObjectType({
-    name: 'Query',
-    fields: {
-        hello: helloQuery(),
-        getAuthors: getAuthorsQuery(),
-        getAuthor: getAuthorQuery()
+    private rootQuery: GraphQLObjectType = new GraphQLObjectType({
+        name: 'Query',
+        fields: {
+            search: new SearchQuery(),
+            findAllAuthors: new FindAllAuthorsQuery(),
+            findAuthorById: new FindAuthorByIdQuery(),
+            findAllBooks: new FindAllBooksQuery(),
+            findBookById: new FindBookByIdQuery()
+        }
+    });
+
+    private rootMutation: GraphQLObjectType = new GraphQLObjectType({
+        name: 'Mutation',
+        fields: {
+            createAuthor: new CreateAuthorMutation(),
+            updateAuthor: new UpdateAuthorMutation(),
+            deleteAuthor: new DeleteAuthorMutation()
+        }
+    });
+
+    private schema: GraphQLSchema = new GraphQLSchema({
+        query: this.rootQuery,
+        mutation: this.rootMutation
+    });
+
+    static get(): GraphQLSchema {
+        if (!Schema.instance) {
+            Schema.instance = new Schema();
+            GraphQLErrorHandling.watch(Schema.instance.schema);
+        }
+        return Schema.instance.schema;
     }
-});
 
-
-/**
- * Mutations
- */
-import { createAuthorMutation } from './author/author.mutation';
-
-const RootMutation: GraphQLObjectType = new GraphQLObjectType({
-    name: 'Mutation',
-    fields: {
-        createAuthor: createAuthorMutation()
-    }
-});
-
-
-/**
- * Export schema with all queries and mutations
- */
-export const schema = new GraphQLSchema({
-    query: RootQuery,
-    mutation: RootMutation
-});
-
-// Handles internal erros and prints the stack to the console
-handlingErrors(schema);
+}

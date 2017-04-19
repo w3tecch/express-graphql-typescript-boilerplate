@@ -1,7 +1,5 @@
 declare module 'models' {
 
-    import * as Sequelize from 'sequelize';
-
     export namespace models {
         namespace author {
 
@@ -9,12 +7,16 @@ declare module 'models' {
                 id?: number;
                 firstName?: string;
                 lastName?: string;
+                updatedAt?: Date;
+                createdAt?: Date;
             }
 
-            interface Instance extends Sequelize.Instance<Attributes>, Attributes {
-            }
-
-            interface Model extends Sequelize.Model<Instance, Attributes> {
+            interface RawAttributes {
+                id?: number;
+                first_name?: string;
+                last_name?: string;
+                updated_at?: Date;
+                created_at?: Date;
             }
 
         }

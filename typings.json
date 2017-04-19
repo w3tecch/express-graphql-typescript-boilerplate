@@ -5,19 +5,20 @@
         "faker": "registry:dt/faker#3.1.0+20161119044246",
         "jasmine": "registry:dt/jasmine#2.5.0+20170117213604",
         "morgan": "registry:dt/morgan#1.7.0+20160524142355",
-        "sequelize": "registry:dt/sequelize#3.4.1+20160929080558",
-        "validator": "registry:dt/validator#5.7.0+20161105193831",
         "winston": "registry:dt/winston#0.0.0+20161108133445"
     },
     "dependencies": {
+        "bluebird": "registry:dt/bluebird#3.0.0+20161229155504",
         "body-parser": "registry:npm/body-parser#1.15.2+20161116154925",
         "cors": "registry:npm/cors#2.7.0+20160902012746",
         "debug": "registry:npm/debug#2.0.0+20160723033700",
         "express": "registry:dt/express#4.0.0+20170118060322",
         "graphql": "registry:npm/graphql#0.5.0+20160602041655",
         "helmet": "registry:dt/helmet#0.0.0+20161005184000",
-        "lodash": "registry:npm/lodash#4.0.0+20161015015725",
+        "knex": "registry:dt/knex#0.0.0+20170202190133",
         "mime": "registry:npm/mime#1.3.0+20160723033700",
+        "lodash": "registry:npm/lodash#4.0.0+20161015015725",
+        "request": "registry:dt/request#0.0.0+20170215005641",
         "serve-static": "registry:npm/serve-static#1.11.1+20161113104247"
     }
 }
