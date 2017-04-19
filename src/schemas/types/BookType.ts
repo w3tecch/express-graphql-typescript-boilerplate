@@ -20,7 +20,7 @@ export const BookType = new GraphQLObjectType({
         title: new TitleField(),
         description: new DescriptionField(),
         price: new PriceField(),
-        autor: new AuthorField(),
+        author: new AuthorField(),
         publishedAt: new PublishedAtField(),
         updatedAt: new UpdatedAtField(),
         createdAt: new CreatedAtField()
