@@ -21,7 +21,7 @@ const findAllBooksRequest = () => {
             body: `query {
                         findAllBooks {
                             title
-                            autor {
+                            author {
                             firstName
                             lastName
                             }
