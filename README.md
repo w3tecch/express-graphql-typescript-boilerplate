@@ -203,6 +203,7 @@ export class FindAllBooksQuery extends AbstractQuery implements GraphQLFieldConf
 * [GraphQL.js](http://graphql.org/) — The JavaScript reference implementation for GraphQL
 * [DataLoader](https://github.com/facebook/dataloader) — Batching and caching for GraphQL data access layer
 * [aurelia-typescript-boilerplate](https://github.com/w3tecch/aurelia-typescript-boilerplate) - An Aurelia starter kit with TypeScript
+* [express-typescript-boilerplate](https://github.com/w3tecch/express-typescript-boilerplate) - Boilerplate for an restful express-apllication written in TypeScript
 
 ## License
  [MIT](/LICENSE)
