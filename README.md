@@ -8,7 +8,7 @@ This seed repository has a complete GraphQL starter kit written in TypeSciprt. F
 * VSCode tasks and launch configuration
 * Improved GraphQL Error Handling, so that the error stack will be shown in the console
 * Multiple environemnt configurations
-* Basic securty configuration
+* Basic security configuration
 * Basic cors configuration
 * Basic logger configuration
 * Advanced GraphQL-Context logic, so we can use repos, dataloader and other stuff in each resolver
