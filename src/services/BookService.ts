@@ -1,6 +1,6 @@
 import { BookRepository } from '../repositories';
 import { BookModel } from '../models/BookModel';
-import { Logger } from '../core/logger';
+import { Logger } from '../core/Logger';
 import { NotFoundException } from '../exceptions';
 
 
