@@ -1,6 +1,6 @@
 import { AuthorRepository } from '../repositories';
 import { AuthorModel } from '../models/AuthorModel';
-import { Logger } from '../core/logger';
+import { Logger } from '../core/Logger';
 import { NotFoundException } from '../exceptions';
 
 export class AuthorService {

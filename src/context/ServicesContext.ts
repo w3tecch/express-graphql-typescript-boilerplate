@@ -3,7 +3,7 @@ import {
     BookService
 } from '../services';
 
-import { Logger } from '../core/logger';
+import { Logger } from '../core/Logger';
 const log = Logger('app:context:ServicesContext');
 
 
